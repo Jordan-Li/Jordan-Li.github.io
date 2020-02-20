@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/2 | 曲水流觞的blog</title>
+  <title>HTML学习笔记（一）：网页的构造块 | 曲水流觞的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="曲水流觞的blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/02/index.html">
+  <meta name="description" content="网页的构造块一个网页主要包括以下三个部分。  文本内容（text content）：在页面上让访问者了解页面内容的纯文字，比如关于业务、产品、家庭度假的内容，以及页面关注的其他任何内容。 对其他文件的引用（references to other files）：我们使用这些引用来加载图像、音频、视频文件，以及样式表（控制页面的显示效果）和JavaScript 文件（为页面添加行为）。这些引用还可以指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML学习笔记（一）：网页的构造块">
+<meta property="og:url" content="http://yoursite.com/2020/02/20/%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9E%84%E9%80%A0%E5%9D%97/index.html">
 <meta property="og:site_name" content="曲水流觞的blog">
+<meta property="og:description" content="网页的构造块一个网页主要包括以下三个部分。  文本内容（text content）：在页面上让访问者了解页面内容的纯文字，比如关于业务、产品、家庭度假的内容，以及页面关注的其他任何内容。 对其他文件的引用（references to other files）：我们使用这些引用来加载图像、音频、视频文件，以及样式表（控制页面的显示效果）和JavaScript 文件（为页面添加行为）。这些引用还可以指">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-20T03:43:53.000Z">
+<meta property="article:modified_time" content="2020-02-20T03:49:02.959Z">
 <meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的blog" type="application/atom+xml">
@@ -155,36 +161,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-网页的构造块" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/20/%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9E%84%E9%80%A0%E5%9D%97/" class="archive-article-date">
-  	<time datetime="2020-02-20T03:43:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/20/%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9E%84%E9%80%A0%E5%9D%97/">HTML学习笔记（一）：网页的构造块</a>
+    <h1 class="article-title" itemprop="name">
+      HTML学习笔记（一）：网页的构造块
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/20/%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9E%84%E9%80%A0%E5%9D%97/" class="archive-article-date">
+  	<time datetime="2020-02-20T03:43:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="网页的构造块"><a href="#网页的构造块" class="headerlink" title="网页的构造块"></a>网页的构造块</h1><p>一个网页主要包括以下三个部分。</p>
+<ul>
+<li><strong>文本内容（text content）</strong>：在页面上让访问者了解页面内容的纯文字，比如关于业务、产品、家庭度假的内容，以及页面关注的其他任何内容。</li>
+<li><strong>对其他文件的引用（references to other files）</strong>：我们使用这些引用来加载图像、音频、视频文件，以及样式表（控制页面的显示效果）和JavaScript 文件（为页面添加行为）。这些引用还可以指向其他的HTML 页面和资源。</li>
+<li><strong>标记（markup）</strong>：对文本内容进行描述并确保引用正确地工作。</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="HTML思想"><a href="#HTML思想" class="headerlink" title="HTML思想"></a>HTML思想</h2><p>做个类比：你打开一个橱柜，为里面的每一样物品都贴上最能描述它的便利贴。一只黄色的装燕麦片的盒子贴上了写有“燕麦片”的贴纸。还有一个红色的盒子也是装燕麦片的，也为它贴上写有“燕麦片”的贴纸。编写HTML与这个过程是很相似的。不同的是，<strong>编写HTML并非向食物和餐具上贴标签，而是为网页内容打上能够描述它们的标签。</strong>但是值得注意的是：便利贴上的用词是“燕麦片”这样的，而不是“黄色的谷物盒子”、“红色的谷物盒子”。因为HTML元素描述的是内容是什么，而非看起来是什么样。而CSS才控制内容的外观（比如字体、颜色、阴影等等）。</p>
+<h2 id="基本的HTML页面"><a href="#基本的HTML页面" class="headerlink" title="基本的HTML页面"></a>基本的HTML页面</h2><p>每一个HTML页面都是由以下结构开始构建的，这个HTML相当于一张白纸，因为访问者只能访问到<code>&lt;body&gt;</code>和<code>&lt;/body&gt;</code>之间的部分：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Your page title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>每个网页都包含DOCTYPE、html、head和body元素，它们是网页的基础。</strong>在这个页面中，可以定制的内容包括两项，一是赋予<code>lang</code>属性的语言代码，二是<code>&lt;title&gt;</code>和<code>&lt;/title&gt;</code>之间的文字。HTML使用”&lt;”和”&gt;”包围HTML标签。开始标签（如<code>&lt;head&gt;</code>）用于标记元素的开始，结束标签（如<code>&lt;/head&gt;</code>）用于标记元素的结束。有的元素没有结束标签，如<code>meta</code>。</p>
+<h3 id="网页的顶部和头部"><a href="#网页的顶部和头部" class="headerlink" title="网页的顶部和头部"></a>网页的顶部和头部</h3><p>既然用户只能看到<code>&lt;body&gt;</code>和<code>&lt;/body&gt;</code>之间的部分，那么其他的代码有什么作用呢？<strong>实际上，</strong><code>&lt; body&gt;</code> <strong>开始标签以上的内容都是为浏览器和搜索引擎准备的。</strong><code>&lt;! DOCTYPE html&gt;</code>部分（称为DOCTYPE）告诉浏览器这是一个HTML5 页面。DOCTYPE 应该始终位于页面的第一行。接下来是html 元素，它包着页面的其余部分，即<code>&lt; html lang=&quot; en&quot;&gt;</code>和<code>&lt;/ html&gt;</code>结束标签（表示页面的结尾）之间的内容。在这里可以为网页指定其他语言。再接下来是文档的头部，即<code>&lt; head&gt;</code> 和<code>&lt;/ head&gt;</code> 之间的区域。主体前面的代码中，有一部分是用户可见的，即<code>&lt;title&gt;</code> 和<code>&lt;/ title&gt;</code> 之间的文本。这些文本会出现在浏览器标签页中，对于某些浏览器，这些文本还会出现在浏览器窗口的顶部，作为网页的标题。此外，这些文本通常还是浏览器书签的默认名称，它们对搜索引擎来说也是非常重要的。</p>
+<h3 id="网页的主体：你的内容"><a href="#网页的主体：你的内容" class="headerlink" title="网页的主体：你的内容"></a>网页的主体：你的内容</h3><p>接下来就可以向网页的主题部分添加以下内容了，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!</span> <span class="attr">DOCTYPE</span> <span class="attr">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">" en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">" utf- 8"</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Blue Flax (Linum lewisii)<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">article</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span> The Ephemeral Blue Flax<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" blueflax. jpg"</span> <span class="attr">width</span>=<span class="string">" 300"</span> <span class="attr">height</span>=<span class="string">" 175"</span> <span class="attr">alt</span>=<span class="string">" Blue Flax"</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span> I am continually <span class="tag">&lt;<span class="name">em</span>&gt;</span> amazed<span class="tag">&lt;/<span class="name">em</span>&gt;</span> at the beautiful, delicate <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">" http:// en. wikipedia. org/ wiki/ Linum_ lewisii"</span> <span class="attr">rel</span>=<span class="string">" external"</span> <span class="attr">title</span>=<span class="string">" Learn more about Blue Flax"</span>&gt;</span> Blue Flax<span class="tag">&lt;/<span class="name">a</span>&gt;</span> that somehow took hold in my garden. They are awash in color every morning, yet not a single flower remains by the afternoon. They are the very definition of ephemeral.</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个页面中，包含了本章开头提到的三种成分：文本内容，对其他文件的引用（图像的src值以及链接的href值）和标记。在使用浏览器查看网页的时候，是不会显示包围文本内容的标记的。但是这些标记是十分有用的，我们就是用他们来描述内容的，比如<code>&lt;p&gt;</code>标记用来表示段落的开始。</p>
+<blockquote>
+<p><strong>对HTML的缩进</strong></p>
+<p>代码的缩进对内容在浏览器中的显示没有任何关系，但是对于嵌套在父元素中的代码进行缩进是一种惯例，这样可以方便我们编写和阅读代码，比较容易看出元素之间的层级关系。</p>
+</blockquote>
+<p>HTML提供了各种各样的元素（100多种），上面这一段代码演示了六种最为常见的元素：<code>a,article,em,h1,img,p</code>。每种元素都有自己的定义，比如h1表示的是标题，a表示的是链接，img表示图像。</p>
+<h2 id="标签：元素、属性、值及其他"><a href="#标签：元素、属性、值及其他" class="headerlink" title="标签：元素、属性、值及其他"></a>标签：元素、属性、值及其他</h2><p>下面来看看标签的组成：元素、属性、值。</p>
+<h3 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h3><p>元素就像描述网页不同部分的小标签一样：这是一个标题，那是一个段落，而那一组链接是一个导航。有的元素有一个或多个属性，属性用来进一步描述元素。大部分的元素既可以包含文本，也可以包含其他元素。这些元素由开始标签，内容和结束标签组成。<strong>开始标签是放在一对&lt;&gt;中的元素的名称及可能包含的属性，结束标签是放在一对尖括号中的斜杠加元素的名称。</strong>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>amazed<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但除此之外，<strong>还有一些元素是空元素，既不包含文本也不包含其他元素。</strong>它们看起来像是开始标签和结束标签的结合，由左尖括号开头，然后是元素的名称和可能包含的属性，然后是一个可选的空格和一个可选的斜杠，最后是<strong>必有的右尖括号</strong>。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"blue.jpg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"175"</span> <span class="attr">alt</span>=<span class="string">"Blue"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"blue.jpg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"175"</span> <span class="attr">alt</span>=<span class="string">"Blue"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"blue.jpg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"175"</span> <span class="attr">alt</span>=<span class="string">"Blue"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上三种写法均可。按照惯例，元素的名称都采用小写字母。</p>
+<h3 id="属性和值"><a href="#属性和值" class="headerlink" title="属性和值"></a>属性和值</h3><p>属性包含了元素的额外信息。在HTML5中，属性值两边的引号是可以选择的，但是习惯上都会写上。属性和元素的名称一样，尽量使用小写字母。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"email"</span>&gt;</span>Email Address<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面这段代码中，<code>for</code>是<code>label</code>的一个属性，而<code>email</code>则是<code>for</code>的属性值。属性总是位于元素的开始标签内，属性的值通常放在一对括号中。<strong>有的元素可以有多个属性，每个属性都有各自的值。属性的顺序并不重要，不同的属性-值对之间都用空格隔开。</strong>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.hao123.com"</span> <span class="attr">rel</span>=<span class="string">"external"</span> <span class="attr">title</span>=<span class="string">"Learn more"</span>&gt;</span>Laern more<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>href</code>，<code>rel</code>和<code>title</code>都是<code>a</code>的属性，后面跟随的内容则是各自的属性值。</p>
+<p>有的属性可以接受任何值，有的则有限制。最常见的还是那些仅接受预定义值（也称为枚举值）的属性。也就是说，必须从一个标准列表中选一个值。</p>
+<ul>
+<li><p>有许多属性的值需要设置为数字，特别是那些描述大小和长度的属性。数字值无需包含单位，只需输入数字本身。图像和视频的宽度和高度是有单位的，默认为像素。</p>
+</li>
+<li><p>有的属性（比如<code>href</code>和<code>src</code>）用于引用其他文件，它们只能包含<code>URL</code>形式的值。</p>
+</li>
+<li><p>还有一种特殊的属性成为布尔属性。这种属性的值是可选的。因为只要这种属性出现就表示其值为真（不出现就表示为假），如果一定要包含一个值，可以写上属性名本身。布尔属性都是预先设定好的，无法自创。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"emailaddr"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"emailaddr"</span> <span class="attr">required</span>=<span class="string">"required"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上两种写法都可以，<code>required</code>就是一个布尔属性。</p>
+</li>
+</ul>
+<h3 id="父元素和子元素"><a href="#父元素和子元素" class="headerlink" title="父元素和子元素"></a>父元素和子元素</h3><p>如果一个元素包含另一个元素，它就是被包含元素的父元素，被包含元素称为子元素。这种类似家谱的结构是HTML代码的关键特性，它有助于在元素上添加样式（CSS）和应用JavaScript行为。</p>
+<p>值得注意的是，当元素中包含其他元素时，每个元素都必须嵌套正确，也就是子元素必须完全地包含在父元素中。使用结束标签时，前面必须有跟它成对的开始标签。换句话说，先开始元素1，再开始元素2，就要先结束元素2，再结束元素1。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>……<span class="tag">&lt;<span class="name">em</span>&gt;</span>……<span class="tag">&lt;/<span class="name">em</span>&gt;</span> ……<span class="tag">&lt;/<span class="name">p</span>&gt;</span>     这种写法是正确的</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>……<span class="tag">&lt;<span class="name">em</span>&gt;</span>……<span class="tag">&lt;/<span class="name">p</span>&gt;</span> ……<span class="tag">&lt;/<span class="name">em</span>&gt;</span>     这种写法是错误的</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="网页的文本内容"><a href="#网页的文本内容" class="headerlink" title="网页的文本内容"></a>网页的文本内容</h2><p>首先，<strong>浏览器呈现HTML时，会把文本中的多个空格或制表符压缩成单个空格，把回车符和换行符转换成单个空格，或者将它们一起忽略。</strong>页面的文本内容几乎就是标签以外的所有东西。过去HTML只用使用ASCII字符，但如今Unicode极大缓解了特殊字符的问题，利用UTF-8对页面进行编码，并用同样的编码保存HTML文件。我们需要在<code>head</code>开始标签后面指明文档的字符编码，<code>chaeser</code>属性用来设置编码的类型。例如:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="链接、图像和其他非文本内容"><a href="#链接、图像和其他非文本内容" class="headerlink" title="链接、图像和其他非文本内容"></a>链接、图像和其他非文本内容</h2><p>万维网充满生机的部分原因是页面之间的链接，以及图像、视频、音乐等。外部文件实际上并没有放在HTML文件中，而是单独保存的，页面只是简单地引用了这些文件。浏览器可以轻而易举地处理链接和图像。然而，它们无法处理其他任何文件类型。例如，对有的浏览器来说，要查看PDF就需要在系统中预先装好Adobe  Reader，要查看电子表格就需要预先装好OpenOffice这样的软件。</p>
+<p>过去，HTML 没有内置的方法播放视频和音频文件。结果，各个厂商都开发出了相应的软件，用户可以下载并安装这些软件，从而弥补缺失的功能。这样的软件称为插件（plugin）。在这些插件中，使用最为广泛的当数Flash。多年以来，Flash 驱动了无数万维网上的视频。不过，这个插件也有一些问题，其中最为突出的就是它会耗费较多的计算资源。幸好，HTML5 已经为缓解这一问题迈出了一大步。HTML5 提供了audio 和video 元素，这样，无需使用插件就可以播放音频和视频。不过，现代浏览器也提供了内置的媒体播放器，你仍然可以使用Flash 播放器作为旧浏览器的备用工具。HTML5 的音频和视频还不完美，但至少开始向着无插件的目标前进了，而且还在继续前进。</p>
+<h2 id="文件名和文件夹名"><a href="#文件名和文件夹名" class="headerlink" title="文件名和文件夹名"></a>文件名和文件夹名</h2><p>同其他文本文件一样，网页也有文件名。对网页文件命名的时候要遵循几点，有助于对文件进行组织，使访问者更容易找到你的页面，确保他们的浏览器能够正确地处理页面，以及增强搜索引擎优化（SEO）。<strong>文件名统一使用小写字母命名，用短横线分割单词（切忌使用空格），用html作为文件的扩展名。</strong></p>
+<ol>
+<li>文件名统一使用小写字母：网页的文件名决定了访问者在访问你的页面时需要输入的文本，因此，文件名和文件夹名只用小写字母可以最大程度地避免访问者的输入错误。</li>
+<li>用短线分割单词：不要在文件名和文件夹名中使用空格分隔单词。应该使用短横线，例如：<code>company-history.html</code>和<code>my-favourite-movies.html</code>。有的网站使用下划线(_)，但是短横线是搜索引擎更容易接受的方式。</li>
+<li>使用正确的拓展名：浏览器主要通过查看文件的扩展名得知需要读取的文本文档是一个网页。尽管也可以使用.htm作为网页的扩展名，但通常使用的是.html。如果页面使用其他的扩展名（如.txt），浏览器会将其当做文本处理，相当于将你的代码直接呈现给访问者。</li>
+</ol>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p><strong>URL（Uniform Resource Locator，统一资源定位符）是地址的别名</strong>。它包含关于文件存储位置和浏览器应如何处理它的信息。互联网上的每个文件都有唯一的URL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.site.com&#x2F;tofu&#x2F;index.html</span><br><span class="line">http（模式):&#x2F;&#x2F;www.site.com(主机名）&#x2F;tofu（目录）&#x2F;index.html（文件名）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>URL的第一个部分称为模式（scheme）。模式告诉浏览器如何处理需要打开的文件。最常见的模式是HTTP（Hypertext Transfer Protocol，超文本传输协议）。HTTPS是从HTTP衍生来的，用于电子商务网站等安全网页。它的格式同HTTP一样，只是用https替代了http。其他常见的模式有用于下载文件的ftp；用于发送电子邮箱的mailto。</li>
+<li>URL的第二个部分是文件所在的主机的名称，紧接着是路径，路径包含到达这个文件的文件夹以及文件自身的名称。</li>
+<li>有时，URL路径不以文件名结尾，而以一个目录结尾（可以包含一个结尾的斜杠，也可以不包含）。在这种情况下，URL指的是路径中最后一个目录中的默认文件，通常为index.html。</li>
+</ul>
+<h3 id="绝对URL"><a href="#绝对URL" class="headerlink" title="绝对URL"></a>绝对URL</h3><p>URL 可以是绝对的，也可以是相对的。<strong>绝对URL（absolute URL）包含了指向目录或文件的完整信息，包括模式、主机名和路径。</strong>绝对URL 就像是完整的通信地址，包括国家、州、城市、邮政编码、街道和姓名。无论邮件来自哪里，邮局都能找到收件人。就URL来说，这意味着绝对URL 本身与被引用文件的实际位置无关，无论是在哪个主机上的网页中，某一文件的绝对URL 都是完全一样的。引用别人Web 服务器上的文件时，应该总是使用绝对URL。</p>
+<h3 id="相对URL"><a href="#相对URL" class="headerlink" title="相对URL"></a>相对URL</h3><p>当我告诉你我邻居家的位置时，我一般不会说完整地址，而是说：“她家在右边第三个门。”这就是相对地址，它指出的位置是以信息提供者的位置为参照的。如果在别的城市按照同样的信息找我的邻居，你永远也找不到。 同样，相对URL以包含URL本身的文件的位置为参照点，描述目标文件的位置。因此，相对URL可以表达像“指向本页面同一目录下的xyz页面”这样的意思。</p>
+<h4 id="引用同一目录下的文件"><a href="#引用同一目录下的文件" class="headerlink" title="引用同一目录下的文件"></a>引用同一目录下的文件</h4><p>如果目标文件与当前页面在同一个目录中，那么这个文件的相对URL只有文件名和扩展名。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"history.html"</span>&gt;</span>Take me to history.html<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种情况出现在<code>history.html</code>和当前页面的在同一个目录的时候，前面不需要再加上<code>http://www.site.com/....</code>。</p>
+<h4 id="引用子目录下的文件"><a href="#引用子目录下的文件" class="headerlink" title="引用子目录下的文件"></a>引用子目录下的文件</h4><p>如果目标文件在当前目录的子目录中，那么这个文件的相对URL就是子目录名，接着是一个斜杠，然后是文件名和扩展名。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"info/history.html"</span>&gt;</span>Take me to history.html<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="引用上层目录的文件"><a href="#引用上层目录的文件" class="headerlink" title="引用上层目录的文件"></a>引用上层目录的文件</h4><p> 如果要引用文件层次结构中更上层目录中的文件，那么应该使用两个句点和一个斜杠。每个<code>../</code>都表示到当前文件的上一层，因此<code>../../</code>会向上走两级，<code>../../../</code>会向上走三级。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"../history.html"</span>&gt;</span>Take me to history.html<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="根相对URL"><a href="#根相对URL" class="headerlink" title="根相对URL"></a>根相对URL</h4><p>但是如果文件位于Web服务器上，应该避免使用<code>../</code>这种显得比较笨拙的文件路径。可以再最开始使用一个斜杠，直接跳转到网站的根目录，然后再向下寻找目标文件。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/info/history.html"</span>&gt;</span>Take me to history.html<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 如果不是在服务器本地开发网站，通常应使用相对URL。这样确保了将页面从本地系统传到服务器变得容易。只要每个文件的相对位置保持不变，就不必修改任何路径，链接依然有效。</p>
+<h2 id="HTML：有含义的标记"><a href="#HTML：有含义的标记" class="headerlink" title="HTML：有含义的标记"></a>HTML：有含义的标记</h2><p>HTML描述的是网页内容的含义，即语义（semantics）。在Web社区中，语义化HTML（semantic HTML）指的是那些使用最恰当的HTML元素进行标记的内容，在标记的过程中并不关心内容显示。 </p>
+<h3 id="基本HTML页面的语义"><a href="#基本HTML页面的语义" class="headerlink" title="基本HTML页面的语义"></a>基本HTML页面的语义</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!</span> <span class="attr">DOCTYPE</span> <span class="attr">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">" en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">" utf- 8"</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Blue Flax (Linum lewisii)<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">article</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span> The Ephemeral Blue Flax<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" blueflax. jpg"</span> <span class="attr">width</span>=<span class="string">" 300"</span> <span class="attr">height</span>=<span class="string">" 175"</span> <span class="attr">alt</span>=<span class="string">" Blue Flax"</span>&gt;</span> </span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span> I am continually <span class="tag">&lt;<span class="name">em</span>&gt;</span> amazed<span class="tag">&lt;/<span class="name">em</span>&gt;</span> at the beautiful, delicate <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">" http:// en. wikipedia. org/ wiki/ Linum_ lewisii"</span> <span class="attr">rel</span>=<span class="string">" external"</span> <span class="attr">title</span>=<span class="string">" Learn more about Blue Flax"</span>&gt;</span> Blue Flax<span class="tag">&lt;/<span class="name">a</span>&gt;</span> that somehow took hold in my garden. They are awash in color every morning, yet not a single flower remains by the afternoon. They are the very definition of ephemeral.</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>基本页面的<code>body</code>元素包含了<code>article,h1,img,p,em,a</code>元素。</p>
+<ul>
+<li><p><code>article</code>元素：所有的内容都包含在<code>article</code>元素中，它定义了一段独立的内容，其他地方可以重用这段内容。在我们的基本网页中使用<code>article</code>元素是一个十分不错的选择。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span> The Ephemeral Blue Flax<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>h1</code>元素：标题元素。HTML提供了六个标题级别，即<code>h1</code>到<code>h6</code>，<code>h1</code>是最重要的一级。标题是描述页面概貌的重要元素，确保了页面对屏幕阅读器用户来说更具访问性，而搜索引擎用它们确定页面的重点。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" blueflax. jpg"</span> <span class="attr">width</span>=<span class="string">" 300"</span> <span class="attr">height</span>=<span class="string">" 175"</span> <span class="attr">alt</span>=<span class="string">" Blue Flax"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>img</code>元素：图像元素。<code>img</code>元素是呈现图像的主要方式，如果浏览器的图像没有加载成功，或者是某一些纯文本的浏览器，就会显示<code>alt</code>中的文字。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> I am continually <span class="tag">&lt;<span class="name">em</span>&gt;</span> amazed<span class="tag">&lt;/<span class="name">em</span>&gt;</span> at the beautiful, delicate <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">" http:// en. wikipedia. org/ wiki/ Linum_ lewisii"</span> <span class="attr">rel</span>=<span class="string">" external"</span> <span class="attr">title</span>=<span class="string">" Learn more about Blue Flax"</span>&gt;</span> Blue Flax<span class="tag">&lt;/<span class="name">a</span>&gt;</span> that somehow took hold in my garden. They are awash in color every morning, yet not a single flower remains by the afternoon. They are the very definition of ephemeral.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><code>p</code>元素：段落元素。一个段落可以包含多个句子。如果需要再加一个段落，只需要在第一个<code>p</code>元素后面再加一个<code>p</code>元素即可。<code>p</code>元素可以包含定义段落内短语语义的其他元素，例如<code>em</code>和<code>a</code>元素。它们可以分别定义短语内容的含义。这是HTML5提供的大量用于提升段落文本语义的<strong>短语内容</strong>。</li>
+</ul>
+<ul>
+<li><p><code>em</code>元素：强调元素。但HTML描述的是内容的含义，因此<code>em</code>代表的是语义上的强调，而非视觉上的，不过通常会用斜体表示<code>em</code>文本（可以使用CSS改变这一样式）。</p>
+</li>
+<li><p><code>a</code>元素：锚点元素。可以用来添加超链接。在上面的例子中， <code>a</code>元素定义了一个指向维基百科中关于<code>Blue Flax</code>的链接。可选的<code>rel</code>属性指出链接指向的是另一个网站，这也增加了语义（没有这个属性链接也会正常工作）。可选的<code>title</code>属性提供了有关所指页面的信息，它也增强了<code>a</code>元素的语义。当用户用鼠标滑过该链接，就会显示<code>title</code>属性的内容。</p>
+</li>
+</ul>
+<h3 id="为什么语义很重要"><a href="#为什么语义很重要" class="headerlink" title="为什么语义很重要"></a>为什么语义很重要</h3><ul>
+<li>提升可访问性和互操作性。</li>
+<li>提升搜索引擎优化（SEO）的效果。</li>
+<li>使维护代码和添加样式变得容易。</li>
+<li>使代码更少，页面加载更快。</li>
+<li>无障碍访问。</li>
+</ul>
+<h2 id="浏览器对网页的默认显示效果"><a href="#浏览器对网页的默认显示效果" class="headerlink" title="浏览器对网页的默认显示效果"></a>浏览器对网页的默认显示效果</h2><p>既然控制页面样式的是CSS而非HTML，为什么在浏览器中查看我们的基本页面时，某些文字的字号会比其他文字的字号大呢，为什么有的文字是粗体或斜体呢？ <strong>原因就是每个Web浏览器都有一个内置CSS文件（一张样式表），它决定了每个HTML元素的默认样式。</strong>你自己创建的CSS可以覆盖这些样式。对于不同的浏览器，默认样式会稍有差异，但总体上相当一致。重要的是，HTML所定义的内容的底层结构和含义是一致的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>一个网页主要由三种成分构成：文本内容、对其他文件的引用和标记。</li>
+<li>HTML 标记由元素、属性和值构成。</li>
+<li>通常全部使用小写字母编写HTML（<code>DOCTYPE</code> 是一个例外），用引号包住属性值。</li>
+<li>为文件和文件夹命名时全部采用小写字母，词与词之间用短横线分隔，而不要用空格或者下划线。</li>
+<li>始终用<code>DOCTYPE</code>声明开始HTML 文档，让浏览器知道这是一个HTML5 页面。即<code>&lt;! DOCTYPE html&gt;</code>。</li>
+<li>页面内容都在<code>body</code> 元素中。主要为浏览器和搜索引擎准备的指令位于<code>body</code>元素之前，在<code>head</code>元素中。</li>
+<li>用语义化HTML 标记内容，不关心它在浏览器中显示的样式。</li>
+<li>语义化HTML 提升了网站的可访问性，让网站更有效率，并使网站维护和添加样式变得更容易。</li>
+<li>CSS 控制HTML 内容的表现。</li>
+<li>每个浏览器自带的样式表规定HTML 的默认表现样式。开发人员可以使用自己写的CSS 覆盖这些规则。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -200,271 +351,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/20/%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9E%84%E9%80%A0%E5%9D%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/18/%E5%A6%82%E4%BD%95%E8%AE%A9Windows%E6%A1%8C%E9%9D%A2%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%9B%B4%E7%BE%8E%E8%A7%82/" class="archive-article-date">
-  	<time datetime="2020-02-18T10:47:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/18/%E5%A6%82%E4%BD%95%E8%AE%A9Windows%E6%A1%8C%E9%9D%A2%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%9B%B4%E7%BE%8E%E8%A7%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何让Windows桌面看起来更美观</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/18/%E5%A6%82%E4%BD%95%E8%AE%A9Windows%E6%A1%8C%E9%9D%A2%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%9B%B4%E7%BE%8E%E8%A7%82/">如何让Windows桌面看起来更美观</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">美化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网页的构造块"><span class="toc-number">1.</span> <span class="toc-text">网页的构造块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML思想"><span class="toc-number">1.1.</span> <span class="toc-text">HTML思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的HTML页面"><span class="toc-number">1.2.</span> <span class="toc-text">基本的HTML页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页的顶部和头部"><span class="toc-number">1.2.1.</span> <span class="toc-text">网页的顶部和头部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页的主体：你的内容"><span class="toc-number">1.2.2.</span> <span class="toc-text">网页的主体：你的内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签：元素、属性、值及其他"><span class="toc-number">1.3.</span> <span class="toc-text">标签：元素、属性、值及其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#元素"><span class="toc-number">1.3.1.</span> <span class="toc-text">元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性和值"><span class="toc-number">1.3.2.</span> <span class="toc-text">属性和值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父元素和子元素"><span class="toc-number">1.3.3.</span> <span class="toc-text">父元素和子元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页的文本内容"><span class="toc-number">1.4.</span> <span class="toc-text">网页的文本内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接、图像和其他非文本内容"><span class="toc-number">1.5.</span> <span class="toc-text">链接、图像和其他非文本内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件名和文件夹名"><span class="toc-number">1.6.</span> <span class="toc-text">文件名和文件夹名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL"><span class="toc-number">1.7.</span> <span class="toc-text">URL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对URL"><span class="toc-number">1.7.1.</span> <span class="toc-text">绝对URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相对URL"><span class="toc-number">1.7.2.</span> <span class="toc-text">相对URL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用同一目录下的文件"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">引用同一目录下的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用子目录下的文件"><span class="toc-number">1.7.2.2.</span> <span class="toc-text">引用子目录下的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用上层目录的文件"><span class="toc-number">1.7.2.3.</span> <span class="toc-text">引用上层目录的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#根相对URL"><span class="toc-number">1.7.2.4.</span> <span class="toc-text">根相对URL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML：有含义的标记"><span class="toc-number">1.8.</span> <span class="toc-text">HTML：有含义的标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本HTML页面的语义"><span class="toc-number">1.8.1.</span> <span class="toc-text">基本HTML页面的语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么语义很重要"><span class="toc-number">1.8.2.</span> <span class="toc-text">为什么语义很重要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器对网页的默认显示效果"><span class="toc-number">1.9.</span> <span class="toc-text">浏览器对网页的默认显示效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.10.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/%E5%9C%A8Hexo%E4%B8%8A%E6%B7%BB%E5%8A%A0Live2D%E7%9C%8B%E6%9D%BF%E5%A8%98/" class="archive-article-date">
-  	<time datetime="2020-02-17T10:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/%E5%9C%A8Hexo%E4%B8%8A%E6%B7%BB%E5%8A%A0Live2D%E7%9C%8B%E6%9D%BF%E5%A8%98/">在Hexo上添加Live2D看板娘</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/%E9%85%B7%E6%88%91%E9%9F%B3%E4%B9%90kwm%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2020-02-17T01:38:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/%E9%85%B7%E6%88%91%E9%9F%B3%E4%B9%90kwm%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/">酷我音乐kwm格式的转换</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/16/Hexo%E5%88%9D%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%9A%84%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-02-16T12:42:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/16/Hexo%E5%88%9D%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%9A%84%E4%BC%98%E5%8C%96/">Hexo初期搭建的优化</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/16/%E8%BE%85%E5%8A%A9%E7%BB%BC%E5%90%88%E6%94%BB%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2020-02-16T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/16/%E8%BE%85%E5%8A%A9%E7%BB%BC%E5%90%88%E6%94%BB%E7%95%A5/">辅助综合攻略</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">王者荣耀</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">攻略</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/16/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-02-16T07:24:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/16/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">从零开始用Hexo搭建一个博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -488,8 +487,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

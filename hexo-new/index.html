@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 爬虫 | 曲水流觞的blog</title>
+  <title>从零开始用Hexo搭建一个博客 | 曲水流觞的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="曲水流觞的blog">
-<meta property="og:url" content="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/index.html">
+  <meta name="description" content="前言​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始用Hexo搭建一个博客">
+<meta property="og:url" content="http://yoursite.com/hexo-new/index.html">
 <meta property="og:site_name" content="曲水流觞的blog">
+<meta property="og:description" content="前言​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-16T07:24:53.000Z">
+<meta property="article:modified_time" content="2020-02-21T13:40:40.736Z">
 <meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的blog" type="application/atom+xml">
@@ -155,160 +161,226 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hexo-new" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从零开始用Hexo搭建一个博客
+    </h1>
+  
+
+        
+        <a href="/hexo-new/" class="archive-article-date">
+  	<time datetime="2020-02-16T07:24:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）</p>
+<a id="more"></a>
+
+<h1 id="前期配置"><a href="#前期配置" class="headerlink" title="前期配置"></a>前期配置</h1><h2 id="下载-Nodejs"><a href="#下载-Nodejs" class="headerlink" title="下载 Nodejs"></a>下载 Nodejs</h2><p>​        Nodejs的下载可以直接到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Nodejs官网</a>去下载，安装左手边LTS版本即可。</p>
+<h2 id="下载-Git-并配置"><a href="#下载-Git-并配置" class="headerlink" title="下载 Git 并配置"></a>下载 Git 并配置</h2><p>​        因为在安装hexo的过程中需要利用到Git去抓包，因此Git的安装和配置是不可以少的。在b站上有关于配置Git和汉化的教程，《<a href="https://www.bilibili.com/video/av47654060" target="_blank" rel="noopener">如何在8分钟内完成Git配置</a>》，按照视频中操作安装即可。笔者在最后一步测试能否顺利抓取Github上的数据的时候遇到了报错，经过查询资料发现是之前在电脑中保存的Github的账号密码出现了问题，该账密是永久储存在电脑中的，如果有变动的话需要重新设置，<a href="https://www.jianshu.com/p/80a83ddd4af8" target="_blank" rel="noopener">设置方法</a>。经过重新调整后，已经能够用Git顺利抓取数据了。</p>
+<h2 id="Git-抓取速度的提升"><a href="#Git-抓取速度的提升" class="headerlink" title="Git 抓取速度的提升"></a>Git 抓取速度的提升</h2><p>​        在使用Git的时候，笔者发现抓取数据的速度宛如龟速，实在有点难顶。经过高人指教，可以利用代理提升Git的抓取速度，<a href="https://blog.csdn.net/qq_40087740/article/details/94192309" target="_blank" rel="noopener">方法在此</a>。经过调教后，Git的抓取速度成功从10KB/s飙升到400KB/s，有点香。</p>
+<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><h2 id="检查-Nodejs-和-npm-是否已经安装完成"><a href="#检查-Nodejs-和-npm-是否已经安装完成" class="headerlink" title="检查 Nodejs 和 npm 是否已经安装完成"></a>检查 Nodejs 和 npm 是否已经安装完成</h2><p>调取 nodejs 和 npm 的版本号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p>调取 Nodejs 和 npm 的版本都成功，说明已经安装完成。</p>
+<h2 id="利用-npm-安装-cnpm"><a href="#利用-npm-安装-cnpm" class="headerlink" title="利用 npm 安装 cnpm"></a>利用 npm 安装 cnpm</h2><p>先利用npm安装淘宝的镜像源 cnpm（这样比较快）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h2 id="利用-cnpm-安装-hexo"><a href="#利用-cnpm-安装-hexo" class="headerlink" title="利用 cnpm 安装 hexo"></a>利用 cnpm 安装 hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>等待安装完以后调取 hexo 的版本号如果成功说明安装完成。</p>
+<h1 id="初始化配置Hexo"><a href="#初始化配置Hexo" class="headerlink" title="初始化配置Hexo"></a>初始化配置Hexo</h1><h2 id="新建一个文件夹"><a href="#新建一个文件夹" class="headerlink" title="新建一个文件夹"></a>新建一个文件夹</h2><p>​        先在要安装Hexo的目录下面新建一个文件夹，用来存放博客的所有数据，如果在配置博客的过程中出现问题，可以整个文件夹干掉重来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:</span><br><span class="line">md test</span><br><span class="line">cd test</span><br></pre></td></tr></table></figure>
+<h2 id="使用-hexo-初始化博客"><a href="#使用-hexo-初始化博客" class="headerlink" title="使用 hexo 初始化博客"></a>使用 hexo 初始化博客</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>这个过程需要一点时间，hexo 会帮我们自动初始化所有的内容并且下载预设主题。</p>
+<h2 id="启动博客"><a href="#启动博客" class="headerlink" title="启动博客"></a>启动博客</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>hexo 就会在本地的4000端口（localhost:4000) 为你创建你的博客，这个时候 hexo博客已经创建完成了。</p>
+<h1 id="在Hexo上创建博文"><a href="#在Hexo上创建博文" class="headerlink" title="在Hexo上创建博文"></a>在Hexo上创建博文</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;我的第一篇文章&quot;</span><br></pre></td></tr></table></figure>
+<p>​        即可在本地创建一篇新的文章。在本地source文件夹的子文件夹中，文件形式为md文件。用Typora或者其他markdown编辑器打开后即可开始编辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>​        编辑完成后，通过<code>hexo g</code>即可生成对应的html文件，再用<code>hexo s</code>即可把博文显示在本地的博客上。（ <code>hexo s</code>可以作为本地测试使用，提前预览博客）</p>
+<h1 id="将Hexo上的博文推到远端"><a href="#将Hexo上的博文推到远端" class="headerlink" title="将Hexo上的博文推到远端"></a>将Hexo上的博文推到远端</h1><h2 id="在-Github-上创建个人仓库"><a href="#在-Github-上创建个人仓库" class="headerlink" title="在 Github 上创建个人仓库"></a>在 Github 上创建个人仓库</h2><p>在Guthub上新建一个仓库，例如：本人Github的昵称.github.io（这样可以方便以后访问的时候直接用username.github.io域名而不是username.github.io/reponame）</p>
+<h2 id="在-test-目录下安装一个-git-的部署插件"><a href="#在-test-目录下安装一个-git-的部署插件" class="headerlink" title="在 test 目录下安装一个 git 的部署插件"></a>在 test 目录下安装一个 git 的部署插件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p>即使有warning提示也不用管，正常安装即可。</p>
+<h2 id="配置-config-yml文件"><a href="#配置-config-yml文件" class="headerlink" title="配置 _config.yml文件"></a>配置 _config.yml文件</h2><p>找到文件的最底部的 Deployment ，将deploy下面的内容替换为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: 你的Github仓库的地址(比如:https:&#x2F;&#x2F;github.com&#x2F;****&#x2F;****.github.io.git）</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<p>修改保存后即可。</p>
+<h2 id="将博客部署到远端"><a href="#将博客部署到远端" class="headerlink" title="将博客部署到远端"></a>将博客部署到远端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>输入命令后博客就开始往远端开始推送，在过程中需要输入GitHub的账号和密码即可。</p>
+<h2 id="浏览自己的博客"><a href="#浏览自己的博客" class="headerlink" title="浏览自己的博客"></a>浏览自己的博客</h2><p>​        经过上述的步骤后，博客已经储存在GitHub上了，这个时候只要打开 https://***.github.io 即可看到自己的博客辣。</p>
+<h1 id="将Github仓库与自己的域名连接"><a href="#将Github仓库与自己的域名连接" class="headerlink" title="将Github仓库与自己的域名连接"></a>将Github仓库与自己的域名连接</h1><p>​        前面有提到，我搭建博客的目的是为了把我之前闲置的域名用起来，那当然少不了把GitHub仓库的GitHub Page和我域名连接起来的过程辣，在阿里云注册好自己的域名以后，就可以开始操作了。</p>
+<h2 id="把解析权从阿里云转到Cloudflare"><a href="#把解析权从阿里云转到Cloudflare" class="headerlink" title="把解析权从阿里云转到Cloudflare"></a>把解析权从阿里云转到Cloudflare</h2><p>​        到<a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare官网</a>注册后，根据指引点击 Add Site，添加自定以的域名。扫面完成后，Cloudflare会选择给我们分配两个NS地址，登录阿里云（你注册域名的地方），把这两个地址替换掉原来的NS地址，等待生效即可。</p>
+<h2 id="修改DNS（解析记录）"><a href="#修改DNS（解析记录）" class="headerlink" title="修改DNS（解析记录）"></a>修改DNS（解析记录）</h2><p>​        为了实现将Github Page和自己的域名连接，就需要把域名解析到Github Page上，添加<code>CNAME</code>和<code>A</code>解析记录，使得<code>www</code>网址和<code>@</code>(即本身) 都指向自己的Github Page。按照以下表格分别添加<code>A</code>和<code>CNAME</code>两条解析记录。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型Type</th>
+<th align="center">主机Host</th>
+<th align="center">指向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>A</code></td>
+<td align="center"><code>@</code></td>
+<td align="center">Github Page 的IP地址</td>
+</tr>
+<tr>
+<td align="center"><code>CNAME</code></td>
+<td align="center"><code>www</code></td>
+<td align="center">Github Page 的网址</td>
+</tr>
+</tbody></table>
+<p>其中Github Page的IP地址可以在<a href="http://ping.chinaz.com/" target="_blank" rel="noopener">站长之家</a>ping一下查到，然后填写进去，Github Page的地址就是 ***.git.io。</p>
+<h2 id="添加Github仓库的域名解析记录"><a href="#添加Github仓库的域名解析记录" class="headerlink" title="添加Github仓库的域名解析记录"></a>添加Github仓库的域名解析记录</h2><p>方法一：按照以下命令在自己的Github仓库中添加CNAME文件，其中填入自己购买的域名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch CNAME</span><br><span class="line">echo &#39;自己购买的域名&#39;&gt;CNAME</span><br></pre></td></tr></table></figure>
+
+<p>方法二：直接在仓库的setting中设置Custom Domain设置好自己的域名，Github会自动添加CNAME文件。</p>
+<p>操作完成后稍微等十多分钟即可用自己购买的域名来访问Github Page辣~</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-2/" class="archive-article-date">
-  	<time datetime="2020-02-21T02:45:05.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-2/">用Python写爬虫学习笔记（三）:网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/hexo-new/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-1/" class="archive-article-date">
-  	<time datetime="2020-02-20T12:29:34.791Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/supporter-strategy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          辅助综合攻略
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-1/">用Python写爬虫学习笔记（二）：网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前期配置"><span class="toc-number">2.</span> <span class="toc-text">前期配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-Nodejs"><span class="toc-number">2.1.</span> <span class="toc-text">下载 Nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-Git-并配置"><span class="toc-number">2.2.</span> <span class="toc-text">下载 Git 并配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-抓取速度的提升"><span class="toc-number">2.3.</span> <span class="toc-text">Git 抓取速度的提升</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hexo"><span class="toc-number">3.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检查-Nodejs-和-npm-是否已经安装完成"><span class="toc-number">3.1.</span> <span class="toc-text">检查 Nodejs 和 npm 是否已经安装完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用-npm-安装-cnpm"><span class="toc-number">3.2.</span> <span class="toc-text">利用 npm 安装 cnpm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用-cnpm-安装-hexo"><span class="toc-number">3.3.</span> <span class="toc-text">利用 cnpm 安装 hexo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始化配置Hexo"><span class="toc-number">4.</span> <span class="toc-text">初始化配置Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建一个文件夹"><span class="toc-number">4.1.</span> <span class="toc-text">新建一个文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-hexo-初始化博客"><span class="toc-number">4.2.</span> <span class="toc-text">使用 hexo 初始化博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动博客"><span class="toc-number">4.3.</span> <span class="toc-text">启动博客</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Hexo上创建博文"><span class="toc-number">5.</span> <span class="toc-text">在Hexo上创建博文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将Hexo上的博文推到远端"><span class="toc-number">6.</span> <span class="toc-text">将Hexo上的博文推到远端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在-Github-上创建个人仓库"><span class="toc-number">6.1.</span> <span class="toc-text">在 Github 上创建个人仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-test-目录下安装一个-git-的部署插件"><span class="toc-number">6.2.</span> <span class="toc-text">在 test 目录下安装一个 git 的部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-config-yml文件"><span class="toc-number">6.3.</span> <span class="toc-text">配置 _config.yml文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将博客部署到远端"><span class="toc-number">6.4.</span> <span class="toc-text">将博客部署到远端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览自己的博客"><span class="toc-number">6.5.</span> <span class="toc-text">浏览自己的博客</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将Github仓库与自己的域名连接"><span class="toc-number">7.</span> <span class="toc-text">将Github仓库与自己的域名连接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#把解析权从阿里云转到Cloudflare"><span class="toc-number">7.1.</span> <span class="toc-text">把解析权从阿里云转到Cloudflare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改DNS（解析记录）"><span class="toc-number">7.2.</span> <span class="toc-text">修改DNS（解析记录）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加Github仓库的域名解析记录"><span class="toc-number">7.3.</span> <span class="toc-text">添加Github仓库的域名解析记录</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-basics/" class="archive-article-date">
-  	<time datetime="2020-02-20T09:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-basics/">用Python写爬虫学习笔记（一）：爬虫基础</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -332,9 +404,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,

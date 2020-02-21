@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 爬虫 | 曲水流觞的blog</title>
+  <title>Hexo初期搭建的优化 | 曲水流觞的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="曲水流觞的blog">
-<meta property="og:url" content="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/index.html">
+  <meta name="description" content="前言Hexo 博客布置完以后，yilia主题还有许多功能需要优化，在CSDN和简书上面搜索了大量的文章，找到比较好的三篇，在这里记录一些我利用到的方法。  Hexo yilia 主题一揽子使用方案 关于hexo yilia主题配置走过的坑 Hexo 基于yilia主题及其它插件优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo初期搭建的优化">
+<meta property="og:url" content="http://yoursite.com/hexo-optimize/index.html">
 <meta property="og:site_name" content="曲水流觞的blog">
+<meta property="og:description" content="前言Hexo 博客布置完以后，yilia主题还有许多功能需要优化，在CSDN和简书上面搜索了大量的文章，找到比较好的三篇，在这里记录一些我利用到的方法。  Hexo yilia 主题一揽子使用方案 关于hexo yilia主题配置走过的坑 Hexo 基于yilia主题及其它插件优化">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-16T12:42:51.000Z">
+<meta property="article:modified_time" content="2020-02-21T13:41:03.508Z">
 <meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的blog" type="application/atom+xml">
@@ -155,160 +161,221 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hexo-optimize" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo初期搭建的优化
+    </h1>
+  
+
+        
+        <a href="/hexo-optimize/" class="archive-article-date">
+  	<time datetime="2020-02-16T12:42:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Hexo 博客布置完以后，yilia主题还有许多功能需要优化，在CSDN和简书上面搜索了大量的文章，找到比较好的三篇，在这里记录一些我利用到的方法。</p>
+<ol>
+<li><a href="https://blog.csdn.net/lynnbest/article/details/79845944" target="_blank" rel="noopener">Hexo yilia 主题一揽子使用方案</a></li>
+<li><a href="https://www.jianshu.com/p/f6f19b02c661" target="_blank" rel="noopener">关于hexo yilia主题配置走过的坑</a></li>
+<li><a href="https://www.jianshu.com/p/adb7640c97c2" target="_blank" rel="noopener">Hexo 基于yilia主题及其它插件优化</a></li>
+</ol>
+<a id="more"></a>
+
+<h1 id="查看所有文件，提示缺失模块"><a href="#查看所有文件，提示缺失模块" class="headerlink" title="查看所有文件，提示缺失模块"></a>查看所有文件，提示缺失模块</h1><p> <code>yilia</code> 在首次使用时，点击<code>所有文章</code> 时，会出现模块找不到的错误，可按照提示操作即可<br>注意一下，<code>_config.yml</code>路径是指 根目录下的，而非 <code>yilia</code> 主题下的 config文件 </p>
+<h1 id="配置图片资源"><a href="#配置图片资源" class="headerlink" title="配置图片资源"></a>配置图片资源</h1><ul>
+<li><strong>添加图片资源文件夹</strong>。 路径为 <code>themes/yilia/source/</code>下，可添加一个 <code>img</code> 文件夹，里面存放图片资源即可 。</li>
+<li><strong>配置文件中直接引用即可</strong>。路径为 <code>themes/yilia/_config.yml</code>，找到如下即可 ：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 微信二维码图片</span><br><span class="line">weixin:  &#x2F;img&#x2F;wechat.png</span><br><span class="line"></span><br><span class="line"># 头像图片</span><br><span class="line">avatar:  &#x2F;img&#x2F;head.jpg</span><br><span class="line"></span><br><span class="line"># 网页图标</span><br><span class="line">favicon:  &#x2F;img&#x2F;head.jpg</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="文章如何显示摘要"><a href="#文章如何显示摘要" class="headerlink" title="文章如何显示摘要"></a>文章如何显示摘要</h1><p>在你 MD 格式文章正文插入 <code>&lt;!-- more --&gt;</code>即可，插入以后文章只会显示它之前的，此后的就不再显示，点击文章标题或者全文阅读才可看到，与此同时需要注释掉:<code>themes/yilia/_config.yml</code>中的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#  excerpt_link: more</span><br></pre></td></tr></table></figure>
+
+<h1 id="给文章增加标签"><a href="#给文章增加标签" class="headerlink" title="给文章增加标签"></a>给文章增加标签</h1><p>在用cmd生成博客文件后，利用Typora打开可以发现最顶上的五行是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: </span><br><span class="line">date: </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>title是在cmd中可以直接利用命令生成的，时间会自动调用系统时间，我们只需要修改tags即可。例如这篇文章，可以将其修改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo初期搭建的优化</span><br><span class="line">date: 2020-02-16 20:42:51</span><br><span class="line">tags: hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>需要注意的是每一个冒号（：）以及下面这段代码中的(-)后面都要有空格。如果文章需要多个标签，可以用这种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo初期搭建的优化</span><br><span class="line">date: 2020-02-16 20:42:51</span><br><span class="line">tags: </span><br><span class="line">- hexo</span><br><span class="line">- 技术</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h1 id="增加归档菜单"><a href="#增加归档菜单" class="headerlink" title="增加归档菜单"></a>增加归档菜单</h1><p>修改 <code>themes/yilia/_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">    主页:  &#x2F;</span><br><span class="line">    归档:  &#x2F;archives&#x2F;index.html</span><br></pre></td></tr></table></figure>
+
+<h1 id="增加不蒜子访问统计"><a href="#增加不蒜子访问统计" class="headerlink" title="增加不蒜子访问统计"></a>增加不蒜子访问统计</h1><p>先在 <code>themes\yilia\layout\_partial\after-footer.ejs</code>最后添加脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>总阅读量可以插在头像下面，也可以插在底部，修改文件都在<code>themes\yilia\layout\_partial</code>的路径中，其中<code>footer.ejs</code>是插在底部的，<code>left-col.ejs</code>是插在头像下方的。</p>
+<ul>
+<li>插在头像下方，需要在<code>&lt;nav class=&quot;header-meau&quot;&gt;</code>前插入：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"header-smart-menu"</span> <span class="attr">style</span>=<span class="string">"margin:0;"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_container_site_pv"</span> <span class="attr">style</span>=<span class="string">"color:#b0a0aa;font-size:14px;"</span>"&gt;</span>本站总访问量<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_value_site_pv"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>次<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插在底部，需要在<code>&lt;div class=&quot;footer-right&quot;&gt;</code>前插入：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_container_site_pv"</span>&gt;</span>本站总访问量<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_value_site_pv"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>次<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于单篇文章的访问，需要修改<code>article.ejs</code>，在<code>&lt;%- post.content %&gt;</code>前插入：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"busuanzi_container_page_pv"</span> <span class="attr">style</span>=<span class="string">"font-size:16px;color:rgb(153,153,153);line-height:1.8em;"</span>&gt;</span>总访问量<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_value_page_pv"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>次<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="增加CNAME文件"><a href="#增加CNAME文件" class="headerlink" title="增加CNAME文件"></a>增加CNAME文件</h1><p>在使用本地cmd往Github仓库里面推文章的时候发现一个问题：在每次推到远端以后，Github仓库的设置里面的<code>Custom domain</code>就会自动刷新一次，导致每次写完新的文章推到Github上以后都要重新登录Github到仓库设置里面重新设置一次。解决方法是在根目录的<code>source</code>文件夹中添加一个名为<code>CNAME</code>的文件，没有文件名后缀，文件内容是你自己注册的域名(要和Github Page绑定的域名)。通过这个操作就不需要每次更新博客都要跑到Github上，只用刷新自己的博客主页即可。</p>
+<h1 id="在Github上添加README文件"><a href="#在Github上添加README文件" class="headerlink" title="在Github上添加README文件"></a>在Github上添加README文件</h1><p>使用<code>hexo d</code>发布本地编译过的代码到github上的时候，发现这个README.md文件也被解析的乱七八糟的，不是一般的github项目里面的README.md文件的显示样式，查了一下，发现只要在根目录下的<code>_config.yml</code>里面把<code>skip_render:</code>设置为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: README.md</span><br></pre></td></tr></table></figure>
+<p>注意<code>README.md</code>文件要放在<code>source</code>文件夹下，而不是和博文一样放在<code>source\_posts</code>下方，这样在用<code>hexo d</code>部署到远端的时候就能够顺利地在Github仓库里面出现<code>README.md</code>文件了。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>这些文章中还有很多功能没有添加到这个博客中来，会在后面不断尝试，例如图床和在线音乐链接等等功能。除此之外，在B站上还看到有up为自己的hexo加入了live2D看板娘，可以在今后探索一下。现在Hexo功能已经初步完善，个人博客基本建立完成~</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-2/" class="archive-article-date">
-  	<time datetime="2020-02-21T02:45:05.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-2/">用Python写爬虫学习笔记（三）:网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/hexo-optimize/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-1/" class="archive-article-date">
-  	<time datetime="2020-02-20T12:29:34.791Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/kuwo-kwm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          酷我音乐kwm格式的转换
+        
+      </div>
+    </a>
+  
+  
+    <a href="/supporter-strategy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">辅助综合攻略</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-1/">用Python写爬虫学习笔记（二）：网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看所有文件，提示缺失模块"><span class="toc-number">2.</span> <span class="toc-text">查看所有文件，提示缺失模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置图片资源"><span class="toc-number">3.</span> <span class="toc-text">配置图片资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文章如何显示摘要"><span class="toc-number">4.</span> <span class="toc-text">文章如何显示摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#给文章增加标签"><span class="toc-number">5.</span> <span class="toc-text">给文章增加标签</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加归档菜单"><span class="toc-number">6.</span> <span class="toc-text">增加归档菜单</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加不蒜子访问统计"><span class="toc-number">7.</span> <span class="toc-text">增加不蒜子访问统计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加CNAME文件"><span class="toc-number">8.</span> <span class="toc-text">增加CNAME文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Github上添加README文件"><span class="toc-number">9.</span> <span class="toc-text">在Github上添加README文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-number">10.</span> <span class="toc-text">后记</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-basics/" class="archive-article-date">
-  	<time datetime="2020-02-20T09:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-basics/">用Python写爬虫学习笔记（一）：爬虫基础</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -332,9 +399,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,

@@ -6,20 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>从零开始用Hexo搭建一个博客 | 曲水流觞的blog</title>
+  <title>用Python写爬虫学习笔记（一）：爬虫基础 | 曲水流觞的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）">
+  <meta name="description" content="前言NSFW里面的酱瓜小同学提出想搞一个闲鱼的爬虫程序帮助垃圾佬捡垃圾。所以我决定笨鸟先飞，去整一整爬虫，在CSDN学院找了一门介绍用Python写爬虫的系列课程开始学习（这一切的一切还要从一只蝙蝠说起），在个人博客中记录一些笔记以供自己以后查阅。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从零开始用Hexo搭建一个博客">
-<meta property="og:url" content="http://yoursite.com/title.html">
+<meta property="og:title" content="用Python写爬虫学习笔记（一）：爬虫基础">
+<meta property="og:url" content="http://yoursite.com/web-crawler-basics/index.html">
 <meta property="og:site_name" content="曲水流觞的blog">
-<meta property="og:description" content="前言​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）">
+<meta property="og:description" content="前言NSFW里面的酱瓜小同学提出想搞一个闲鱼的爬虫程序帮助垃圾佬捡垃圾。所以我决定笨鸟先飞，去整一整爬虫，在CSDN学院找了一门介绍用Python写爬虫的系列课程开始学习（这一切的一切还要从一只蝙蝠说起），在个人博客中记录一些笔记以供自己以后查阅。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-16T07:24:53.000Z">
-<meta property="article:modified_time" content="2020-02-21T04:08:28.021Z">
+<meta property="article:published_time" content="2020-02-20T09:16:23.000Z">
+<meta property="article:modified_time" content="2020-02-21T13:42:05.707Z">
 <meta property="article:author" content="Sufe.曲水">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="技术">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的blog" type="application/atom+xml">
@@ -161,86 +162,90 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo-new" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-web-crawler-basics" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      从零开始用Hexo搭建一个博客
+      用Python写爬虫学习笔记（一）：爬虫基础
     </h1>
   
 
         
-        <a href="/title.html" class="archive-article-date">
-  	<time datetime="2020-02-16T07:24:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
+        <a href="/web-crawler-basics/" class="archive-article-date">
+  	<time datetime="2020-02-20T09:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        这一切的一切都要从一只蝙蝠说起，疫情爆发以后每天宅在家里面，为了不让自己闲得发霉，决定将之前注册的域名利用起来，搭建一个自己的博客。在搭建的过程中碰到了不少问题，但都逐步解决，于是有了下面这篇文章，可以给以后还需要搭建hexo的小朋友一点参考，也给自己一些参考（万一某天我又要搭多一个并且忘了之前怎么搭的了呢？）</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>NSFW里面的酱瓜小同学提出想搞一个闲鱼的爬虫程序帮助垃圾佬捡垃圾。所以我决定笨鸟先飞，去整一整爬虫，在CSDN学院找了一门介绍用Python写爬虫的系列课程开始学习（这一切的一切还要从一只蝙蝠说起），在个人博客中记录一些笔记以供自己以后查阅。</p>
 <a id="more"></a>
 
-<h1 id="前期配置"><a href="#前期配置" class="headerlink" title="前期配置"></a>前期配置</h1><h2 id="下载-Nodejs"><a href="#下载-Nodejs" class="headerlink" title="下载 Nodejs"></a>下载 Nodejs</h2><p>​        Nodejs的下载可以直接到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Nodejs官网</a>去下载，安装左手边LTS版本即可。</p>
-<h2 id="下载-Git-并配置"><a href="#下载-Git-并配置" class="headerlink" title="下载 Git 并配置"></a>下载 Git 并配置</h2><p>​        因为在安装hexo的过程中需要利用到Git去抓包，因此Git的安装和配置是不可以少的。在b站上有关于配置Git和汉化的教程，《<a href="https://www.bilibili.com/video/av47654060" target="_blank" rel="noopener">如何在8分钟内完成Git配置</a>》，按照视频中操作安装即可。笔者在最后一步测试能否顺利抓取Github上的数据的时候遇到了报错，经过查询资料发现是之前在电脑中保存的Github的账号密码出现了问题，该账密是永久储存在电脑中的，如果有变动的话需要重新设置，<a href="https://www.jianshu.com/p/80a83ddd4af8" target="_blank" rel="noopener">设置方法</a>。经过重新调整后，已经能够用Git顺利抓取数据了。</p>
-<h2 id="Git-抓取速度的提升"><a href="#Git-抓取速度的提升" class="headerlink" title="Git 抓取速度的提升"></a>Git 抓取速度的提升</h2><p>​        在使用Git的时候，笔者发现抓取数据的速度宛如龟速，实在有点难顶。经过高人指教，可以利用代理提升Git的抓取速度，<a href="https://blog.csdn.net/qq_40087740/article/details/94192309" target="_blank" rel="noopener">方法在此</a>。经过调教后，Git的抓取速度成功从10KB/s飙升到400KB/s，有点香。</p>
-<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><h2 id="检查-Nodejs-和-npm-是否已经安装完成"><a href="#检查-Nodejs-和-npm-是否已经安装完成" class="headerlink" title="检查 Nodejs 和 npm 是否已经安装完成"></a>检查 Nodejs 和 npm 是否已经安装完成</h2><p>调取 nodejs 和 npm 的版本号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p>调取 Nodejs 和 npm 的版本都成功，说明已经安装完成。</p>
-<h2 id="利用-npm-安装-cnpm"><a href="#利用-npm-安装-cnpm" class="headerlink" title="利用 npm 安装 cnpm"></a>利用 npm 安装 cnpm</h2><p>先利用npm安装淘宝的镜像源 cnpm（这样比较快）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<h2 id="利用-cnpm-安装-hexo"><a href="#利用-cnpm-安装-hexo" class="headerlink" title="利用 cnpm 安装 hexo"></a>利用 cnpm 安装 hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>等待安装完以后调取 hexo 的版本号如果成功说明安装完成。</p>
-<h1 id="初始化配置Hexo"><a href="#初始化配置Hexo" class="headerlink" title="初始化配置Hexo"></a>初始化配置Hexo</h1><h2 id="新建一个文件夹"><a href="#新建一个文件夹" class="headerlink" title="新建一个文件夹"></a>新建一个文件夹</h2><p>​        先在要安装Hexo的目录下面新建一个文件夹，用来存放博客的所有数据，如果在配置博客的过程中出现问题，可以整个文件夹干掉重来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:</span><br><span class="line">md test</span><br><span class="line">cd test</span><br></pre></td></tr></table></figure>
-<h2 id="使用-hexo-初始化博客"><a href="#使用-hexo-初始化博客" class="headerlink" title="使用 hexo 初始化博客"></a>使用 hexo 初始化博客</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<p>这个过程需要一点时间，hexo 会帮我们自动初始化所有的内容并且下载预设主题。</p>
-<h2 id="启动博客"><a href="#启动博客" class="headerlink" title="启动博客"></a>启动博客</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>hexo 就会在本地的4000端口（localhost:4000) 为你创建你的博客，这个时候 hexo博客已经创建完成了。</p>
-<h1 id="在Hexo上创建博文"><a href="#在Hexo上创建博文" class="headerlink" title="在Hexo上创建博文"></a>在Hexo上创建博文</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;我的第一篇文章&quot;</span><br></pre></td></tr></table></figure>
-<p>​        即可在本地创建一篇新的文章。在本地source文件夹的子文件夹中，文件形式为md文件。用Typora或者其他markdown编辑器打开后即可开始编辑。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>​        编辑完成后，通过<code>hexo g</code>即可生成对应的html文件，再用<code>hexo s</code>即可把博文显示在本地的博客上。（ <code>hexo s</code>可以作为本地测试使用，提前预览博客）</p>
-<h1 id="将Hexo上的博文推到远端"><a href="#将Hexo上的博文推到远端" class="headerlink" title="将Hexo上的博文推到远端"></a>将Hexo上的博文推到远端</h1><h2 id="在-Github-上创建个人仓库"><a href="#在-Github-上创建个人仓库" class="headerlink" title="在 Github 上创建个人仓库"></a>在 Github 上创建个人仓库</h2><p>在Guthub上新建一个仓库，例如：本人Github的昵称.github.io（这样可以方便以后访问的时候直接用username.github.io域名而不是username.github.io/reponame）</p>
-<h2 id="在-test-目录下安装一个-git-的部署插件"><a href="#在-test-目录下安装一个-git-的部署插件" class="headerlink" title="在 test 目录下安装一个 git 的部署插件"></a>在 test 目录下安装一个 git 的部署插件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<p>即使有warning提示也不用管，正常安装即可。</p>
-<h2 id="配置-config-yml文件"><a href="#配置-config-yml文件" class="headerlink" title="配置 _config.yml文件"></a>配置 _config.yml文件</h2><p>找到文件的最底部的 Deployment ，将deploy下面的内容替换为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: 你的Github仓库的地址(比如:https:&#x2F;&#x2F;github.com&#x2F;****&#x2F;****.github.io.git）</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
-<p>修改保存后即可。</p>
-<h2 id="将博客部署到远端"><a href="#将博客部署到远端" class="headerlink" title="将博客部署到远端"></a>将博客部署到远端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<p>输入命令后博客就开始往远端开始推送，在过程中需要输入GitHub的账号和密码即可。</p>
-<h2 id="浏览自己的博客"><a href="#浏览自己的博客" class="headerlink" title="浏览自己的博客"></a>浏览自己的博客</h2><p>​        经过上述的步骤后，博客已经储存在GitHub上了，这个时候只要打开 https://***.github.io 即可看到自己的博客辣。</p>
-<h1 id="将Github仓库与自己的域名连接"><a href="#将Github仓库与自己的域名连接" class="headerlink" title="将Github仓库与自己的域名连接"></a>将Github仓库与自己的域名连接</h1><p>​        前面有提到，我搭建博客的目的是为了把我之前闲置的域名用起来，那当然少不了把GitHub仓库的GitHub Page和我域名连接起来的过程辣，在阿里云注册好自己的域名以后，就可以开始操作了。</p>
-<h2 id="把解析权从阿里云转到Cloudflare"><a href="#把解析权从阿里云转到Cloudflare" class="headerlink" title="把解析权从阿里云转到Cloudflare"></a>把解析权从阿里云转到Cloudflare</h2><p>​        到<a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare官网</a>注册后，根据指引点击 Add Site，添加自定以的域名。扫面完成后，Cloudflare会选择给我们分配两个NS地址，登录阿里云（你注册域名的地方），把这两个地址替换掉原来的NS地址，等待生效即可。</p>
-<h2 id="修改DNS（解析记录）"><a href="#修改DNS（解析记录）" class="headerlink" title="修改DNS（解析记录）"></a>修改DNS（解析记录）</h2><p>​        为了实现将Github Page和自己的域名连接，就需要把域名解析到Github Page上，添加<code>CNAME</code>和<code>A</code>解析记录，使得<code>www</code>网址和<code>@</code>(即本身) 都指向自己的Github Page。按照以下表格分别添加<code>A</code>和<code>CNAME</code>两条解析记录。</p>
-<table>
-<thead>
-<tr>
-<th align="center">类型Type</th>
-<th align="center">主机Host</th>
-<th align="center">指向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>A</code></td>
-<td align="center"><code>@</code></td>
-<td align="center">Github Page 的IP地址</td>
-</tr>
-<tr>
-<td align="center"><code>CNAME</code></td>
-<td align="center"><code>www</code></td>
-<td align="center">Github Page 的网址</td>
-</tr>
-</tbody></table>
-<p>其中Github Page的IP地址可以在<a href="http://ping.chinaz.com/" target="_blank" rel="noopener">站长之家</a>ping一下查到，然后填写进去，Github Page的地址就是 ***.git.io。</p>
-<h2 id="添加Github仓库的域名解析记录"><a href="#添加Github仓库的域名解析记录" class="headerlink" title="添加Github仓库的域名解析记录"></a>添加Github仓库的域名解析记录</h2><p>方法一：按照以下命令在自己的Github仓库中添加CNAME文件，其中填入自己购买的域名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch CNAME</span><br><span class="line">echo &#39;自己购买的域名&#39;&gt;CNAME</span><br></pre></td></tr></table></figure>
-
-<p>方法二：直接在仓库的setting中设置Custom Domain设置好自己的域名，Github会自动添加CNAME文件。</p>
-<p>操作完成后稍微等十多分钟即可用自己购买的域名来访问Github Page辣~</p>
+<h1 id="爬虫基础"><a href="#爬虫基础" class="headerlink" title="爬虫基础"></a>爬虫基础</h1><h2 id="爬虫介绍"><a href="#爬虫介绍" class="headerlink" title="爬虫介绍"></a>爬虫介绍</h2><h3 id="什么是爬虫"><a href="#什么是爬虫" class="headerlink" title="什么是爬虫"></a>什么是爬虫</h3><p>爬虫是一个模拟人类请求网站行为的程序。可以自动请求网页，并把数据抓取下来，然后用一定的规则提取有价值的数据。</p>
+<h3 id="爬虫应用场景"><a href="#爬虫应用场景" class="headerlink" title="爬虫应用场景"></a>爬虫应用场景</h3><ol>
+<li>搜索引擎（谷歌或者百度)</li>
+<li>数据分析</li>
+<li>抢票软件等</li>
+</ol>
+<h3 id="为什么用Python写爬虫"><a href="#为什么用Python写爬虫" class="headerlink" title="为什么用Python写爬虫"></a>为什么用Python写爬虫</h3><ol>
+<li>PHP：PHP是世界最好的语言，但是天生不是干这个的，而且对多线程、异步支持不是很好，并发处理能力弱。爬虫是工具性程序，对速度和效率的要求比较高。</li>
+<li>Java：生态圈很完善，是Python爬虫最大的竞争对手。但是Java语言本身很笨重，代码量十分大。重构成本比较高，任何修改都会导致代码的大量变动。爬虫经常要修改采集代码。</li>
+<li>C/C++：运行效率是无敌的。但是学习和开发成本高。写个小爬虫程序可能要大半天的时间。</li>
+<li>Python：语法优美、代码简洁、开发效率高、支持的模块多。相关HTTP请求模块和HTML解析模块很丰富。还有Scrapy和Scrapy-redis框架让我们开发爬虫变得异常简单。</li>
+</ol>
+<h2 id="爬虫开发工具安装"><a href="#爬虫开发工具安装" class="headerlink" title="爬虫开发工具安装"></a>爬虫开发工具安装</h2><h3 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h3><blockquote>
+<p>下载地址：<a href="https://www.python.org" target="_blank" rel="noopener">Python官网</a></p>
+<p>或者使用Anaconda：<a href="https://www.anaconda.com" target="_blank" rel="noopener">Anaconda官网</a></p>
+</blockquote>
+<h3 id="安装Pycharm："><a href="#安装Pycharm：" class="headerlink" title="安装Pycharm："></a>安装Pycharm：</h3><blockquote>
+<p>Pycharm社区版下载：<a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">Pycharm Commun</a></p>
+</blockquote>
+<h3 id="安装Chrome："><a href="#安装Chrome：" class="headerlink" title="安装Chrome："></a>安装Chrome：</h3><blockquote>
+<p>下载地址：<a href="https://www.google.com/chrome" target="_blank" rel="noopener">Chrome官网</a></p>
+</blockquote>
+<h2 id="Http协议："><a href="#Http协议：" class="headerlink" title="Http协议："></a>Http协议：</h2><h3 id="Http协议介绍"><a href="#Http协议介绍" class="headerlink" title="Http协议介绍"></a>Http协议介绍</h3><ol>
+<li>Http协议全称是HyperText Transfer Protocol（超文本传输协议）。是一种发布和接受HTML页面的方法。服务器的端口是80端口。</li>
+<li>Https协议是Http协议的加密版本，在Http协议下面加入了SSL曾。服务器端口是443端口。</li>
+</ol>
+<h3 id="URL详解"><a href="#URL详解" class="headerlink" title="URL详解"></a>URL详解</h3><p>URL是Uniform Resource Locator的简写，统一资源定位符。一个URL由以下几部分组成：</p>
+<p><strong>scheme://host:port/path/?query-string=xxx#anchor</strong></p>
+<ol>
+<li>scheme：代表的是访问协议，一般为http或者https或者ftp。</li>
+<li>host：主机名，域名。比如：<code>www.baidu.com</code>。</li>
+<li>port：端口号。当你访问一个网站的时候，浏览器默认使用80端口。</li>
+<li>path：查找路径。比如<code>www.jianshu.com/trending/now</code>后面的<code>trending/now</code>就是路径。</li>
+<li>query-string：查询字符串。比如：<code>www.baidu.com/s?wd=python</code>。</li>
+<li>anchor：锚点。用来做页面定位的。现在一些前后端分离的项目，也用锚点来做导航。</li>
+</ol>
+<p>在浏览器中请求一个URL，浏览器会对这个URL进行一个编码。除了英文字母，数字和部分符号外，其他的全部使用百分号+十六进制码值进行编码。</p>
+<h3 id="常见的请求Method"><a href="#常见的请求Method" class="headerlink" title="常见的请求Method"></a>常见的请求Method</h3><p>在Http协议中，定义了八种请求的方法。这里介绍两种常用的请求方法，分别是get请求和post请求。</p>
+<ol>
+<li>get请求：一般情况下，只从服务器获取数据下来，并不会对服务器资源产生任何影响的时候会使用get请求。</li>
+<li>post请求：向服务器发送数据（登录）、上传文件等，会对服务器资源产生影响的时候会使用post请求。</li>
+</ol>
+<p>有一些网站和服务器为了做反爬虫机制，也经常不按照套路出牌，有可能一个应该使用get方法的请求就一定要改成post请求，这个要视情况而定。</p>
+<h3 id="常见的请求头参数"><a href="#常见的请求头参数" class="headerlink" title="常见的请求头参数"></a>常见的请求头参数</h3><p>在Http协议中，向服务器发送一个请求，数据分为三部分，第一个是把数据放在url中，第二个是把数据放在body中（放在post请求中），第三个就是把数据放在head中。这里介绍在网络爬虫中经常会用到的一些请求头参数：</p>
+<ol>
+<li>User-Agent：浏览器名称。这个在网络爬虫中经常会被使用到。请求一个网页的时候，服务器通过这个参数就可以知道这个请求时由哪种浏览器发送的。如果我们是通过网络爬虫发送请求，那么我们的User-Agent就是Python，这对于那些有反爬虫机制的网站来说，可以轻易的判断这个请求是爬虫。因此我们要经常设置这一个值为一些浏览器的值，来伪装我们的爬虫。</li>
+<li>Referer：表明当前这个请求是从哪个URL过来的。这个一般也可以用来做反爬虫技术。如果不是从指定页面过来的，那么就不做相关的响应。</li>
+<li>Cookie：Http协议是无状态的，也就是同一个人发送了两次请求，服务器没有能力知道这两个请求是否来自同一个人。因此这个时候就需要用cookie作为标识。一般如果想要登陆后才能访问的网站，那么就要发送cookie信息了。</li>
+</ol>
+<h3 id="常见的响应状态码"><a href="#常见的响应状态码" class="headerlink" title="常见的响应状态码"></a>常见的响应状态码</h3><ul>
+<li>200：请求正常，服务器正常的返回数据。</li>
+<li>301：永久重定向。比如在访问<code>www.jingdong.com</code>的时候会重定向到<code>www.jd.com</code>。</li>
+<li>302：临时重定向。比如在访问一个需要登陆的页面的时候，而此时没有登录，那么就会重定向到登录页面。</li>
+<li>400：请求的URL在服务器上找不到。换句话说就是请求URL错误。</li>
+<li>403：服务器拒绝访问，权限不够。</li>
+<li>500：服务器内部错误。可能是服务器出现Bug了。</li>
+</ul>
+<h2 id="用Chrome分析网页"><a href="#用Chrome分析网页" class="headerlink" title="用Chrome分析网页"></a>用Chrome分析网页</h2><h3 id="Elements"><a href="#Elements" class="headerlink" title="Elements"></a>Elements</h3><p>可以帮助我们分析网页结构，获取我们想要的数据。但是Elements是最终呈现的网页数据，有时候网页数据是通过ajax请求得到的，因此Elements下的数据不能完全相信。</p>
+<h3 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h3><p>用来打印网页的一些信息。</p>
+<h3 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h3><p>整个网页锁加载的所有文件。</p>
+<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><p>查看整个网页发送的所有网路请求。一般我们想要去查看某个请求的信息，都可以到这个界面里面查看。</p>
 
       
 
@@ -254,11 +259,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -314,7 +323,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/title.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/web-crawler-basics/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,15 +337,20 @@
   
 <nav id="article-nav">
   
-    <a href="/title.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/web-crawler-network-1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          辅助综合攻略
+          用Python写爬虫学习笔记（二）：网络请求
         
       </div>
     </a>
   
+  
+    <a href="/html-learn-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTML学习笔记（一）：网页的构造块</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -361,7 +375,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前期配置"><span class="toc-number">2.</span> <span class="toc-text">前期配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-Nodejs"><span class="toc-number">2.1.</span> <span class="toc-text">下载 Nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-Git-并配置"><span class="toc-number">2.2.</span> <span class="toc-text">下载 Git 并配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-抓取速度的提升"><span class="toc-number">2.3.</span> <span class="toc-text">Git 抓取速度的提升</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hexo"><span class="toc-number">3.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检查-Nodejs-和-npm-是否已经安装完成"><span class="toc-number">3.1.</span> <span class="toc-text">检查 Nodejs 和 npm 是否已经安装完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用-npm-安装-cnpm"><span class="toc-number">3.2.</span> <span class="toc-text">利用 npm 安装 cnpm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用-cnpm-安装-hexo"><span class="toc-number">3.3.</span> <span class="toc-text">利用 cnpm 安装 hexo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始化配置Hexo"><span class="toc-number">4.</span> <span class="toc-text">初始化配置Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建一个文件夹"><span class="toc-number">4.1.</span> <span class="toc-text">新建一个文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-hexo-初始化博客"><span class="toc-number">4.2.</span> <span class="toc-text">使用 hexo 初始化博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动博客"><span class="toc-number">4.3.</span> <span class="toc-text">启动博客</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Hexo上创建博文"><span class="toc-number">5.</span> <span class="toc-text">在Hexo上创建博文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将Hexo上的博文推到远端"><span class="toc-number">6.</span> <span class="toc-text">将Hexo上的博文推到远端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在-Github-上创建个人仓库"><span class="toc-number">6.1.</span> <span class="toc-text">在 Github 上创建个人仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-test-目录下安装一个-git-的部署插件"><span class="toc-number">6.2.</span> <span class="toc-text">在 test 目录下安装一个 git 的部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-config-yml文件"><span class="toc-number">6.3.</span> <span class="toc-text">配置 _config.yml文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将博客部署到远端"><span class="toc-number">6.4.</span> <span class="toc-text">将博客部署到远端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览自己的博客"><span class="toc-number">6.5.</span> <span class="toc-text">浏览自己的博客</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将Github仓库与自己的域名连接"><span class="toc-number">7.</span> <span class="toc-text">将Github仓库与自己的域名连接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#把解析权从阿里云转到Cloudflare"><span class="toc-number">7.1.</span> <span class="toc-text">把解析权从阿里云转到Cloudflare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改DNS（解析记录）"><span class="toc-number">7.2.</span> <span class="toc-text">修改DNS（解析记录）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加Github仓库的域名解析记录"><span class="toc-number">7.3.</span> <span class="toc-text">添加Github仓库的域名解析记录</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#爬虫基础"><span class="toc-number">2.</span> <span class="toc-text">爬虫基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫介绍"><span class="toc-number">2.1.</span> <span class="toc-text">爬虫介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是爬虫"><span class="toc-number">2.1.1.</span> <span class="toc-text">什么是爬虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爬虫应用场景"><span class="toc-number">2.1.2.</span> <span class="toc-text">爬虫应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么用Python写爬虫"><span class="toc-number">2.1.3.</span> <span class="toc-text">为什么用Python写爬虫</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫开发工具安装"><span class="toc-number">2.2.</span> <span class="toc-text">爬虫开发工具安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Python"><span class="toc-number">2.2.1.</span> <span class="toc-text">安装Python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Pycharm："><span class="toc-number">2.2.2.</span> <span class="toc-text">安装Pycharm：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Chrome："><span class="toc-number">2.2.3.</span> <span class="toc-text">安装Chrome：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http协议："><span class="toc-number">2.3.</span> <span class="toc-text">Http协议：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Http协议介绍"><span class="toc-number">2.3.1.</span> <span class="toc-text">Http协议介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL详解"><span class="toc-number">2.3.2.</span> <span class="toc-text">URL详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的请求Method"><span class="toc-number">2.3.3.</span> <span class="toc-text">常见的请求Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的请求头参数"><span class="toc-number">2.3.4.</span> <span class="toc-text">常见的请求头参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的响应状态码"><span class="toc-number">2.3.5.</span> <span class="toc-text">常见的响应状态码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Chrome分析网页"><span class="toc-number">2.4.</span> <span class="toc-text">用Chrome分析网页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Elements"><span class="toc-number">2.4.1.</span> <span class="toc-text">Elements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Console"><span class="toc-number">2.4.2.</span> <span class="toc-text">Console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sources"><span class="toc-number">2.4.3.</span> <span class="toc-text">Sources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network"><span class="toc-number">2.4.4.</span> <span class="toc-text">Network</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>

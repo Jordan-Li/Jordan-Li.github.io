@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 爬虫 | 曲水流觞的blog</title>
+  <title>在Hexo上添加Live2D看板娘 | 曲水流觞的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="曲水流觞的blog">
-<meta property="og:url" content="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/index.html">
+  <meta name="description" content="前言昨天在参观许多Hexo博客的时候发现有许多博主增加了Live2D看板娘，心向往之，所以决定也要在自己的主页上面增加一个Live2D看板娘，搜索了简书以及Github上面的教程后，开始动手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Hexo上添加Live2D看板娘">
+<meta property="og:url" content="http://yoursite.com/hexo-live2d/index.html">
 <meta property="og:site_name" content="曲水流觞的blog">
+<meta property="og:description" content="前言昨天在参观许多Hexo博客的时候发现有许多博主增加了Live2D看板娘，心向往之，所以决定也要在自己的主页上面增加一个Live2D看板娘，搜索了简书以及Github上面的教程后，开始动手。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-17T10:28:09.000Z">
+<meta property="article:modified_time" content="2020-02-21T13:39:53.622Z">
 <meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的blog" type="application/atom+xml">
@@ -155,160 +161,191 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hexo-live2d" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Hexo上添加Live2D看板娘
+    </h1>
+  
+
+        
+        <a href="/hexo-live2d/" class="archive-article-date">
+  	<time datetime="2020-02-17T10:28:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>昨天在参观许多Hexo博客的时候发现有许多博主增加了Live2D看板娘，心向往之，所以决定也要在自己的主页上面增加一个Live2D看板娘，搜索了简书以及Github上面的教程后，开始动手。</p>
+<a id="more"></a>
+
+<h1 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ol>
+<li><a href="https://www.jianshu.com/p/c2f7e68e9c33" target="_blank" rel="noopener">Hexo博客yilia主题首页添加helper-live2d模型插件</a></li>
+<li><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md" target="_blank" rel="noopener">Live2D插件的Github中文版地址</a></li>
+</ol>
+<h2 id="安装Live2D模块"><a href="#安装Live2D模块" class="headerlink" title="安装Live2D模块"></a>安装Live2D模块</h2><p>在Hexo的博客根目录下面选择<code>cmd</code>命令窗口输入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+<p>等待安装完成即可，这个时候可以在<code>public</code>中找到名为<code>live2dw</code>的文件夹，表示安装成功。</p>
+<h2 id="下载属于自己想要的模型"><a href="#下载属于自己想要的模型" class="headerlink" title="下载属于自己想要的模型"></a>下载属于自己想要的模型</h2><p>在上面的第二个链接中，作者提供了三种下载模型的方法，我建议选择最简单的一种，就是直接在<code>cmd</code>命令窗口中输入<code>npm install 模型的包名</code>来进行安装。作者提供的模型有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">live2d-widget-model-chitose</span><br><span class="line">live2d-widget-model-epsilon2_1</span><br><span class="line">live2d-widget-model-gf</span><br><span class="line">live2d-widget-model-haru&#x2F;01（使用npm install --save live2d-widget-model-haru）</span><br><span class="line">live2d-widget-model-haru&#x2F;02（使用npm install --save live2d-widget-model-haru）</span><br><span class="line">live2d-widget-model-haruto</span><br><span class="line">live2d-widget-model-hibiki</span><br><span class="line">live2d-widget-model-hijiki</span><br><span class="line">live2d-widget-model-izumi</span><br><span class="line">live2d-widget-model-koharu</span><br><span class="line">live2d-widget-model-miku</span><br><span class="line">live2d-widget-model-ni-j</span><br><span class="line">live2d-widget-model-nico</span><br><span class="line">live2d-widget-model-nietzsche</span><br><span class="line">live2d-widget-model-nipsilon</span><br><span class="line">live2d-widget-model-nito</span><br><span class="line">live2d-widget-model-shizuku</span><br><span class="line">live2d-widget-model-tororo</span><br><span class="line">live2d-widget-model-tsumiki</span><br><span class="line">live2d-widget-model-unitychan</span><br><span class="line">live2d-widget-model-wanko</span><br><span class="line">live2d-widget-model-z16</span><br></pre></td></tr></table></figure>
+<p>例如我选择了miku（公主殿下天下第一！）的模型，我只需要在<code>cmd</code>命令行中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-miku</span><br></pre></td></tr></table></figure>
+<p>随后等待安装成功即可。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置根目录文件"><a href="#配置根目录文件" class="headerlink" title="配置根目录文件"></a>配置根目录文件</h2><p>我们需要对根目录的<code>_config.yml</code>文件添加配置。在文件的最后加上基础模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw&#x2F;</span><br><span class="line">  pluginJsPath: lib&#x2F;</span><br><span class="line">  pluginModelPath: assets&#x2F;</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-xxx  #这里填本人下载的模板名称</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br><span class="line">  react:</span><br><span class="line">    opacity: 0.7</span><br></pre></td></tr></table></figure>
+<p>但在我如此设置完以后重新刷新博客发现miku把我的某些功能键挡住了，我希望能够在上面设置中找到有关<strong>水平/竖直位移</strong>的版块，但一直没有找到。苦寻无果，我只好重新查看GitHub上面的Live2D的原文，最终找到了开发者留下的一个文件：<code>live2d-widget.js API</code>。一看就知道是配置文件的全部内容了，点进去一看果不其然：<a href="https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init" target="_blank" rel="noopener">配置文件全文</a>。下面我优化一下配置文件模板和对应的含义，以方便以后使用。</p>
+<h2 id="配置文件升级版"><a href="#配置文件升级版" class="headerlink" title="配置文件升级版"></a>配置文件升级版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># Live2D</span><br><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  # enable: false</span><br><span class="line">  scriptFrom: local # 默认</span><br><span class="line">  pluginRootPath: live2dw&#x2F; # 插件在站点上的根目录(相对路径)</span><br><span class="line">  pluginJsPath: lib&#x2F; # 脚本文件相对与插件根目录路径</span><br><span class="line">  pluginModelPath: assets&#x2F; # 模型文件相对与插件根目录路径</span><br><span class="line">  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span><br><span class="line">  debug: false # 调试, 是否在控制台输出日志</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-xxxx  #你所安装的模板的名称</span><br><span class="line">    scale: 1   #模型与canvas的缩放比例，1为正常比例</span><br><span class="line">  display:</span><br><span class="line">    superSample: 2  #超采样等级</span><br><span class="line">    width: 150   #canvas的长度&#x2F;宽度</span><br><span class="line">    height: 300   #canvas的高度</span><br><span class="line">    position: left  #可以选择left&#x2F;right 显示位置左或者右</span><br><span class="line">    hOffset: 0    #水平偏移</span><br><span class="line">    vOffset: -20   #竖直偏移</span><br><span class="line">  mobile: </span><br><span class="line">    show: true   #true&#x2F;fasle 是否在移动设备上显示</span><br><span class="line">    scale: 0.5    #在移动设备上面的缩放比例，1为正常比例</span><br><span class="line">  name: </span><br><span class="line">    canvas: live2dcanvas    #canvas元素的ID</span><br><span class="line">    div: live2d-widget    #div元素的ID</span><br><span class="line">  react: </span><br><span class="line">    opacity: 0.7    #透明度，1是完全不透明，0表示完全透明</span><br><span class="line">  dev: </span><br><span class="line">    border: false   #true&#x2F;false 是否在canvas的周围显示边界</span><br><span class="line">  dialog: </span><br><span class="line">    enable: true     #true&#x2F;false 是否显示人物对话框</span><br><span class="line">    hitokoto: true    #true&#x2F;false  是否使用一言API</span><br></pre></td></tr></table></figure>
+<p>以上就是Live2D作者给出的Live2D配置的完全版，可以直接拷贝到根目录的配置文件中使用。完成以上工作就可以在自己的网页上看到一个活生生的miku辣！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-2/" class="archive-article-date">
-  	<time datetime="2020-02-21T02:45:05.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-2/">用Python写爬虫学习笔记（三）:网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/hexo-live2d/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-network-1/" class="archive-article-date">
-  	<time datetime="2020-02-20T12:29:34.791Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/windows-beautify/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          如何让Windows桌面看起来更美观
+        
+      </div>
+    </a>
+  
+  
+    <a href="/kuwo-kwm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">酷我音乐kwm格式的转换</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-network-1/">用Python写爬虫学习笔记（二）：网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装模块"><span class="toc-number">2.</span> <span class="toc-text">安装模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">2.1.</span> <span class="toc-text">链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Live2D模块"><span class="toc-number">2.2.</span> <span class="toc-text">安装Live2D模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载属于自己想要的模型"><span class="toc-number">2.3.</span> <span class="toc-text">下载属于自己想要的模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置根目录文件"><span class="toc-number">3.1.</span> <span class="toc-text">配置根目录文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件升级版"><span class="toc-number">3.2.</span> <span class="toc-text">配置文件升级版</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-basics/" class="archive-article-date">
-  	<time datetime="2020-02-20T09:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-basics/">用Python写爬虫学习笔记（一）：爬虫基础</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -332,9 +369,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,

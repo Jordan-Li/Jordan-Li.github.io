@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Python | 曲水流觞的Blog</title>
+  <title>用Python写爬虫学习笔记（五）:数据解析 | 曲水流觞的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="曲水流觞的Blog">
-<meta property="og:url" content="http://yoursite.com/tags/python/index.html">
+  <meta name="description" content="前言当我们将数据从网站上获取下来以后，下一步要做的事情就是分析数据，将数据解析。主要就是通过搜索提取HTML代码中的有效信息并且进行整理和整合。这一篇文章我们先来学习利用XPath来对Html文档中的内容进行提取。下一篇文章将会学习利用bs4来解析数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python写爬虫学习笔记（五）:数据解析">
+<meta property="og:url" content="http://yoursite.com/web-crawler-xpath/index.html">
 <meta property="og:site_name" content="曲水流觞的Blog">
+<meta property="og:description" content="前言当我们将数据从网站上获取下来以后，下一步要做的事情就是分析数据，将数据解析。主要就是通过搜索提取HTML代码中的有效信息并且进行整理和整合。这一篇文章我们先来学习利用XPath来对Html文档中的内容进行提取。下一篇文章将会学习利用bs4来解析数据。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-22T12:39:33.660Z">
+<meta property="article:modified_time" content="2020-02-22T12:39:14.584Z">
 <meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="曲水流觞的Blog" type="application/atom+xml">
@@ -155,36 +162,319 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-web-crawler-xpath" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      用Python写爬虫学习笔记（五）:数据解析
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-xpath/" class="archive-article-date">
+
+        
+        <a href="/web-crawler-xpath/" class="archive-article-date">
   	<time datetime="2020-02-22T12:39:33.660Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-xpath/">用Python写爬虫学习笔记（五）:数据解析</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我们将数据从网站上获取下来以后，下一步要做的事情就是分析数据，将数据解析。主要就是通过搜索提取HTML代码中的有效信息并且进行整理和整合。这一篇文章我们先来学习利用XPath来对Html文档中的内容进行提取。下一篇文章将会学习利用bs4来解析数据。</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h1 id="数据解析（一）：XPath的使用"><a href="#数据解析（一）：XPath的使用" class="headerlink" title="数据解析（一）：XPath的使用"></a>数据解析（一）：XPath的使用</h1><h2 id="了解XPath"><a href="#了解XPath" class="headerlink" title="了解XPath"></a>了解XPath</h2><p>XPath（XML Path Language）是一门在XML和HTML文档中查找信息 的语言，可用来在XML和HTML文档中对元素和属性进行遍历。Xpath开发工具有：Chrome插件XPath Helper，Firefox插件Try XPath。</p>
+<h3 id="XPath节点"><a href="#XPath节点" class="headerlink" title="XPath节点"></a>XPath节点</h3><p>在 XPath 中，有七种类型的节点：元素、属性、文本、命名、空间、处理指令、注释以及文档（根）节点。XML 文档被作为节点树对待。树的根被称为文档节点或者根节点。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span>  <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span>Harry Potter<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  <span class="tag">&lt;<span class="name">author</span>&gt;</span>J K. Rowling<span class="tag">&lt;/<span class="name">author</span>&gt;</span>   <span class="tag">&lt;<span class="name">year</span>&gt;</span>2005<span class="tag">&lt;/<span class="name">year</span>&gt;</span>  <span class="tag">&lt;<span class="name">price</span>&gt;</span>29.99<span class="tag">&lt;/<span class="name">price</span>&gt;</span> <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>&lt;bookstore&gt;</code>就是文档节点，<code>&lt;author&gt;J K. Rowling&lt;/author&gt;</code>是一个元素节点，<code>lang=&quot;en&quot;</code>是属性节点。</p>
+<h3 id="XPath语法"><a href="#XPath语法" class="headerlink" title="XPath语法"></a>XPath语法</h3><p>XPath 使用路径表达式来选取 XML 文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似。例如：</p>
+<table>
+<thead>
+<tr>
+<th align="center">表达式</th>
+<th align="center">描述</th>
+<th align="center">示例</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">nodename</td>
+<td align="center">选取此节点的所有子节点</td>
+<td align="center">bookstore</td>
+<td align="center">选取bookstore下的所有子节点</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">如果是在最前面，代表从根节点选取。否则选择某节点下的某个节点</td>
+<td align="center">/bookstore</td>
+<td align="center">选取根元素下所有的bookstore节点</td>
+</tr>
+<tr>
+<td align="center">//</td>
+<td align="center">从全局节点中选择节点，随便在哪个位置</td>
+<td align="center">//book</td>
+<td align="center">在全局节点中找到所有book节点</td>
+</tr>
+<tr>
+<td align="center">@</td>
+<td align="center">选取某个节点的属性</td>
+<td align="center">//book[@price]</td>
+<td align="center">选择所有拥有price属性的book节点</td>
+</tr>
+</tbody></table>
+<p>上面示例中的<code>//book[@price]</code>中<code>[]</code>代表什么呢？这是XPath语法中的谓语。谓语用来查找某个特定的节点或者包含某个指定的值的节点，被嵌在方括号中。 在下面的表格中，我们列出了带有谓语的一些路径表达式，以及表达式的结果：</p>
+<table>
+<thead>
+<tr>
+<th align="center">路径表达式</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/bookstore/book[1]</td>
+<td align="center">选取属于bookstore子元素的第一个book元素</td>
+</tr>
+<tr>
+<td align="center">/bookstore/book[last()]</td>
+<td align="center">选取属于bookstore子元素的最后一个book元素</td>
+</tr>
+<tr>
+<td align="center">/bookstore/book[last()-1]</td>
+<td align="center">选取属于bookstore子元素的倒数第二个book元素</td>
+</tr>
+<tr>
+<td align="center">/bookstore/book[position()&lt;3]</td>
+<td align="center">选取最前面的两个属于bookstore元素的子元素</td>
+</tr>
+<tr>
+<td align="center">/title[@lang]</td>
+<td align="center">选取所有拥有名为lang的属性的title元素</td>
+</tr>
+<tr>
+<td align="center">/title[@lang=’eng’]</td>
+<td align="center">选取所有title元素，这些元素拥有值为eng的lang属性</td>
+</tr>
+<tr>
+<td align="center">/bookstore/book[price&gt;35.0]</td>
+<td align="center">选取bookstore元素的所有book元素，且这些元素其中的price元素的值大于35.0</td>
+</tr>
+<tr>
+<td align="center">/bookstore/book[price&gt;35.0]/title</td>
+<td align="center">选取bookstore元素的book元素的所有title元素，且book元素中的price元素的值大于35.0</td>
+</tr>
+</tbody></table>
+<p><strong>通配符：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">通配符</th>
+<th align="center">描述</th>
+<th align="center">示例</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">匹配任意节点</td>
+<td align="center">/bookstore/*</td>
+<td align="center">选取bookstore下的所有子元素</td>
+</tr>
+<tr>
+<td align="center">@*</td>
+<td align="center">匹配节点中的任何属性</td>
+<td align="center">//book[@*]</td>
+<td align="center">选取所有带有属性的book元素</td>
+</tr>
+</tbody></table>
+<p><strong>运算符：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+<th align="center">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">|</td>
+<td align="center">选取多个路径</td>
+<td align="center">//bookstore/book | //book/title</td>
+<td align="center">所有book元素和book元素下所有的title元素</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">加法</td>
+<td align="center">6 + 4</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">减法</td>
+<td align="center">6 - 4</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">乘法</td>
+<td align="center">6 * 4</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center">div</td>
+<td align="center">除法</td>
+<td align="center">8 div 4</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center">等于</td>
+<td align="center">price = 9.80</td>
+<td align="center">如果price是9.80，返回true。否则返回false</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">不等于</td>
+<td align="center">price != 9.80</td>
+<td align="center">如果price是9.80，返回false。否则返回true</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+<td align="center">price&lt;9.80</td>
+<td align="center">若price小于9.80，返回true。否则返回false</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于或等于</td>
+<td align="center">price&lt;=9.80</td>
+<td align="center">若price&lt;=9.80，返回true。否则返回false</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+<td align="center">price&gt;9.80</td>
+<td align="center">若price大于9.80，返回true。否则返回false</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于或等于</td>
+<td align="center">price&gt;=9.80</td>
+<td align="center">若price&gt;=9.80，返回true。否则返回false</td>
+</tr>
+<tr>
+<td align="center">or</td>
+<td align="center">或</td>
+<td align="center">price = 9.8 or price=9.7</td>
+<td align="center">若price等于9.8或9.7返回true。</td>
+</tr>
+<tr>
+<td align="center">and</td>
+<td align="center">与</td>
+<td align="center">price&gt;9.0 and price&lt;9.5</td>
+<td align="center">如果price大于9.0且小于9.5，返回true。</td>
+</tr>
+<tr>
+<td align="center">mod</td>
+<td align="center">计算余数</td>
+<td align="center">5 mod 2</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h2 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h2><p>lxml 是 一个HTML/XML的解析器，主要的功能是如何解析和提取 HTML/XML 数据。lxml和正则一样，也是用 C 实现的，是一款高性能的 Python HTML/XML 解析器，我 们可以利用之前学习的XPath语法，来快速的定位特定元素以及节点信息。</p>
+<blockquote>
+<p><a href="http://lxml.de/index.html" target="_blank" rel="noopener">lxml python 官方文档</a></p>
+</blockquote>
+<p>安装lxml可以直接使用命令行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install lxml</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用lxml库解析HTML代码和文件"><a href="#利用lxml库解析HTML代码和文件" class="headerlink" title="利用lxml库解析HTML代码和文件"></a>利用lxml库解析HTML代码和文件</h3><p>基本使用：我们可以利用lxml库来解析HTML代码，并且在解析HTML代码的时候，如果HTML代码不规范，他会自动的进行补全。</p>
+<h4 id="从字符串中读取HTML代码"><a href="#从字符串中读取HTML代码" class="headerlink" title="从字符串中读取HTML代码"></a>从字符串中读取HTML代码</h4><p>lxml可以从字符串中读取代码并且把不规范的代码自动补全，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">text = <span class="string">'''</span></span><br><span class="line"><span class="string">&lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;ul&gt;</span></span><br><span class="line"><span class="string">        &lt;li class="iten-0"&gt;&lt;a href="link1.html"&gt;first item&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li class="item-1"&gt;&lt;a href="link2.html"&gt;second item&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li class="iten-inactive"&gt;&lt;a href="link3.html"&gt;third item&lt;/a&gt;   </span></span><br><span class="line"><span class="string">    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">'''</span><span class="comment">#在第三个&lt;li&gt;标签中缺少结束标签&lt;/li&gt;</span></span><br><span class="line"><span class="comment">#将字符串解析为html文档</span></span><br><span class="line">html = etree.HTML(text)</span><br><span class="line"><span class="comment">#print(html)         会返回&lt;Element html at 0x2f71ee0&gt;</span></span><br><span class="line"><span class="comment">#按照字符串序列化html文档</span></span><br><span class="line">result = etree.tostring(html).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>执行上面代码，最后得到的输出为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"iten-0"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link1.html"</span>&gt;</span>first item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item-1"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link2.html"</span>&gt;</span>second item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"iten-inactive"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link3.html"</span>&gt;</span>third item<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里就将缺失的部分<code>&lt;html&gt;&lt;/html&gt;</code>和<code>&lt;body&gt;&lt;/body&gt;</code>以及不规范的部分<code>&lt;/li&gt;</code>补上了。</p>
+<h4 id="从文件中读取HTML代码"><a href="#从文件中读取HTML代码" class="headerlink" title="从文件中读取HTML代码"></a>从文件中读取HTML代码</h4><p>lxml不但可以从字符串中读取HTML代码，还可以从文件中读取HTML代码。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resp = etree.parse(<span class="string">'text.html'</span>)</span><br><span class="line">rq = etree.tostring(resp).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">print(rq)</span><br></pre></td></tr></table></figure>
+
+<h3 id="在lxml中使用XPath语法"><a href="#在lxml中使用XPath语法" class="headerlink" title="在lxml中使用XPath语法"></a>在lxml中使用XPath语法</h3><p>可以利用一个本地的<code>text.html</code>文档来练习XPath语法的使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"iten-0"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link1.html"</span>&gt;</span>first item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item-1"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link2.html"</span>&gt;</span>second item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"iten-inactive"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link3.html"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bold"</span>&gt;</span>third item<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item-1"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link4.html"</span>&gt;</span>fourth item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item-0"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"link5.html"</span>&gt;</span>fifth item<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在使用Xpath语法的时候，只需要调用<code>html.xpath(&#39;&#39;)</code>然后再其中填入xpath语法即可。</p>
+<p>训练的题目和对应的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">html = etree.parse(<span class="string">'text.html'</span>)</span><br><span class="line"><span class="comment">#获取所有的li标签</span></span><br><span class="line">result1 = html.xpath(<span class="string">'//li'</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result1:</span><br><span class="line">    print(etree.tostring(i).decode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="comment">#获取所有li标签下的所有class属性的值</span></span><br><span class="line">result2 = html.xpath(<span class="string">'//li/@class'</span>)</span><br><span class="line">print(result2)</span><br><span class="line"><span class="comment">#获取所有li标签下href为www.baidu.com的a标签</span></span><br><span class="line">result3 = html.xpath(<span class="string">'//li/a[@href="www.baidu.com"]'</span>)</span><br><span class="line">print(result3)</span><br><span class="line"><span class="comment">#获取所有li标签下的span标签</span></span><br><span class="line">result4 = html.xpath(<span class="string">'//li//span'</span>)</span><br><span class="line">print(result4)</span><br><span class="line"><span class="comment">#获取li标签下的a标签里的所有class</span></span><br><span class="line">result5 = html.xpath(<span class="string">'//li/a//@class'</span>)</span><br><span class="line">print(result5)</span><br><span class="line"><span class="comment">#获取最后一个li的a的href属性对应的值</span></span><br><span class="line">result6 = html.xpath(<span class="string">'//li[last()]/a/@href'</span>)</span><br><span class="line">print(result6)</span><br><span class="line"><span class="comment">#获取倒数第二个li元素的内容</span></span><br><span class="line">result7 = html.xpath(<span class="string">'//li[last()-1]/a'</span>)</span><br><span class="line">print(result7)</span><br><span class="line">print(result7[<span class="number">0</span>].text)</span><br><span class="line"><span class="comment">#result7是一个列表对象，result7[0]代表选取列表中的第一个元素</span></span><br><span class="line"><span class="comment">#获取倒数第二个li元素的内容的第二种方式（常用方式）：</span></span><br><span class="line">result8 = html.xpath(<span class="string">'//li[last()-1]/a/text()'</span>)</span><br><span class="line">print(result8)</span><br></pre></td></tr></table></figure>
+
+<h2 id="实战：爬取瓜子二手车网站"><a href="#实战：爬取瓜子二手车网站" class="headerlink" title="实战：爬取瓜子二手车网站"></a>实战：爬取瓜子二手车网站</h2><p>爬虫思路：首先登录主页，发现主页的源代码中是包含每个车的信息的，并且存放有汽车具体信息的超链接。进入这个超链接就可以看到车辆的具体信息。所以整体的思路：首先访问主页URL，发送get请求获取网页源代码；其次在这个网页源代码通过解析工具中找到每辆车的超链接的URL，然后再次发送get请求得到每辆车具体信息网页的源代码，再利用解析工具在这些源代码中找到车辆的具体信息。</p>
+<ol>
+<li><strong>首先，导入需要的库，将主界面的信息和headers文件写好，用来发送get请求：</strong></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'https://www.guazi.com/www/'</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'</span>,</span><br><span class="line">    <span class="string">'cookie'</span>:<span class="string">'uuid=45450b3d-2e57-4120-c089-ba69bed3d555; ganji_uuid=8377739662186796682216; antipas=O2476016FL682A0213b995572l585; lg=1; clueSourceCode=%2A%2300; user_city_id=-1; preTime=%7B%22last%22%3A1582358956%2C%22this%22%3A1582183579%2C%22pre%22%3A1582183579%7D; sessionid=9b0ca0f8-9579-42da-bddc-0887abb9f610; cainfo=%7B%22ca_a%22%3A%22-%22%2C%22ca_b%22%3A%22-%22%2C%22ca_s%22%3A%22dh_hao123llq%22%2C%22ca_n%22%3A%22hao123mzpc%22%2C%22ca_medium%22%3A%22-%22%2C%22ca_term%22%3A%22-%22%2C%22ca_content%22%3A%22%22%2C%22ca_campaign%22%3A%22%22%2C%22ca_kw%22%3A%22-%22%2C%22ca_i%22%3A%22-%22%2C%22scode%22%3A%22-%22%2C%22keyword%22%3A%22-%22%2C%22ca_keywordid%22%3A%22-%22%2C%22ca_transid%22%3A%22%22%2C%22platform%22%3A%221%22%2C%22version%22%3A1%2C%22display_finance_flag%22%3A%22-%22%2C%22client_ab%22%3A%22-%22%2C%22guid%22%3A%2245450b3d-2e57-4120-c089-ba69bed3d555%22%2C%22ca_city%22%3A%22zhanjiang%22%2C%22sessionid%22%3A%229b0ca0f8-9579-42da-bddc-0887abb9f610%22%7D; _gl_tracker=%7B%22ca_source%22%3A%22-%22%2C%22ca_name%22%3A%22-%22%2C%22ca_kw%22%3A%22-%22%2C%22ca_id%22%3A%22-%22%2C%22ca_s%22%3A%22self%22%2C%22ca_n%22%3A%22-%22%2C%22ca_i%22%3A%22-%22%2C%22sid%22%3A58169395173%7D; cityDomain=www'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>对主界面发送get请求获取网页源代码：</strong></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resp = requests.get(url,headers=headers)   </span><br><span class="line">text = resp.content.decode(<span class="string">'utf-8'</span>)       <span class="comment">#将获取到的代码储存到text中</span></span><br><span class="line">html = etree.HTML(text)					  <span class="comment">#将其变成html的标准格式</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>下面就需要对获取到的html文件进行xpath解析。</strong>解析的过程需要根据网站的具体规则而定。通过检查网页源代码，我们可以发现所有的车辆信息都储存在<code>&lt;li&gt;</code>标签下，而所有的<code>&lt;li&gt;</code>标签都在<code>&lt;ul&gt;</code>标签下方，因此我们可以检索到所有的<code>&lt;ul&gt;</code>标签，再向下爬取。这里展示爬取第一个<code>&lt;ul&gt;</code>标签：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ul = html.xpath(<span class="string">'//ul[@class="carlist clearfix"]'</span>)[<span class="number">0</span>]  </span><br><span class="line"><span class="comment">#获取所有class属性值为carlist clearfix的ul标签，得到一个列表，选取其中的第一个</span></span><br><span class="line"><span class="comment">#再在当前的目录下寻找li标签，得到一个列表：</span></span><br><span class="line">lis = ul.xpath(<span class="string">'./li'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行上述代码最后得到的结果是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&lt;Element li at <span class="number">0x3fbf1c0</span>&gt;, &lt;Element li at <span class="number">0x3fbf1e8</span>&gt;, &lt;Element li at <span class="number">0x3fbf210</span>&gt;, &lt;Element li at <span class="number">0x4031f08</span>&gt;, &lt;Element li at <span class="number">0x4031fd0</span>&gt;, &lt;Element li at <span class="number">0x4031fa8</span>&gt;, &lt;Element li at <span class="number">0x4031da0</span>&gt;, &lt;Element li at <span class="number">0x4031b70</span>&gt;, &lt;Element li at <span class="number">0x40314e0</span>&gt;, &lt;Element li at <span class="number">0x4031508</span>&gt;, &lt;Element li at <span class="number">0x4031530</span>&gt;, &lt;Element li at <span class="number">0x4031d50</span>&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>显然这是一个列表，里面包含了所有<code>&lt;li&gt;</code>标签的内容，但是我们还需要获取的是<code>&lt;li&gt;</code>标签下的<code>&lt;a&gt;</code>标签的<code>href</code>属性值的值，所以我们需要遍历解析：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> li <span class="keyword">in</span> lis:</span><br><span class="line">    detail_url = li.xpath(<span class="string">'./a/@href'</span>)</span><br><span class="line">    print(detail_url)</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[&#39;&#x2F;suqian&#x2F;4bd4c9c3565509dex.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;0&#39;]</span><br><span class="line">[&#39;&#x2F;nantong&#x2F;39e89dfb3bd22c2ax.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;1&#39;]</span><br><span class="line">[&#39;&#x2F;sh&#x2F;2a22a35b31668235x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;2&#39;]</span><br><span class="line">[&#39;&#x2F;mianyang&#x2F;2762c6e208ec8484x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;3&#39;]</span><br><span class="line">[&#39;&#x2F;zz&#x2F;b0d27e3ea1541399x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;4&#39;]</span><br><span class="line">[&#39;&#x2F;cq&#x2F;432ab0d21c7df7fex.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;5&#39;]</span><br><span class="line">[&#39;&#x2F;km&#x2F;da6ed64d0b3952c9x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;6&#39;]</span><br><span class="line">[&#39;&#x2F;zhongshan&#x2F;c591376091cb853ax.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;7&#39;]</span><br><span class="line">[&#39;&#x2F;jiamusi&#x2F;d497451cb639cf5bx.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;8&#39;]</span><br><span class="line">[&#39;&#x2F;qd&#x2F;6bb49a897d2a7de8x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;9&#39;]</span><br><span class="line">[&#39;&#x2F;xm&#x2F;0798329309500aa8x.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;10&#39;]</span><br><span class="line">[&#39;&#x2F;wh&#x2F;089744121e9c464ax.htm#fr_page&#x3D;index&amp;fr_pos&#x3D;rec&amp;fr_no&#x3D;11&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>分析数据：这是多个列表，每个列表中只有一个元素，并且元素是href的属性值。但是观察发现这些href值并不是完整的url，所以我们还需要对其进行字符串的拼接，所以将代码修改成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> li <span class="keyword">in</span> lis:</span><br><span class="line">    detail_url = li.xpath(<span class="string">'./a/@href'</span>)</span><br><span class="line">    detail_url = <span class="string">'https://www.guazi.com'</span> + detail_url[<span class="number">0</span>]</span><br><span class="line">    print(detail_url)</span><br></pre></td></tr></table></figure>
+
+<p>对于每个detail_url中的元素（都是列表元素），我们选取这些元素中的第一个元素（detail_url[0])，然后用完整的url与其进行比较，把缺失的部分拼接后再输出，就得到了我们需要的完整的url，输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">https://www.guazi.com/suqian/<span class="number">4</span>bd4c9c3565509dex.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=0</span></span><br><span class="line">https://www.guazi.com/nantong/<span class="number">39e89</span>dfb3bd22c2ax.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=1</span></span><br><span class="line">https://www.guazi.com/sh/<span class="number">2</span>a22a35b31668235x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=2</span></span><br><span class="line">https://www.guazi.com/mianyang/<span class="number">2762</span>c6e208ec8484x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=3</span></span><br><span class="line">https://www.guazi.com/zz/b0d27e3ea1541399x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=4</span></span><br><span class="line">https://www.guazi.com/cq/<span class="number">432</span>ab0d21c7df7fex.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=5</span></span><br><span class="line">https://www.guazi.com/km/da6ed64d0b3952c9x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=6</span></span><br><span class="line">https://www.guazi.com/zhongshan/c591376091cb853ax.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=7</span></span><br><span class="line">https://www.guazi.com/jiamusi/d497451cb639cf5bx.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=8</span></span><br><span class="line">https://www.guazi.com/qd/<span class="number">6</span>bb49a897d2a7de8x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=9</span></span><br><span class="line">https://www.guazi.com/xm/<span class="number">0798329309500</span>aa8x.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=10</span></span><br><span class="line">https://www.guazi.com/wh/<span class="number">089744121e9</span>c464ax.htm<span class="comment">#fr_page=index&amp;fr_pos=rec&amp;fr_no=11</span></span><br></pre></td></tr></table></figure>
+
+<p>最后我们把获取每辆车详细的url这一整体步骤封装到一个函数中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_detail_urls</span><span class="params">(url)</span>:</span></span><br><span class="line">    resp = requests.get(url, headers=headers)</span><br><span class="line">	text = resp.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">	html = etree.HTML(text)</span><br><span class="line">	ul = html.xpath(<span class="string">'//ul[@class="carlist clearfix"]'</span>)[<span class="number">0</span>]</span><br><span class="line">	lis = ul.xpath(<span class="string">'./li'</span>)</span><br><span class="line">    detail_urls = []</span><br><span class="line">	<span class="keyword">for</span> li <span class="keyword">in</span> lis:</span><br><span class="line">   		detail_url = li.xpath(<span class="string">'./a/@href'</span>)</span><br><span class="line">    	detail_url = <span class="string">'https://www.guazi.com'</span> + detail_url[<span class="number">0</span>]</span><br><span class="line">    	detail_urls.append(detail_url)</span><br><span class="line">    <span class="keyword">return</span> detail_urls</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>接下来我们来解析详情页面的内容，依旧是根据网站的规则提取响应的信息，代码如下：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">detail = get_detail_urls(url)    <span class="comment">#通过主界面获取每个车辆的详细url并存在一个列表里</span></span><br><span class="line"><span class="keyword">for</span> detail_url <span class="keyword">in</span> detail:</span><br><span class="line">    resp = requests.get(detail_url, headers=headers)</span><br><span class="line">    text = resp.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    html = etree.HTML(text)</span><br><span class="line">	<span class="comment">#遍历列表提取网页的源代码并转成html文件，下面开始处理数据</span></span><br><span class="line">	title =  html.xpath(<span class="string">'//div[@class="product-textbox"]/h2/text()'</span>)</span><br><span class="line">    <span class="comment">#提取网页的车辆的题目信息</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候我们如果输出的话，每个车辆可以得到以下的信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'\r\n        阿尔法·罗密欧 Stelvio 2017款 2.0T 200HP 精英版\r\n                                                                    '</span>, <span class="string">'\r\n                                    '</span>, <span class="string">'\r\n                                    '</span>, <span class="string">'\r\n                                        '</span>]</span><br></pre></td></tr></table></figure>
+
+<p>显然我们虽然提取到了车辆的标题信息，但是还有很多没用的元素在列表中，现在就要针对提取到的信息进行有效化的处理，首先第一步就是只获取列表中的第一个元素，然后将’\r\n’转变成空字符，最后再把这个元素的头尾的空格给删掉，所以将上面代码改成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title =  html.xpath(<span class="string">'//div[@class="product-textbox"]/h2/text()'</span>)[<span class="number">0</span>] <span class="comment">#提取第一个元素</span></span><br><span class="line">   title = title.replace(<span class="string">'\r\n'</span>,<span class="string">''</span>).strip()   <span class="comment">#replace函数替换\r\n,strip函数删除头尾空格</span></span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以得到所有车辆的标题信息了，输出如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">阿尔法·罗密欧 Stelvio <span class="number">2017</span>款 <span class="number">2.0</span>T <span class="number">200</span>HP 精英版</span><br><span class="line">奥迪A6L <span class="number">2009</span>款 <span class="number">2.0</span> TFSI 自动标准型</span><br><span class="line">大众 途锐 <span class="number">2019</span>款 <span class="number">3.0</span>TSI 锐智版 国VI(进口)</span><br><span class="line">别克 君越 <span class="number">2013</span>款 <span class="number">2.4L</span> SIDI领先舒适型</span><br><span class="line">沃尔沃S90 <span class="number">2018</span>款 T4 智远版</span><br><span class="line">奇瑞 艾瑞泽<span class="number">5</span> <span class="number">2016</span>款 <span class="number">1.5L</span> CVT领潮版</span><br><span class="line">雪铁龙C5 <span class="number">2017</span>款 <span class="number">350</span>THP 自动豪华型</span><br><span class="line">标致<span class="number">2008</span> <span class="number">2015</span>款 <span class="number">1.6L</span> 自动玩酷版</span><br><span class="line">本田 思域 <span class="number">2016</span>款 <span class="number">220</span>TURBO 手动豪华版</span><br><span class="line">WEY VV5 <span class="number">2017</span>款 <span class="number">2.0</span>T 超豪型</span><br><span class="line">本田 思铂睿 <span class="number">2015</span>款 <span class="number">2.4L</span> Si</span><br><span class="line">别克 君越 <span class="number">2013</span>款 <span class="number">3.0L</span> SIDI V6智享旗舰型</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>我们用同样的规则去获取车辆的其他信息，并且新建一个空字典来储存这些信息：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">infos = &#123;&#125;</span><br><span class="line">   info = html.xpath(<span class="string">'//div[@class="product-textbox"]/ul/li/span/text()'</span>)</span><br><span class="line">   cartime = info[<span class="number">0</span>]</span><br><span class="line">   km = info[<span class="number">1</span>]</span><br><span class="line">   displace = info[<span class="number">2</span>]</span><br><span class="line">   speedbox = info[<span class="number">3</span>]</span><br><span class="line">   infos[<span class="string">'标题'</span>] = title</span><br><span class="line">   infos[<span class="string">'上牌时间'</span>] = cartime</span><br><span class="line">   infos[<span class="string">'公里数'</span>] = km</span><br><span class="line">   infos[<span class="string">'上牌地点'</span>] = displace</span><br><span class="line">   infos[<span class="string">'变速箱'</span>] = speedbox</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>最后我们同样把这个功能封装到一个函数中，并且添加<code>save</code>函数，将爬取到的数据储存到本地，最终代码为：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'</span>,</span><br><span class="line">        <span class="string">'cookie'</span>: <span class="string">'uuid=45450b3d-2e57-4120-c089-ba69bed3d555; ganji_uuid=8377739662186796682216; antipas=O2476016FL682A0213b995572l585; lg=1; clueSourceCode=%2A%2300; user_city_id=-1; preTime=%7B%22last%22%3A1582358956%2C%22this%22%3A1582183579%2C%22pre%22%3A1582183579%7D; sessionid=9b0ca0f8-9579-42da-bddc-0887abb9f610; cainfo=%7B%22ca_a%22%3A%22-%22%2C%22ca_b%22%3A%22-%22%2C%22ca_s%22%3A%22dh_hao123llq%22%2C%22ca_n%22%3A%22hao123mzpc%22%2C%22ca_medium%22%3A%22-%22%2C%22ca_term%22%3A%22-%22%2C%22ca_content%22%3A%22%22%2C%22ca_campaign%22%3A%22%22%2C%22ca_kw%22%3A%22-%22%2C%22ca_i%22%3A%22-%22%2C%22scode%22%3A%22-%22%2C%22keyword%22%3A%22-%22%2C%22ca_keywordid%22%3A%22-%22%2C%22ca_transid%22%3A%22%22%2C%22platform%22%3A%221%22%2C%22version%22%3A1%2C%22display_finance_flag%22%3A%22-%22%2C%22client_ab%22%3A%22-%22%2C%22guid%22%3A%2245450b3d-2e57-4120-c089-ba69bed3d555%22%2C%22ca_city%22%3A%22zhanjiang%22%2C%22sessionid%22%3A%229b0ca0f8-9579-42da-bddc-0887abb9f610%22%7D; _gl_tracker=%7B%22ca_source%22%3A%22-%22%2C%22ca_name%22%3A%22-%22%2C%22ca_kw%22%3A%22-%22%2C%22ca_id%22%3A%22-%22%2C%22ca_s%22%3A%22self%22%2C%22ca_n%22%3A%22-%22%2C%22ca_i%22%3A%22-%22%2C%22sid%22%3A58169395173%7D; cityDomain=www'</span></span><br><span class="line">    &#125;</span><br><span class="line">proxy=&#123;<span class="string">'http'</span>:<span class="string">'117.88.176.122:3000'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取详情页面URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_detail_urls</span><span class="params">(url)</span>:</span></span><br><span class="line">    resp = requests.get(url, headers=headers,proxies = proxy)</span><br><span class="line">    text = resp.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    html = etree.HTML(text)</span><br><span class="line">    ul = html.xpath(<span class="string">'//ul[@class="carlist clearfix js-top"]'</span>)[<span class="number">0</span>]</span><br><span class="line">    lis = ul.xpath(<span class="string">'./li'</span>)</span><br><span class="line">    detail_urls = []</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> lis:</span><br><span class="line">        detail_url = li.xpath(<span class="string">'./a/@href'</span>)</span><br><span class="line">        detail_url = <span class="string">'https://www.guazi.com'</span> + detail_url[<span class="number">0</span>]</span><br><span class="line">        detail_urls.append(detail_url)</span><br><span class="line">    <span class="keyword">return</span> detail_urls</span><br><span class="line"></span><br><span class="line"><span class="comment">#解析详情页面的内容</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_detail_page</span><span class="params">(detail_url)</span>:</span></span><br><span class="line">    resp = requests.get(detail_url, headers=headers)</span><br><span class="line">    text = resp.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    html = etree.HTML(text)</span><br><span class="line">    title = html.xpath(<span class="string">'//div[@class="product-textbox"]/h2/text()'</span>)[<span class="number">0</span>]</span><br><span class="line">    title = title.replace(<span class="string">'\r\n'</span>, <span class="string">''</span>).strip()</span><br><span class="line">    infos = &#123;&#125;</span><br><span class="line">    info = html.xpath(<span class="string">'//div[@class="product-textbox"]/ul/li/span/text()'</span>)</span><br><span class="line">    cartime = info[<span class="number">0</span>]</span><br><span class="line">    km = info[<span class="number">1</span>]</span><br><span class="line">    displace = info[<span class="number">2</span>]</span><br><span class="line">    speedbox = info[<span class="number">3</span>]</span><br><span class="line">    infos[<span class="string">'title'</span>] = title</span><br><span class="line">    infos[<span class="string">'cartime'</span>] = cartime</span><br><span class="line">    infos[<span class="string">'km'</span>] = km</span><br><span class="line">    infos[<span class="string">'displace'</span>] = displace</span><br><span class="line">    infos[<span class="string">'speedbox'</span>] = speedbox</span><br><span class="line">    <span class="keyword">return</span> infos</span><br><span class="line"></span><br><span class="line"><span class="comment">#保存数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_data</span><span class="params">(infos)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'guazi.csv'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">'&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;\n'</span>.format(infos[<span class="string">'title'</span>],infos[<span class="string">'cartime'</span>],infos[<span class="string">'km'</span>],infos[<span class="string">'displace'</span>],infos[<span class="string">'speedbox'</span>]))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    base_url = <span class="string">'https://www.guazi.com/www/buy/o&#123;&#125;c-1/#bread'</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):     <span class="comment">#爬取第1页到第10页的全部数据</span></span><br><span class="line">        url = base_url.format(x)</span><br><span class="line">        <span class="comment">#获取页面详细url</span></span><br><span class="line">        detail = get_detail_urls(url)</span><br><span class="line">        <span class="comment">#解析详情页的内容并且进行保存</span></span><br><span class="line">        <span class="keyword">for</span> detail_url <span class="keyword">in</span> detail:</span><br><span class="line">            infos = parse_detail_page(detail_url)</span><br><span class="line">            <span class="comment">#print(infos)</span></span><br><span class="line">            save_data(infos)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -204,203 +494,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/web-crawler-xpath/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-requests/" class="archive-article-date">
-  	<time datetime="2020-02-22T03:01:06.211Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/web-crawler-requests/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用Python写爬虫学习笔记（四）:网络请求</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-requests/">用Python写爬虫学习笔记（四）:网络请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据解析（一）：XPath的使用"><span class="toc-number">2.</span> <span class="toc-text">数据解析（一）：XPath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#了解XPath"><span class="toc-number">2.1.</span> <span class="toc-text">了解XPath</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XPath节点"><span class="toc-number">2.1.1.</span> <span class="toc-text">XPath节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XPath语法"><span class="toc-number">2.1.2.</span> <span class="toc-text">XPath语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lxml库"><span class="toc-number">2.2.</span> <span class="toc-text">lxml库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用lxml库解析HTML代码和文件"><span class="toc-number">2.2.1.</span> <span class="toc-text">利用lxml库解析HTML代码和文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#从字符串中读取HTML代码"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">从字符串中读取HTML代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从文件中读取HTML代码"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">从文件中读取HTML代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在lxml中使用XPath语法"><span class="toc-number">2.2.2.</span> <span class="toc-text">在lxml中使用XPath语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实战：爬取瓜子二手车网站"><span class="toc-number">2.3.</span> <span class="toc-text">实战：爬取瓜子二手车网站</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-urllib-2/" class="archive-article-date">
-  	<time datetime="2020-02-21T02:45:05.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-urllib-2/">用Python写爬虫学习笔记（三）:网络请求</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-urllib-1/" class="archive-article-date">
-  	<time datetime="2020-02-20T12:29:34.791Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-urllib-1/">用Python写爬虫学习笔记（二）：网络请求</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/web-crawler-basics/" class="archive-article-date">
-  	<time datetime="2020-02-20T09:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/web-crawler-basics/">用Python写爬虫学习笔记（一）：爬虫基础</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -424,9 +630,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,

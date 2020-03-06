@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>如何使用Python操作MySQL数据库 - 曲水流觞</title>
+
+
+    <meta name="description" content="前言将数据爬取下来以后，接下来要做的事情就是将数据保存下来以便后续的分析和处理。本篇主要讲解如何利用Python对MySQL数据库进行操作，将我们的数据插入，删除，更新，亦或者在数据库中查找我们想要的数据。除此之外，还会介绍一些MySQL的语法基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用Python操作MySQL数据库">
+<meta property="og:url" content="http://sufeqs.com/mysql/index.html">
+<meta property="og:site_name" content="曲水流觞">
+<meta property="og:description" content="前言将数据爬取下来以后，接下来要做的事情就是将数据保存下来以便后续的分析和处理。本篇主要讲解如何利用Python对MySQL数据库进行操作，将我们的数据插入，删除，更新，亦或者在数据库中查找我们想要的数据。除此之外，还会介绍一些MySQL的语法基础。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sufeqs.com/photos/mysql.jpg">
+<meta property="article:published_time" content="2020-03-06T13:48:52.000Z">
+<meta property="article:modified_time" content="2020-03-06T14:54:30.125Z">
+<meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sufeqs.com/photos/mysql.jpg">
+
+
+
+<link rel="canonical" href="jordan-li.github.io" />
+
+
+
+
+
+<link rel="icon" href="/images/amg.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github-gist.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="如何使用Python操作MySQL数据库" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives/">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories/">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags/">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/photos/mysql.jpg" alt="如何使用Python操作MySQL数据库">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>如何使用Python操作MySQL数据库
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-06T13:48:52.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-06</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-06T14:54:30.125Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-06</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    16 minutes read (About 2465 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>将数据爬取下来以后，接下来要做的事情就是将数据保存下来以便后续的分析和处理。本篇主要讲解如何利用Python对MySQL数据库进行操作，将我们的数据插入，删除，更新，亦或者在数据库中查找我们想要的数据。除此之外，还会介绍一些MySQL的语法基础。</p>
+<a id="more"></a>
+
+<h1 id="MySQL数据库操作"><a href="#MySQL数据库操作" class="headerlink" title="MySQL数据库操作"></a>MySQL数据库操作</h1><h2 id="MySQL数据库下载"><a href="#MySQL数据库下载" class="headerlink" title="MySQL数据库下载"></a>MySQL数据库下载</h2><blockquote>
+<p><a href="https://dev.mysql.com/downloads/windows/installer/5.7.0.html">MySQL下载地址</a></p>
+</blockquote>
+<p>如果提示没有<code>.NET Framework</code>框架。那么就在提示框中找到下载的链接下载一个即可。</p>
+<p>如果提示没有<code>Microsoft Virtual C++ x64(x86)</code>，百度或者Google一下下载即可。</p>
+<h2 id="连接MySQL数据库"><a href="#连接MySQL数据库" class="headerlink" title="连接MySQL数据库"></a>连接MySQL数据库</h2><p>首先在Pycharm安装pymysql数据库，可以直接在命令行中输入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+
+<p>连接代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#1. 使用pymysql.connect的方法连接数据库</span></span><br><span class="line">db = pymysql.connect(host=<span class="string">"主机名"</span>,port=端口号,user=<span class="string">"账号名称"</span>,password=<span class="string">"数据库密码"</span>,database=<span class="string">"要连接操作的数据库名"</span>,charset=<span class="string">"utf8"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 如果想要操作数据库还需要获取db上面的cursor对象</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 使用cursor.execute()来执行sql语句</span></span><br><span class="line">cursor.execute(<span class="string">"select * from article"</span>)</span><br><span class="line">result = cursor.fetchone()    <span class="comment">#fetchone代表提取第一条数据</span></span><br><span class="line">print(result)</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>host：在连接外网的服务器的时候，需要改成外网服务器的ip地址，本地默认localhost。</li>
+<li>port：在外网一般会更换端口号，在本地操作默认端口号为3306。</li>
+<li>user：连接的用户，一般在生产环境中会单独分配一个账号，本地操作默认root。</li>
+<li>password：连接的用户设置的密码。</li>
+<li>database：要连接操作的数据库名。</li>
+<li>charset：设置为utf8（注意不是utf-8）才可以操作中文。</li>
+</ul>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>如果想要在数据库中插入数据，也可以使用Python操作，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 连接数据库，返回一个pymysql.connection对象</span></span><br><span class="line">db = pymysql.connect(host=<span class="string">"localhost"</span>, port=<span class="number">3306</span>, user=<span class="string">"root"</span>, password=<span class="string">"root"</span>, database=<span class="string">"data"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 得到db的curser对象,用于操作数据库</span></span><br><span class="line">curser = db.cursor()</span><br><span class="line">sql = <span class="string">"insert into article(id,title,content) values(null,'222','apple')"</span></span><br><span class="line">curser.execute(sql)     <span class="comment">#执行sql语句</span></span><br></pre></td></tr></table></figure>
+
+<p>其中sql语句的语法是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名(字段) values(对应的值)</span><br></pre></td></tr></table></figure>
+
+<p>如果有时候需要提交的数据待定，还可以用以下方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果使用的数据不想写死，就用%s挖坑</span></span><br><span class="line">sql = <span class="string">"insert into article(id,title,content) values(null,%s,%s)"</span>  <span class="comment">#全部用%s挖坑</span></span><br><span class="line">title = <span class="string">'444'</span></span><br><span class="line">content =<span class="string">'555'</span></span><br><span class="line"><span class="comment"># 最后利用元组进行提交数据</span></span><br><span class="line">curser.execute(sql,(title,content))</span><br><span class="line">db.commit()             <span class="comment">#将执行的操作提交</span></span><br><span class="line">db.close()              <span class="comment">#将数据库关闭</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h2><p>查找数据的sql语句的语法为：<code>select 字段 from 表名 where 条件</code>。查找数据的方法有很多种，可以根据不同的需要提取不同数量的数据，具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment"># 使用pymysql查询数据，可以用fetch*方法</span></span><br><span class="line"><span class="comment"># fetchone(): 这个方法每次只获取一条数据</span></span><br><span class="line"><span class="comment"># fetchall(): 这个方法接收全部的返回结果</span></span><br><span class="line"><span class="comment"># fetchmany(size): 可以获取指定条数的数据</span></span><br><span class="line"></span><br><span class="line">db = pymysql.connect(host=<span class="string">"localhost"</span>, port=<span class="number">3306</span>, user=<span class="string">"root"</span>, password=<span class="string">"root"</span>, database=<span class="string">"data"</span>)</span><br><span class="line">cursor = db.cursor()</span><br><span class="line">sql = <span class="string">"select id,title from article"</span>              <span class="comment"># * 表示提取所有的字段</span></span><br><span class="line"><span class="comment"># sql ="select id,title from article where id&gt;3"  可以在sql语句中用where添加条件实现过滤</span></span><br><span class="line">sql1 = <span class="string">"select * from article"</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line">result1 = cursor.fetchall()</span><br><span class="line"><span class="comment"># result2 = cursor.fetchone()</span></span><br><span class="line"><span class="comment"># result3 = cursor.fetchmany(2)   只提取两条数据</span></span><br><span class="line"><span class="comment"># 查找数据是不需要对数据库进行操作的，所以可以不使用db.commit()</span></span><br><span class="line">print(result1)</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除数据的sql语句的语法为：<code>delete form 表名 where 条件</code>，实例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(host=<span class="string">"localhost"</span>, port=<span class="number">3306</span>, user=<span class="string">"root"</span>, password=<span class="string">"root"</span>, database=<span class="string">"data"</span>)</span><br><span class="line">cursor = db.cursor()</span><br><span class="line">sql = <span class="string">"delete from article where id=2"</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line">db.commit()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><p>更新数据的sql语句的语法为：<code>update 表名 set 列名称=新值 条件</code>，实例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db = pymysql.connect(host=<span class="string">"localhost"</span>, port=<span class="number">3306</span>, user=<span class="string">"root"</span>, password=<span class="string">"root"</span>, database=<span class="string">"data"</span>,charset=<span class="string">'utf8'</span>)       <span class="comment">#注意这里应该是utf8而不是utf-8,这样才可以操作中文</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line">sql = <span class="string">"update article set title ='钢铁是怎样炼成的' where id=3"</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line">db.commit()     <span class="comment"># 对数据库进行操作必须使用db.commit</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="MySQL语句语法基础"><a href="#MySQL语句语法基础" class="headerlink" title="MySQL语句语法基础"></a>MySQL语句语法基础</h1><p>所有的SQL的语法教程可以参考：<a href="https://www.w3school.com.cn/sql/index.asp">SQL基础教程</a></p>
+<p>在介绍SQL的语法之前，先给一个样例数据库的<strong>“Persons”</strong>表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Id</th>
+<th align="center">LastName</th>
+<th align="center">FirstName</th>
+<th align="center">Address</th>
+<th align="center">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Adams</td>
+<td align="center">John</td>
+<td align="center">Oxford</td>
+<td align="center">London</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Bush</td>
+<td align="center">George</td>
+<td align="center">Fifth Avenue</td>
+<td align="center">NewWork</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Carter</td>
+<td align="center">Thomas</td>
+<td align="center">Changan Street</td>
+<td align="center">Beijing</td>
+</tr>
+</tbody></table>
+<h2 id="SQL-select"><a href="#SQL-select" class="headerlink" title="SQL select"></a>SQL select</h2><p>select 语句用于从表中选取数据，结果被存储在一个结果表中（称为结果集）。具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 列名称 from 表名称</span><br><span class="line">select * from 表名称</span><br><span class="line">#select语句对大小写不敏感，使用时候一致即可</span><br></pre></td></tr></table></figure>
+
+<p>实例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select LastName,FirstName from Persons</span><br><span class="line">select * from persons     # *表示获取所有的列</span><br></pre></td></tr></table></figure>
+
+<p>语句2将会返回原来的表，语句1会得到：</p>
+<table>
+<thead>
+<tr>
+<th>LastName</th>
+<th>FirstName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Adams</td>
+<td>John</td>
+</tr>
+<tr>
+<td>Bush</td>
+<td>George</td>
+</tr>
+<tr>
+<td>Carter</td>
+<td>Thomas</td>
+</tr>
+</tbody></table>
+<h2 id="SQL-insert-into"><a href="#SQL-insert-into" class="headerlink" title="SQL insert into"></a>SQL insert into</h2><p>insert into 语句用于向表格中插入新的行。具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名称 values (值1,值2...)</span><br><span class="line">insert into 表名称(列1,列2...) values (值1,值2...)    #我们也可以指定索要插入数据的列</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如在上面那个表中插入新的行，可以使用：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into Persons values (&#39;4&#39;,&#39;Gates&#39;,&#39;Bill&#39;,&#39;Xuanwumen10&#39;,&#39;Beijing&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Id</th>
+<th align="center">LastName</th>
+<th align="center">FirstName</th>
+<th align="center">Address</th>
+<th align="center">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Adams</td>
+<td align="center">John</td>
+<td align="center">Oxford</td>
+<td align="center">London</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Bush</td>
+<td align="center">George</td>
+<td align="center">Fifth Avenue</td>
+<td align="center">NewWork</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Carter</td>
+<td align="center">Thomas</td>
+<td align="center">Changan Street</td>
+<td align="center">Beijing</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Gates</td>
+<td align="center">Bill</td>
+<td align="center">Xuanwumen10</td>
+<td align="center">Beijing</td>
+</tr>
+</tbody></table>
+<ul>
+<li>如果想要在指定的列中插入数据，可以使用：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into Persons(LastName,Address) values(&#39;Wilson&#39;,&#39;Champs-Elysees&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Id</th>
+<th align="center">LastName</th>
+<th align="center">FirstName</th>
+<th align="center">Address</th>
+<th align="center">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Adams</td>
+<td align="center">John</td>
+<td align="center">Oxford</td>
+<td align="center">London</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Bush</td>
+<td align="center">George</td>
+<td align="center">Fifth Avenue</td>
+<td align="center">NewWork</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Carter</td>
+<td align="center">Thomas</td>
+<td align="center">Changan Street</td>
+<td align="center">Beijing</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Wilson</td>
+<td align="center"></td>
+<td align="center">Champs-Elysees</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>没有写入数据的地方会保持空。</p>
+<h2 id="SQL-update"><a href="#SQL-update" class="headerlink" title="SQL update"></a>SQL update</h2><p>update语句用于修改表中的数据。具体语法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表名称 set 列名称 &#x3D; 新值 where 列名称 &#x3D; 某值</span><br></pre></td></tr></table></figure>
+
+<p>实例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update Person set LastName &#x3D; &#39;Fred&#39; where FirstName &#x3D; &#39;Thomas&#39;</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Id</th>
+<th align="center">LastName</th>
+<th align="center">FirstName</th>
+<th align="center">Address</th>
+<th align="center">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Adams</td>
+<td align="center">John</td>
+<td align="center">Oxford</td>
+<td align="center">London</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Bush</td>
+<td align="center">George</td>
+<td align="center">Fifth Avenue</td>
+<td align="center">NewWork</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Fred</td>
+<td align="center">Thomas</td>
+<td align="center">Changan Street</td>
+<td align="center">Beijing</td>
+</tr>
+</tbody></table>
+<h2 id="SQL-delete"><a href="#SQL-delete" class="headerlink" title="SQL delete"></a>SQL delete</h2><p>delete 语句用于删除列表中的行。具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名称 where 列名称 &#x3D; 值</span><br></pre></td></tr></table></figure>
+
+<p>实例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from Persons where LastName&#x3D;&#39;Wilson&#39;</span><br></pre></td></tr></table></figure>
+
+<p>也可以删除在不删除表的情况下删除所有的行，这意味着表的结构、属性和索引都是完整的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from table_name</span><br><span class="line">delete * from table_name</span><br></pre></td></tr></table></figure>
+
+<p>以上两种方法都是可以在不删除表的情况下删除所有的行。</p>
+<h2 id="SQL-distinct"><a href="#SQL-distinct" class="headerlink" title="SQL distinct"></a>SQL distinct</h2><p>在表中，可能会包含重复的值。一般来说这不是问题，但是往往有的时候我们只希望列出不同(distinct)的值。我们只需要在查找的过程中加入关键词(distinct)即可，具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct 列名称 from 表名称</span><br></pre></td></tr></table></figure>
+
+<p>实例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct FisrtName from Persons</span><br></pre></td></tr></table></figure>
+
+<p>当然原本的表中<code>FirstName</code>一栏并没有重复的值，这里只做实例用。</p>
+<h2 id="SQL-where"><a href="#SQL-where" class="headerlink" title="SQL where"></a>SQL where</h2><p>where子句用来添加条件，具体的语法如下（这里用select查找数据的时候作为例子）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列名称 from 表名称 where 列 运算符 值</span><br></pre></td></tr></table></figure>
+
+<p>下面的运算符可以在where语句中使用：</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt; 或者 !=</td>
+<td align="center">不等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于</td>
+</tr>
+<tr>
+<td align="center">between</td>
+<td align="center">在某个范围内</td>
+</tr>
+<tr>
+<td align="center">like</td>
+<td align="center">搜索某种模式</td>
+</tr>
+</tbody></table>
+<p>实例代码：比如我们要搜索居住在<code>Fifth Avenue</code>的人的全部信息，可以采用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from Persons where Address &#x3D; &#39;Fifth Avenue&#39;</span><br></pre></td></tr></table></figure>
+
+<p>最终得到的结果是：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Id</th>
+<th align="center">LastName</th>
+<th align="center">FirstName</th>
+<th align="center">Address</th>
+<th align="center">City</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2</td>
+<td align="center">Bush</td>
+<td align="center">George</td>
+<td align="center">Fifth Avenue</td>
+<td align="center">NewWork</td>
+</tr>
+</tbody></table>
+<p>需要注意的是： <strong>SQL 使用单引号来环绕文本值</strong>（一般数据库系统也接受双引号）。<strong>如果是数值，不要使用引号。</strong> </p>
+<h2 id="SQL-and-amp-or"><a href="#SQL-and-amp-or" class="headerlink" title="SQL and &amp; or"></a>SQL and &amp; or</h2><p>and和or运算符用于给予一个以上的条件对记录进行过滤。实例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from Persons where FirstName&#x3D;&#39;Thomas&#39; and LastName&#x3D;&#39;Carter&#39;</span><br><span class="line">select * from Persons where FirstName&#x3D;&#39;Thomas&#39; or LastName&#x3D;&#39;Adams&#39;</span><br><span class="line">select * from Persons where (FisrtName&#x3D;&#39;Thomas&#39; or FirstName&#x3D;&#39;John&#39;) and LastName&#x3D;&#39;Adams&#39;</span><br></pre></td></tr></table></figure>
+
+<p>第一和第二条语句都比较好理解，第三条语句指的是搜索姓为’Adams’且名字为’Thomas’或者名字为’John’的人，显然在原来的表中，姓为Adams的人只有一个，所以最终的搜索结果只有’Adams John’的全部信息。</p>
+<h2 id="SQL-order-by"><a href="#SQL-order-by" class="headerlink" title="SQL order by"></a>SQL order by</h2><p>order by 语句用于根据指定的列对结果集进行排序（不会更改原来数据库的顺序），order by 语句默认按照<strong>升序</strong>对记录进行排序，可以采用<code>desc</code>关键字更改顺序为降序。具体语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 需要排序的列1,列2... from Orders order by 基准列1,基准列2...</span><br></pre></td></tr></table></figure>
+
+<p>例如，原表为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Company</th>
+<th align="center">OrderNumber</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IBM</td>
+<td align="center">3532</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">2356</td>
+</tr>
+<tr>
+<td align="center">Apple</td>
+<td align="center">4698</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">6953</td>
+</tr>
+</tbody></table>
+<ul>
+<li>采用以下代码，按照字母顺序将公司的名称进行排序：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select Company,OrderNumber from Orders order by Company</span><br><span class="line"># select Company,OrderNumber from Orders order by Company desc(这个是逆序排列)</span><br></pre></td></tr></table></figure>
+
+<p>排序后的结果为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Company</th>
+<th align="center">OrderNumber</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Apple</td>
+<td align="center">4698</td>
+</tr>
+<tr>
+<td align="center">IBM</td>
+<td align="center">3532</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">6953</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">2356</td>
+</tr>
+</tbody></table>
+<ul>
+<li>采用以下代码，按照字母表顺序将公司的名称排序，并且按照数字顺序显示OrderNumber：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select Company,OrderNumber from Orders order by Company,OrderNumber</span><br><span class="line">select Company,OrderNumber from Orders order by Company desc,OrderNumber asc</span><br><span class="line"># 上面这串语法的含义是按照逆序将Company进行排列，并且按照数字顺序将OrderNumber进行排列</span><br></pre></td></tr></table></figure>
+
+<p>排序后的结果为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Company</th>
+<th align="center">OrderNumber</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Apple</td>
+<td align="center">4698</td>
+</tr>
+<tr>
+<td align="center">IBM</td>
+<td align="center">3532</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">2356</td>
+</tr>
+<tr>
+<td align="center">W3School</td>
+<td align="center">6953</td>
+</tr>
+</tbody></table>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="http://sufeqs.com/mysql/">如何使用Python操作MySQL数据库</a></li>
+            <li><strong>本文作者：</strong><a href="http://sufeqs.com">Sufe.曲水</a></li>
+            <li><strong>本文链接：</strong><a href="http://sufeqs.com/mysql/">http://sufeqs.com/mysql/</a></li>
+            <li><strong>最后更新：</strong>2020-03-06</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/MySQL/" rel="tag">MySQL</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/assetstudio/">
+                <span class="level-item">如何用AssetStudio解明日方舟的包</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://sufeqs.com/mysql/';
+        this.page.identifier = 'mysql/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'Sufeqs' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-96x96 has-mb-6">
+                        <img class="is-rounded" src="https://www.gravatar.com/avatar/cfd1955fdbeef0f5e9af36b03ee37dd3?s=96" alt="Sufe.曲水">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sufe.曲水
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        清风徐来，水波不兴
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shanghai, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/archives/">
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        16
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/categories/">
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/tags/">
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Jordan-Li" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    
+        
+
+    <div class="card widget column-left is-sticky" id="toc">
+        <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    Catalogue
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#MySQL数据库操作">
+        <span class="has-mr-6">2</span>
+        <span>MySQL数据库操作</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#MySQL数据库下载">
+        <span class="has-mr-6">2.1</span>
+        <span>MySQL数据库下载</span>
+        </a></li><li>
+        <a class="is-flex" href="#连接MySQL数据库">
+        <span class="has-mr-6">2.2</span>
+        <span>连接MySQL数据库</span>
+        </a></li><li>
+        <a class="is-flex" href="#插入数据">
+        <span class="has-mr-6">2.3</span>
+        <span>插入数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#查找数据">
+        <span class="has-mr-6">2.4</span>
+        <span>查找数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#删除数据">
+        <span class="has-mr-6">2.5</span>
+        <span>删除数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#更新数据">
+        <span class="has-mr-6">2.6</span>
+        <span>更新数据</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MySQL语句语法基础">
+        <span class="has-mr-6">3</span>
+        <span>MySQL语句语法基础</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#SQL-select">
+        <span class="has-mr-6">3.1</span>
+        <span>SQL select</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-insert-into">
+        <span class="has-mr-6">3.2</span>
+        <span>SQL insert into</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-update">
+        <span class="has-mr-6">3.3</span>
+        <span>SQL update</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-delete">
+        <span class="has-mr-6">3.4</span>
+        <span>SQL delete</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-distinct">
+        <span class="has-mr-6">3.5</span>
+        <span>SQL distinct</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-where">
+        <span class="has-mr-6">3.6</span>
+        <span>SQL where</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-and-amp-or">
+        <span class="has-mr-6">3.7</span>
+        <span>SQL and & or</span>
+        </a></li><li>
+        <a class="is-flex" href="#SQL-order-by">
+        <span class="has-mr-6">3.8</span>
+        <span>SQL order by</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="如何使用Python操作MySQL数据库" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Sufe.曲水&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://sufeqs.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

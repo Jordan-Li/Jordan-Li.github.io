@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://sufeqs.com/photos/hexo.jfif">
 <meta property="article:published_time" content="2020-02-16T07:24:53.000Z">
-<meta property="article:modified_time" content="2020-02-23T14:06:17.068Z">
+<meta property="article:modified_time" content="2020-03-07T09:38:24.468Z">
 <meta property="article:author" content="Sufe.曲水">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
@@ -153,7 +153,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-16T07:24:53.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-16</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-23T14:06:17.068Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-23</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-07T09:38:24.468Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-07</time>
                 
                 
                 <div class="level-item">
@@ -212,7 +212,7 @@
 <p>输入命令后博客就开始往远端开始推送，在过程中需要输入GitHub的账号和密码即可。</p>
 <h2 id="浏览自己的博客"><a href="#浏览自己的博客" class="headerlink" title="浏览自己的博客"></a>浏览自己的博客</h2><p>​        经过上述的步骤后，博客已经储存在GitHub上了，这个时候只要打开 https://***.github.io 即可看到自己的博客辣。</p>
 <h1 id="将Github仓库与自己的域名连接"><a href="#将Github仓库与自己的域名连接" class="headerlink" title="将Github仓库与自己的域名连接"></a>将Github仓库与自己的域名连接</h1><p>​        前面有提到，我搭建博客的目的是为了把我之前闲置的域名用起来，那当然少不了把GitHub仓库的GitHub Page和我域名连接起来的过程辣，在阿里云注册好自己的域名以后，就可以开始操作了。</p>
-<h2 id="把解析权从阿里云转到Cloudflare"><a href="#把解析权从阿里云转到Cloudflare" class="headerlink" title="把解析权从阿里云转到Cloudflare"></a>把解析权从阿里云转到Cloudflare</h2><p>​        到<a href="https://dash.cloudflare.com/">Cloudflare官网</a>注册后，根据指引点击 Add Site，添加自定以的域名。扫面完成后，Cloudflare会选择给我们分配两个NS地址，登录阿里云（你注册域名的地方），把这两个地址替换掉原来的NS地址，等待生效即可。</p>
+<h2 id="把解析权从阿里云转到Cloudflare"><a href="#把解析权从阿里云转到Cloudflare" class="headerlink" title="把解析权从阿里云转到Cloudflare"></a>把解析权从阿里云转到Cloudflare</h2><p>​        到<a href="https://dash.cloudflare.com/">Cloudflare官网</a>注册后，根据指引点击 Add Site，添加自定以的域名。扫描完成后，Cloudflare会选择给我们分配两个NS地址，登录阿里云（你注册域名的地方），把这两个地址替换掉原来的NS地址，等待生效即可。</p>
 <h2 id="修改DNS（解析记录）"><a href="#修改DNS（解析记录）" class="headerlink" title="修改DNS（解析记录）"></a>修改DNS（解析记录）</h2><p>​        为了实现将Github Page和自己的域名连接，就需要把域名解析到Github Page上，添加<code>CNAME</code>和<code>A</code>解析记录，使得<code>www</code>网址和<code>@</code>(即本身) 都指向自己的Github Page。按照以下表格分别添加<code>A</code>和<code>CNAME</code>两条解析记录。</p>
 <table>
 <thead>
@@ -246,7 +246,7 @@
             <li><strong>本文标题：</strong><a href="http://sufeqs.com/hexo-new/">从零开始用Hexo搭建一个博客</a></li>
             <li><strong>本文作者：</strong><a href="http://sufeqs.com">Sufe.曲水</a></li>
             <li><strong>本文链接：</strong><a href="http://sufeqs.com/hexo-new/">http://sufeqs.com/hexo-new/</a></li>
-            <li><strong>最后更新：</strong>2020-02-16</li>
+            <li><strong>创建时间：</strong>2020-02-16</li>
             <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
             </li>
             </ul>

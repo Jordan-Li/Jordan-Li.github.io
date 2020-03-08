@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>如何利用Markdown制作一份PPY - 曲水流觞</title>
+
+
+    <meta name="description" content="前言在搭建帮助中心的过程中，我找到了一款看上去十分不错的Hexo主题melody，这一款主题具有完备的配置和各种各样的功能，功能几乎应有尽有。在配置的过程中，我发现教程中有一项我从来没有见过的功能：幻灯片Slides页面。大致的作用是可以通过Reveal.js将我们书写的Markdown转化为精彩的幻灯片（PPT）。这可是程序猿的一大喜讯。（奇怪的知识又增加了！）Hexo等博客框架已经实现了Mar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何利用Markdown制作一份PPY">
+<meta property="og:url" content="http://sufeqs.com/hexo-slide/index.html">
+<meta property="og:site_name" content="曲水流觞">
+<meta property="og:description" content="前言在搭建帮助中心的过程中，我找到了一款看上去十分不错的Hexo主题melody，这一款主题具有完备的配置和各种各样的功能，功能几乎应有尽有。在配置的过程中，我发现教程中有一项我从来没有见过的功能：幻灯片Slides页面。大致的作用是可以通过Reveal.js将我们书写的Markdown转化为精彩的幻灯片（PPT）。这可是程序猿的一大喜讯。（奇怪的知识又增加了！）Hexo等博客框架已经实现了Mar">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sufeqs.com/photos/revealjs.jpg">
+<meta property="article:published_time" content="2020-03-08T02:26:52.000Z">
+<meta property="article:modified_time" content="2020-03-08T02:29:16.920Z">
+<meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sufeqs.com/photos/revealjs.jpg">
+
+
+
+<link rel="canonical" href="jordan-li.github.io" />
+
+
+
+
+
+<link rel="icon" href="/images/amg.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github-gist.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="如何利用Markdown制作一份PPY" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives/">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories/">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags/">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/photos/revealjs.jpg" alt="如何利用Markdown制作一份PPY">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>如何利用Markdown制作一份PPY
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-08T02:26:52.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-08</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-08T02:29:16.920Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-08</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/hexo/">Hexo</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    12 minutes read (About 1868 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在搭建<a href="http://help.sufeqs.com">帮助中心</a>的过程中，我找到了一款看上去十分不错的Hexo主题<code>melody</code>，这一款主题具有完备的配置和各种各样的功能，功能几乎应有尽有。在配置的过程中，我发现教程中有一项我从来没有见过的功能：<strong>幻灯片Slides页面</strong>。大致的作用是可以通过<strong>Reveal.js</strong>将我们书写的Markdown转化为精彩的幻灯片（PPT）。这可是程序猿的一大喜讯。（奇怪的知识又增加了！）Hexo等博客框架已经实现了Markdown转HTML的功能，如今又发现Markdown还能用来制作PPT，这样一来程序猿的<strong>文档形式就可以更加统一</strong>。（Markdown天下第一！）但是苦恼的是，搜遍网络依旧没有找到一篇<strong>介绍Markdown转PPT的语法</strong>的文章，于是本人只能苦苦摸索一下午，初步实现能够制作一份PPT的成果。在此记录一下如何用Markdown来通过<strong>Reveal.js</strong>制作一份PPT。</p>
+<a id="more"></a>
+
+<h1 id="头文件设置"><a href="#头文件设置" class="headerlink" title="头文件设置"></a>头文件设置</h1><p>在具有<strong>幻灯片Slides页面</strong>主题下，需要在Markdown文件的文件头中加入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">layout: slides                   # 表示本片文章采用幻灯片形式</span><br><span class="line">slide:</span><br><span class="line">   theme: night                  # 对幻灯片设置主题样式</span><br><span class="line">   separator: ===                # 水平播放（一级标题）分割符</span><br><span class="line">   separator_vertical: ==        # 竖直播放（二级标题）分隔符</span><br></pre></td></tr></table></figure>
+
+<p>不同的主题的配置可能会有所不同，具体的情况可以查阅主题的配置介绍文件。</p>
+<h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h1><p><strong>Reveal.js</strong>官方给出了许多不同的主题给予我们选择，具体有以下九种：</p>
+<ul>
+<li>black：黑色背景，白色文字，蓝色链接（默认主题）</li>
+<li>white：白色背景，黑色文字，蓝色链接</li>
+<li>league：灰色背景，白色文字，蓝色链接（revel.js &lt;3.0.0的默认主题）</li>
+<li>beige：米色背景，深色文字，棕色链接</li>
+<li>sky：蓝色背景，细小的深色文字，蓝色链接</li>
+<li>night：黑色背景，白色粗体文字，橙色链接</li>
+<li>serif：卡布奇诺背景，灰色文字，棕色链接</li>
+<li>simple：白色背景，黑色文字，蓝色链接</li>
+<li>solarized：米色背景，深绿色文字，蓝色链接</li>
+</ul>
+<p>直接选择自己想要的主题，填写在文件头的<code>theme</code>后面即可。</p>
+<h1 id="具体语法"><a href="#具体语法" class="headerlink" title="具体语法"></a>具体语法</h1><h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>如果要说PPT和普通博客有什么明显的差别，那就是有动画效果和层次感。层次感通过幻灯片之间的播放来提现<strong>Reveal.js</strong> 提供了<strong>水平播放</strong>和<strong>竖直播放</strong>两种播放的方法，可以在PPT中自如地切换。水平播放可以看作PPT的主线，竖直播放可以看作PPT的副线，也就是一级标题和二级标题之间的关系。这样一来，PPT之间的逻辑关系变得更加清楚，条理更加清晰。</p>
+<p>想要实现分页就采用文件头中给出的分隔符：<code>===</code>以及<code>==</code>，默认的分割符是<code>---</code>以及<code>--</code>。但是实践中发现，文档会自动把某一些配置样式的代码，例如：<code>&lt;!-- .slide: data-transition=&quot;zoom&quot; data-background=&quot;#49B1F5&quot;--&gt;</code>中的<code>--</code>也解析成为分隔符，导致了页面的混乱，所以在文件头中我们修改了分页符。其中<code>===</code>用于水平分割（类似于一级标题的分割），<code>==</code>用于竖直分割（类似于二级标题的分割）。使用的过程中需要注意：<strong>分隔符的前一行和后一行都必须是空行。</strong>演示代码如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 1</span></span><br><span class="line">第一页PPT中的内容</span><br><span class="line"></span><br><span class="line">==</span><br><span class="line"></span><br><span class="line"><span class="section">## 1.1</span></span><br><span class="line">第一页PPT中的子目录1.1</span><br><span class="line"></span><br><span class="line">==</span><br><span class="line"></span><br><span class="line"><span class="section"># 1.2</span></span><br><span class="line">第一页PPT中的子目录1.2</span><br><span class="line"></span><br><span class="line">===</span><br><span class="line"></span><br><span class="line"><span class="section"># 2</span></span><br><span class="line">第二页PPT中的内容</span><br></pre></td></tr></table></figure>
+
+<p>最终得到的页面的结构是：</p>
+<p><img src="http://q5tp904kf.bkt.clouddn.com/reveal.png" alt=""></p>
+<h2 id="设置背景颜色和转场效果"><a href="#设置背景颜色和转场效果" class="headerlink" title="设置背景颜色和转场效果"></a>设置背景颜色和转场效果</h2><p>这两项是构成PPT效果的绝大部分因素。设置可以放在某个页面的任意地方（不过一般放在开头）。具体语法为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- .slide: data-transition="zoom" data-background="#49B1F5"--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>data-transition</code>是表示转场的效果，<strong>Reveal.js</strong>提供了以下几种转场效果给我们选择：</p>
+<ul>
+<li>none： 不用切换效果</li>
+<li>fade： 渐隐</li>
+<li>slide： 平移出屏幕</li>
+<li>convex：立体向后隐藏</li>
+<li>concave：立体向前隐藏</li>
+<li>zoom：放大</li>
+</ul>
+<p>另外一项<code>data-background</code>则是表示PPT的背景颜色，其中填入的内容可以是英文单词，比如：<code>white,black,blue,green,red,orange,purple……</code>等等，也可以直接写入16进制的颜色编码，示例如上。</p>
+<h2 id="表格，图片，超链接，代码块"><a href="#表格，图片，超链接，代码块" class="headerlink" title="表格，图片，超链接，代码块"></a>表格，图片，超链接，代码块</h2><p>对于表格，图片，超链接，代码块的设置就比较简单，直接按照Markdown语法来即可，在<strong>Reveal.js</strong>渲染后会默认将内容居中显示在页面上。示例代码如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">超链接：[<span class="string">超链接测试</span>](<span class="link"> https://www.baidu.com/ </span>)</span><br><span class="line">图片引用测试：![<span class="string">图片引用</span>](<span class="link">https://sufeqs.com/photos/mysql.jpg</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加音频和视频"><a href="#添加音频和视频" class="headerlink" title="添加音频和视频"></a>添加音频和视频</h2><p>由于Markdown中没有对应的语法，所以只能采用在Markdown中穿插HTML的方法来插入音频和视频。具体插入的方法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"./你的答案.mp3"</span> <span class="attr">controls</span>&gt;</span>加载音乐<span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"./阿冗 - 你的答案.mp4"</span> <span class="attr">controls</span>&gt;</span>加载视频<span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种插入方法是本地引用，需要将插入的文件和md文件放置在相同的目录下，也可以利用云盘将内容上传后获取外链再将其填入到<code>src</code>中实现引用。</p>
+<h2 id="页面中文字的出现效果"><a href="#页面中文字的出现效果" class="headerlink" title="页面中文字的出现效果"></a>页面中文字的出现效果</h2><h3 id="片段出现的动画"><a href="#片段出现的动画" class="headerlink" title="片段出现的动画"></a>片段出现的动画</h3><p>我们同样需要使用HTML语法来对我们需要操作的文本进行注释。首先需要在标签中添加<code>fragment</code>属性，其次添加<code>fade</code>类，用<code>fade-*</code>来表示出现的方向，具体代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment fade-up"</span>&gt;</span>这是隐藏的文字，会从下到上出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment fade-down"</span>&gt;</span>这是隐藏的文字，会从上到下出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment fade-left"</span>&gt;</span>这是隐藏的文字，会从右到左出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment fade-right"</span>&gt;</span>这是隐藏的文字，会从左到右出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文字高亮显示"><a href="#文字高亮显示" class="headerlink" title="文字高亮显示"></a>文字高亮显示</h3><p>和上面的代码类似，只需要将<code>fragment</code>后面的内容替换成<code>highlight-*</code>即可。具体代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment highlight-blue"</span>&gt;</span>按↓或→对应字体的颜色高亮为蓝色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment highlight-green"</span>&gt;</span>按↓或→对应字体的颜色高亮为绿色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文字出现顺序"><a href="#文字出现顺序" class="headerlink" title="文字出现顺序"></a>文字出现顺序</h3><p>直接上示例代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment"</span> <span class="attr">data-fragment-index</span>=<span class="string">"3"</span> &gt;</span>排第一，第三顺序出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment"</span> <span class="attr">data-fragment-index</span>=<span class="string">"1"</span> &gt;</span>排第二，第一顺序出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"fragment"</span> <span class="attr">data-fragment-index</span>=<span class="string">"2"</span> &gt;</span>排第三，第二顺序出现<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>data-fragment-index</code>后面的值表示页面中的出现的顺序。</p>
+<h3 id="字体颜色设置"><a href="#字体颜色设置" class="headerlink" title="字体颜色设置"></a>字体颜色设置</h3><p>如果需要自定义字体的颜色，可以采取这样的方式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:pink;"</span>&gt;</span>粉色测试<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>color</code>后面写入英文单词或者16进制的颜色编码都可以，例如<code>#49B1F5</code>。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>功能还有待探索，相信直接利用代码也可以编出一份精美的PPT，以后做PPT就决定是你了。</p>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="http://sufeqs.com/hexo-slide/">如何利用Markdown制作一份PPY</a></li>
+            <li><strong>本文作者：</strong><a href="http://sufeqs.com">Sufe.曲水</a></li>
+            <li><strong>本文链接：</strong><a href="http://sufeqs.com/hexo-slide/">http://sufeqs.com/hexo-slide/</a></li>
+            <li><strong>创建时间：</strong>2020-03-08</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/technology/" rel="tag">技术</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/mysql/">
+                <span class="level-item">如何使用Python操作MySQL数据库</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://sufeqs.com/hexo-slide/';
+        this.page.identifier = 'hexo-slide/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'Sufeqs' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-96x96 has-mb-6">
+                        <img class="is-rounded" src="https://www.gravatar.com/avatar/cfd1955fdbeef0f5e9af36b03ee37dd3?s=96" alt="Sufe.曲水">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sufe.曲水
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        清风徐来，水波不兴
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shanghai, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/archives/">
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        17
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/categories/">
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/tags/">
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Jordan-Li" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    
+        
+
+    <div class="card widget column-left is-sticky" id="toc">
+        <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    Catalogue
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#头文件设置">
+        <span class="has-mr-6">2</span>
+        <span>头文件设置</span>
+        </a></li><li>
+        <a class="is-flex" href="#主题">
+        <span class="has-mr-6">3</span>
+        <span>主题</span>
+        </a></li><li>
+        <a class="is-flex" href="#具体语法">
+        <span class="has-mr-6">4</span>
+        <span>具体语法</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#分页">
+        <span class="has-mr-6">4.1</span>
+        <span>分页</span>
+        </a></li><li>
+        <a class="is-flex" href="#设置背景颜色和转场效果">
+        <span class="has-mr-6">4.2</span>
+        <span>设置背景颜色和转场效果</span>
+        </a></li><li>
+        <a class="is-flex" href="#表格，图片，超链接，代码块">
+        <span class="has-mr-6">4.3</span>
+        <span>表格，图片，超链接，代码块</span>
+        </a></li><li>
+        <a class="is-flex" href="#添加音频和视频">
+        <span class="has-mr-6">4.4</span>
+        <span>添加音频和视频</span>
+        </a></li><li>
+        <a class="is-flex" href="#页面中文字的出现效果">
+        <span class="has-mr-6">4.5</span>
+        <span>页面中文字的出现效果</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#片段出现的动画">
+        <span class="has-mr-6">4.5.1</span>
+        <span>片段出现的动画</span>
+        </a></li><li>
+        <a class="is-flex" href="#文字高亮显示">
+        <span class="has-mr-6">4.5.2</span>
+        <span>文字高亮显示</span>
+        </a></li><li>
+        <a class="is-flex" href="#文字出现顺序">
+        <span class="has-mr-6">4.5.3</span>
+        <span>文字出现顺序</span>
+        </a></li><li>
+        <a class="is-flex" href="#字体颜色设置">
+        <span class="has-mr-6">4.5.4</span>
+        <span>字体颜色设置</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#后记">
+        <span class="has-mr-6">5</span>
+        <span>后记</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="如何利用Markdown制作一份PPY" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Sufe.曲水&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://sufeqs.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

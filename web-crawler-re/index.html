@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Python爬虫学习笔记（六）：数据解析 - 曲水流觞</title>
+
+
+    <meta name="description" content="前言将网络上的数据爬取下来以后如何提取有效的信息也是爬虫的最重要的一步。这篇文章用来学习数据解析的一个很重要的方式：正则表达式。   正则表达式正则表达式指的是利用某一种规则在繁杂的信息中提取出某些有效的信息所采用的提取方式。通俗理解：按照一定的规则，从某个字符串中匹配出想要的数据。这个规则就是正则表达式。 运用正则表达式需要import re。re库中有许多和正则表达式有关的函数，例如：matc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫学习笔记（六）：数据解析">
+<meta property="og:url" content="http://sufeqs.com/web-crawler-re/index.html">
+<meta property="og:site_name" content="曲水流觞">
+<meta property="og:description" content="前言将网络上的数据爬取下来以后如何提取有效的信息也是爬虫的最重要的一步。这篇文章用来学习数据解析的一个很重要的方式：正则表达式。   正则表达式正则表达式指的是利用某一种规则在繁杂的信息中提取出某些有效的信息所采用的提取方式。通俗理解：按照一定的规则，从某个字符串中匹配出想要的数据。这个规则就是正则表达式。 运用正则表达式需要import re。re库中有许多和正则表达式有关的函数，例如：matc">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sufeqs.com/photos/python-crawler.jfif">
+<meta property="article:published_time" content="2020-03-11T11:23:11.000Z">
+<meta property="article:modified_time" content="2020-03-11T11:26:20.259Z">
+<meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sufeqs.com/photos/python-crawler.jfif">
+
+
+
+<link rel="canonical" href="jordan-li.github.io" />
+
+
+
+
+
+<link rel="icon" href="/images/amg.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github-gist.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Python爬虫学习笔记（六）：数据解析" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives/">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories/">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags/">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/photos/python-crawler.jfif" alt="Python爬虫学习笔记（六）：数据解析">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>Python爬虫学习笔记（六）：数据解析
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-11T11:23:11.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-11</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-11T11:26:20.259Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-11</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    19 minutes read (About 2902 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>将网络上的数据爬取下来以后如何提取有效的信息也是爬虫的最重要的一步。这篇文章用来学习数据解析的一个很重要的方式：正则表达式。</p>
+<!--mroe-->
+
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则表达式指的是利用某一种规则在繁杂的信息中提取出某些有效的信息所采用的提取方式。通俗理解：按照一定的规则，从某个字符串中匹配出想要的数据。这个规则就是正则表达式。 运用正则表达式需要<code>import re</code>。<code>re</code>库中有许多和正则表达式有关的函数，例如：<code>match, search, group, findall, sub, split, compile</code>，在之后的学习中会慢慢学到。</p>
+<h2 id="匹配单个字符"><a href="#匹配单个字符" class="headerlink" title="匹配单个字符"></a>匹配单个字符</h2><p>匹配单个字符的操作有很多种，具体如下代码。这里一致采用<code>re.match</code>进行操作，指从头开始寻找，一直找到满足条件的位置，返回的类型是<code>&lt;class &#39;re.Match&#39;&gt;</code>，输出内容的时候需要使用<code>.group()</code>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># 匹配某个字符/字符串</span></span><br><span class="line">text1 = <span class="string">"abc"</span></span><br><span class="line">ret1 = re.match(<span class="string">'ab'</span>,text1)</span><br><span class="line">print(ret1.group())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点(.) : 匹配任意的字符(除了'\n')</span></span><br><span class="line">text2 = <span class="string">"abc"</span></span><br><span class="line">ret2 = re.match(<span class="string">'.'</span>,text2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \d : 匹配任意的数字(0-9)     (英文digit数字的缩写)</span></span><br><span class="line">text3 = <span class="string">"123"</span></span><br><span class="line">ret3 = re.match(<span class="string">'\d'</span>,text3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \D : 匹配任意的非数字</span></span><br><span class="line">text4 = <span class="string">"+123"</span></span><br><span class="line">ret4 = re.match(<span class="string">'\D'</span>,text4)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \s : 匹配的是空白字符(包括\n,\t,\r和空格)    (英文space的缩写)</span></span><br><span class="line">text5 = <span class="string">"\nab"</span></span><br><span class="line">ret5 = re.match(<span class="string">'\s'</span>,text5)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \S : 匹配任意的非空白字符</span></span><br><span class="line">text6 = <span class="string">"ab"</span></span><br><span class="line">ret6 = re.match(<span class="string">'\S'</span>,text6)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \w : 匹配a-z和A-Z以及数字和下划线：      (英文word的缩写)</span></span><br><span class="line">text7 = <span class="string">"_ab"</span></span><br><span class="line">ret7 = re.match(<span class="string">'\w'</span>,text7)</span><br><span class="line"></span><br><span class="line"><span class="comment"># \W : 匹配规则和\w相反</span></span><br><span class="line">text8 = <span class="string">"+ab"</span></span><br><span class="line">re8 = re.match(<span class="string">'\W'</span>,text8)</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，正则表达式还可以利用组合来共同实现在某一范围内<strong>匹配单个字符</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># []：组合的方式，只要满足中括号中的某一项就算匹配成功</span></span><br><span class="line">text9 = <span class="string">"1bc"</span></span><br><span class="line">ret9 = re.match(<span class="string">'[b1]'</span>,text9)    <span class="comment">#匹配1或者b，最终输出1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用组合的方式实现\d:</span></span><br><span class="line">text10 = <span class="string">"23424"</span></span><br><span class="line">ret10 = re.match(<span class="string">'[0-9]'</span>,text10)   <span class="comment">#表示匹配0-9的所有数字，输出2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用组合的方式实现\D:</span></span><br><span class="line">text11 = <span class="string">"+wo23423"</span></span><br><span class="line">ret11 = re.match(<span class="string">'[^0-9]'</span>,text11)    <span class="comment">#^表示取反操作，输出+</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用组合的方式实现\w:</span></span><br><span class="line">text12 = <span class="string">"123josjd_"</span></span><br><span class="line">ret12 = re.match(<span class="string">'[a-zA-Z0-9_]'</span>,text12) <span class="comment">#匹配a-z,A-Z,0-9或者下划线，输出1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用组合的方式实现\W:</span></span><br><span class="line">text13 = <span class="string">"+3sod023"</span></span><br><span class="line">ret12 = re.match(<span class="string">'[^a-zA-Z0-9_]'</span>,text13)</span><br></pre></td></tr></table></figure>
+
+<h2 id="匹配多个字符"><a href="#匹配多个字符" class="headerlink" title="匹配多个字符"></a>匹配多个字符</h2><p>正则表达式可以利用某种符号来实现某一种字符匹配0个/1个/多个的效果，具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># *：匹配任意多个字符(0次或无限次)</span></span><br><span class="line">text1 = <span class="string">"abc+1"</span></span><br><span class="line">re1 = re.match(<span class="string">'\w*'</span>,text1)   <span class="comment">#从前到后要么匹配0个，要么匹配多个</span></span><br><span class="line"><span class="comment">#输出为：abc</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># +: 匹配1个或者多个字符</span></span><br><span class="line">text2 = <span class="string">"abc"</span></span><br><span class="line"><span class="comment">#text2 = "1abc"    如果内容是这个会导致报错</span></span><br><span class="line">re2 = re.match(<span class="string">'\w+'</span>,text2)   <span class="comment">#和*有点像，区别在于+至少要有1个</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ?: 匹配?前一个字符0个或者1个:</span></span><br><span class="line">text3 = <span class="string">"abc"</span>        <span class="comment">#返回a</span></span><br><span class="line"><span class="comment">#text3 = "+abc"      #返回空</span></span><br><span class="line">re3 = re.match(<span class="string">'\w?'</span>,text3)</span><br><span class="line"><span class="comment">#在这个例子中，?在\w后面，因此表示匹配a-zA-z0-9_中的字符的0个或者1个</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#123;m&#125;: 匹配m个字符</span></span><br><span class="line">text4 = <span class="string">"abc"</span></span><br><span class="line">re4 = re.match(<span class="string">'\w&#123;2&#125;'</span>,text4)</span><br><span class="line"><span class="comment">#表示匹配a-zA-Z0-9_中的字符两个，因此输出为ab</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#123;m,n&#125;: 匹配m-n之前的个数的字符</span></span><br><span class="line">text5 = <span class="string">"1+abc"</span>				<span class="comment">#输出为1</span></span><br><span class="line"><span class="comment"># text5 = "1a+bc"			#输出为1a</span></span><br><span class="line"><span class="comment"># text5 = "1ab+c"			#输出为1ab</span></span><br><span class="line"><span class="comment"># text5 = "1abc+"			#输出为1ab</span></span><br><span class="line">re5 = re.match(<span class="string">'\w&#123;1,3&#125;'</span>,text5)  <span class="comment">#返回1-3个都可以</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="匹配练习"><a href="#匹配练习" class="headerlink" title="匹配练习"></a>匹配练习</h2><p>这里给出一些例子，要求用正则表达式去匹配对应的内容，以便巩固对正则表达式的理解：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 验证手机号码：手机号码的规则是以1开头，第二位可以是34578，后面9位数字随意</span></span><br><span class="line">text1 = <span class="string">"18677889900"</span></span><br><span class="line">result1 = re.match(<span class="string">'1[34578]\d&#123;9&#125;'</span>,text1)</span><br><span class="line"><span class="comment">#1表示首字母是1,[34578]表示第二位可以在中括号的5个中挑一个,\d&#123;9&#125;表示任意9个数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 验证邮箱：邮箱的规则是邮箱名字是用数字、英文字符、下划线组成的，最后是@符号，后面是域名</span></span><br><span class="line">text2 = <span class="string">"hynever@163.com"</span></span><br><span class="line">result2 = re.match(<span class="string">'\w+@[a-z0-9]+\.[a-z]+'</span>,text2)</span><br><span class="line"><span class="comment">#\w+表示匹配位于@符号前任意多个英文字符,@就是匹配@,[a-z0-9]+匹配的是@符号后面的域名中.前面的部分,然后匹</span></span><br><span class="line"><span class="comment"># 配的就是小数点,但是由于.在正则中本身具有含义，因此需要使用转义\.来匹配小数点，最后的[a-z]+匹配的是小数</span></span><br><span class="line"><span class="comment"># 点以后的部分,表示匹配任意多的a-z</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 验证URL：URL的规则是前面是ftp/http/https，然后是://，再后面就是非空白字符</span></span><br><span class="line">text3 = <span class="string">"http://www.baidu.com/"</span></span><br><span class="line">result3 = re.match(<span class="string">'(http|https|ftp)://\S+'</span>,text3)</span><br><span class="line"><span class="comment"># (http|https|ftp)表示在三个协议中挑选一个进行匹配,://对应匹配://,最后要匹配任意多非空白字符，用\S+</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 验证身份证，身份证的规则是，总共有18位，前面17位都是数字，最后一位是小写x或者大写X或者数字</span></span><br><span class="line">text4 = <span class="string">"44080220000730001X"</span></span><br><span class="line">result4 = re.match(<span class="string">'\d&#123;17&#125;(\d|x|X)'</span>,text4)</span><br><span class="line"><span class="comment"># \d&#123;17&#125;表示匹配17位数字，最后一位有可能是数字，有可能是x，有可能是X，和例3一样用(\d|x|X)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="特殊符号与非贪婪"><a href="#特殊符号与非贪婪" class="headerlink" title="特殊符号与非贪婪"></a>特殊符号与非贪婪</h2><p>正则表达式中有某一些特殊符号<code>^,$,|</code>，代表着不同的含义。除此之外，一般我们采用的都是贪婪模式进行匹配，也就是搜索最大的可能，这一部分介绍非贪婪模式，非贪婪模式一般用于网页的信息提取。具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># ^:以……开头</span></span><br><span class="line">text1 = <span class="string">"helloworld"</span></span><br><span class="line">result1 = re.match(<span class="string">'hello'</span>,text1)               <span class="comment">#match本身自带^效果，输出hello</span></span><br><span class="line">text2 = <span class="string">"worldhello"</span></span><br><span class="line"><span class="comment">#re库中的search函数表示全局查找一个符合条件的</span></span><br><span class="line">result2 = re.search(<span class="string">'hello'</span>,text2)              <span class="comment">#在整个字符串中寻找位置，输出hello</span></span><br><span class="line">result3 = re.search(<span class="string">'^hello'</span>,text2)             </span><br><span class="line"><span class="comment">#会先查找是否有hello,找到后会判断字符串是不是以hello开头，这里运行就会报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># $:以……结尾</span></span><br><span class="line">text3 = <span class="string">"helloworld"</span></span><br><span class="line">result4 = re.match(<span class="string">'$hello'</span>,text3)            <span class="comment">#判断这个字符串是不是以hello结尾</span></span><br><span class="line"><span class="comment"># result = re.match('^$',text)  这个表达式代表一定是以空字符开始，以空字符结束，只能是空字符</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># |:匹配多个字符串或者表达式，要用()囊括起来</span></span><br><span class="line">text4 = <span class="string">"http://www.baidu.com/"</span></span><br><span class="line">result5 = re.match(<span class="string">'(http|https|ftp)://\S+'</span>,text4)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 贪婪与非贪婪</span></span><br><span class="line">text5 = <span class="string">"12345"</span></span><br><span class="line">result6 = re.match(<span class="string">'\d+?'</span>,text5)    <span class="comment">#如果?出现在+后面，代表非贪婪模式,否则代表一个或者多个</span></span><br><span class="line"><span class="comment"># 这个地方的输出是1，如果把?去掉则输出为12345</span></span><br><span class="line"><span class="comment"># 除了有+?的组合以外，还有*?以及??，但是由于两者都可以匹配0个，在非贪婪模式下基本都是返回0个，用处不大</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 案例1：提取html的标签名称</span></span><br><span class="line">text6 = <span class="string">"&lt;h1&gt;这是标题&lt;/h1&gt;"</span></span><br><span class="line">result7 = re.match(<span class="string">'&lt;.+&gt;'</span>,text6)    <span class="comment">#?匹配尽量少的个数</span></span><br><span class="line">result8 = re.match(<span class="string">'&lt;.+?&gt;'</span>,text6)</span><br><span class="line">print(result7.group())      <span class="comment">#最终的输出结果为&lt;h1&gt;这是标题&lt;/h1&gt;</span></span><br><span class="line"><span class="comment">#这个例子中，由于是贪婪模式,所以.+匹配到的是‘h1&gt;这是标题&lt;/h1’</span></span><br><span class="line">print(result8.group())      <span class="comment">#最终的输出结果为&lt;h1&gt;</span></span><br><span class="line"><span class="comment">#这个例子中，因为采用非贪婪模式，所以会尽可能少地匹配字符</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 案例2：验证一个数是否在0-100之前的数字 </span></span><br><span class="line">text7 = <span class="string">"95"</span></span><br><span class="line">result9 = re.match(<span class="string">'0$|[1-9]\d?$|100$'</span>,text7)</span><br></pre></td></tr></table></figure>
+
+<h2 id="转义字符与原生字符串"><a href="#转义字符与原生字符串" class="headerlink" title="转义字符与原生字符串"></a>转义字符与原生字符串</h2><p>Python中原本就带有转义字符，同时还有一种原生字符串。在解析正则表达式的时候会先提交给Python进行编译，然后再提交给正则表达式进行编译，所以在遇到需要转义的字符的时候会略显麻烦。因此，<strong>在以后使用正则表达式的时候尽量都使用原生字符串，可以使正则表达式变得更加简洁</strong>。具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python中的转移字符：</span></span><br><span class="line">text1 = <span class="string">"hello\nworld"</span>				<span class="comment">#输出结果为:hello(换行)world</span></span><br><span class="line">text2 = <span class="string">"hello\\nworld"</span>             <span class="comment">#输出结果为:hello\nworld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 正则表达式中的转义字符</span></span><br><span class="line">text = <span class="string">"apple price is $88, orange price is $99"</span></span><br><span class="line">result1 = re.findall(<span class="string">'$\d+'</span>,text)    <span class="comment">#因为$符号在正则表达式中具有特殊的意义，所以无法匹配</span></span><br><span class="line">result2 = re.findall(<span class="string">'\$\d+'</span>,text)</span><br><span class="line">print(result1)    <span class="comment">#findall返回的是一个列表</span></span><br><span class="line">print(result2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原生字符串：</span></span><br><span class="line">text3 = <span class="string">r"hello\nworld"</span></span><br><span class="line">print(text3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原生字符串和正则表达式：</span></span><br><span class="line">text4 = <span class="string">"\cba c"</span></span><br><span class="line"><span class="comment">#result3 = re.match('\c',text4)</span></span><br><span class="line"><span class="comment">#因为\c正则是没有特殊意义的，正则会先尝试将两者结合看是否有意义，如果发现没有就会报错</span></span><br><span class="line"><span class="comment">#result3 = re.match('\\c',text4)</span></span><br><span class="line"><span class="comment">#Python会先将语言放到Python层面进行解析，解析完成以后再将其放到正则表达式中解析</span></span><br><span class="line"><span class="comment">#现在出现了\\c，在Python层面解析会自动转换成\c，因此返回给正则依旧是\c</span></span><br><span class="line"><span class="comment">#所以反推一下，如果想要在正则表达式层面解析出两个\\，</span></span><br><span class="line"><span class="comment">#一开始应该输入\\\\,其中每\\被Python解析成\,最终得到\\</span></span><br><span class="line">result3 = re.match(<span class="string">'\\\\c'</span>,text4)</span><br><span class="line">print(result3.group())</span><br><span class="line"><span class="comment">#但是如果使用原生字符串，Python层面就不会进行解析，只需要两个\\</span></span><br><span class="line">result4 = re.match(<span class="string">r'\\c'</span>,text4)</span><br><span class="line">print(result4.group())</span><br><span class="line"><span class="comment">#因此在以后书写正则表达式的过程中尽量使用原生字符串，这样可以使得正则看起来比较简洁</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="分组与其他函数"><a href="#分组与其他函数" class="headerlink" title="分组与其他函数"></a>分组与其他函数</h2><p>在正则表达式中可以利用分组提取我们需要的信息，同时还可以利用不同的函数实现全局查找或者从头查找以及全局只查找一个等功能。除此之外，re库中还有一些其他的函数，可以实现替换，分割，编译等等功能，具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分组：</span></span><br><span class="line">text = <span class="string">"apple price is $99, orange price is $88"</span></span><br><span class="line">result = re.search(<span class="string">'.+\$\d+.+\$\d+'</span>,text)   <span class="comment">#search只能找得到第一个</span></span><br><span class="line">print(result.group())</span><br><span class="line"><span class="comment">#分组采用圆括号()</span></span><br><span class="line">result2 = re.search(<span class="string">'.+(\$\d+).+(\$\d+)'</span>,text)</span><br><span class="line">print(result2.group())</span><br><span class="line">print(result2.group(<span class="number">0</span>))    <span class="comment">#将整个字符串匹配</span></span><br><span class="line">print(result2.group(<span class="number">1</span>))    <span class="comment">#匹配第一个分组的信息</span></span><br><span class="line">print(result2.group(<span class="number">2</span>))    <span class="comment">#匹配第二个分组的信息</span></span><br><span class="line">print(result2.groups())    <span class="comment">#匹配所有的分组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># findall: 查找所有发满足条件的</span></span><br><span class="line"><span class="comment"># search也是全局查找，但是只能找到一个</span></span><br><span class="line">result3 = re.findall(<span class="string">r'\$\d+'</span>,text)</span><br><span class="line">print(result3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sub: 根据规则替换其它字符串</span></span><br><span class="line">text2 = <span class="string">"nihao zhongguo,hello world"</span></span><br><span class="line">new = text2.replace(<span class="string">' '</span>,<span class="string">'\n'</span>)</span><br><span class="line">print(new)</span><br><span class="line"></span><br><span class="line">new2 = re.sub(<span class="string">r' '</span>,<span class="string">'\n'</span>,text2)</span><br><span class="line">print(new2)</span><br><span class="line"><span class="comment"># sub的功能会更加强大,可以同时修改多个字符</span></span><br><span class="line">new3 = re.sub(<span class="string">r' |,'</span>,<span class="string">'\n'</span>,text2)</span><br><span class="line">print(new3)</span><br><span class="line"></span><br><span class="line"><span class="comment">#例如：</span></span><br><span class="line">html = <span class="string">'''</span></span><br><span class="line"><span class="string">  &lt;meta charset="utf-8"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="data-spm" content="a2170"&gt;</span></span><br><span class="line"><span class="string">  &lt;title&gt;闲鱼频道首页&lt;/title&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="aplus-touch" content="1"&gt; </span></span><br><span class="line"><span class="string">  &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="apple-touch-fullscreen" content="yes"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="format-detection" content="telephone=no,address=no,email=no"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta name="weex-viewport" content="750"&gt;</span></span><br><span class="line"><span class="string">  &lt;meta id="WV.Meta.Share.Disabled" value="true"&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment">#如果想要把所有的标签去掉可以直接利用替换，注意采用非贪婪模式</span></span><br><span class="line">new_html = re.sub(<span class="string">r' |\n|&lt;.+?&gt;'</span>,<span class="string">''</span>,html)</span><br><span class="line">print(new_html)</span><br><span class="line"></span><br><span class="line"><span class="comment"># split: 根据规则分割字符串</span></span><br><span class="line">text3 = <span class="string">"nihao zhongguo hello world"</span></span><br><span class="line">result4 = re.split(<span class="string">r' '</span>,text3)</span><br><span class="line">result5 = re.split(<span class="string">r' |,'</span>,text2)</span><br><span class="line">print(result4)</span><br><span class="line">print(result5)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile: 编译正则表达式</span></span><br><span class="line"><span class="comment"># 在使用正则的时候可以先将其编译完，然后再进行搜索，这样效率会高一些</span></span><br><span class="line">text4 = <span class="string">"apple price is 23.24"</span></span><br><span class="line">res = re.compile(<span class="string">r'\d+\.?\d*'</span>)</span><br><span class="line">result5 = re.search(res,text4)</span><br><span class="line">print(result5.group())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 正则表达式是可以添加注释的</span></span><br><span class="line">res2 = re.compile(<span class="string">r"""</span></span><br><span class="line"><span class="string">\d+     #整数部分</span></span><br><span class="line"><span class="string">\.?     #小数点</span></span><br><span class="line"><span class="string">\d*     #小数部分</span></span><br><span class="line"><span class="string">"""</span>,re.VERBOSE)</span><br><span class="line">result6 = re.search(res,text4)</span><br><span class="line">print(result6.group())</span><br><span class="line"><span class="comment">#注释可以在很多地方加，只需要在函数最后加上一个flag:re.VERBOSE即可</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="http://sufeqs.com/web-crawler-re/">Python爬虫学习笔记（六）：数据解析</a></li>
+            <li><strong>本文作者：</strong><a href="http://sufeqs.com">Sufe.曲水</a></li>
+            <li><strong>本文链接：</strong><a href="http://sufeqs.com/web-crawler-re/">http://sufeqs.com/web-crawler-re/</a></li>
+            <li><strong>创建时间：</strong>2020-03-11</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/web-crawler/" rel="tag">爬虫</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/hexo-slide/">
+                <span class="level-item">如何利用Markdown制作一份PPT</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://sufeqs.com/web-crawler-re/';
+        this.page.identifier = 'web-crawler-re/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'Sufeqs' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-96x96 has-mb-6">
+                        <img class="is-rounded" src="https://www.gravatar.com/avatar/cfd1955fdbeef0f5e9af36b03ee37dd3?s=96" alt="Sufe.曲水">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sufe.曲水
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        清风徐来，水波不兴
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shanghai, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/archives/">
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        18
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/categories/">
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/tags/">
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Jordan-Li" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    
+        
+
+    <div class="card widget column-left is-sticky" id="toc">
+        <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    Catalogue
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#正则表达式">
+        <span class="has-mr-6">2</span>
+        <span>正则表达式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#匹配单个字符">
+        <span class="has-mr-6">2.1</span>
+        <span>匹配单个字符</span>
+        </a></li><li>
+        <a class="is-flex" href="#匹配多个字符">
+        <span class="has-mr-6">2.2</span>
+        <span>匹配多个字符</span>
+        </a></li><li>
+        <a class="is-flex" href="#匹配练习">
+        <span class="has-mr-6">2.3</span>
+        <span>匹配练习</span>
+        </a></li><li>
+        <a class="is-flex" href="#特殊符号与非贪婪">
+        <span class="has-mr-6">2.4</span>
+        <span>特殊符号与非贪婪</span>
+        </a></li><li>
+        <a class="is-flex" href="#转义字符与原生字符串">
+        <span class="has-mr-6">2.5</span>
+        <span>转义字符与原生字符串</span>
+        </a></li><li>
+        <a class="is-flex" href="#分组与其他函数">
+        <span class="has-mr-6">2.6</span>
+        <span>分组与其他函数</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Python爬虫学习笔记（六）：数据解析" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Sufe.曲水&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://sufeqs.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

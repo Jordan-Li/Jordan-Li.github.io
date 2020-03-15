@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Python爬虫学习笔记（七）：动态爬虫 - 曲水流觞</title>
+
+
+    <meta name="description" content="前言在设计爬虫的过程中，我们有时候会碰到一些网页的源代码中并不能直接得到我们想要的内容。因为某一些网页是通过AJAX技术通过发包的方式将网页的某些内容在网页源代码之外发送再加载进来的，这种网页我们称作动态网页。我们以往采用的方法是通过Network中抓包的方式来获取Response的内容，更换爬取的url来实现对需求内容的爬取。这一篇文章我们学习一种新的方法——通过运用selenium+chrom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫学习笔记（七）：动态爬虫">
+<meta property="og:url" content="http://sufeqs.com/web-crawler-selenium/index.html">
+<meta property="og:site_name" content="曲水流觞">
+<meta property="og:description" content="前言在设计爬虫的过程中，我们有时候会碰到一些网页的源代码中并不能直接得到我们想要的内容。因为某一些网页是通过AJAX技术通过发包的方式将网页的某些内容在网页源代码之外发送再加载进来的，这种网页我们称作动态网页。我们以往采用的方法是通过Network中抓包的方式来获取Response的内容，更换爬取的url来实现对需求内容的爬取。这一篇文章我们学习一种新的方法——通过运用selenium+chrom">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sufeqs.com/photos/python-crawler.jfif">
+<meta property="article:published_time" content="2020-03-15T04:14:09.000Z">
+<meta property="article:modified_time" content="2020-03-15T08:17:07.542Z">
+<meta property="article:author" content="Sufe.曲水">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sufeqs.com/photos/python-crawler.jfif">
+
+
+
+<link rel="canonical" href="jordan-li.github.io" />
+
+
+
+
+
+<link rel="icon" href="/images/amg.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github-gist.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Python爬虫学习笔记（七）：动态爬虫" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives/">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories/">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags/">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/photos/python-crawler.jfif" alt="Python爬虫学习笔记（七）：动态爬虫">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>Python爬虫学习笔记（七）：动态爬虫
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-15T04:14:09.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-15</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-15T08:17:07.542Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-15</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    24 minutes read (About 3532 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在设计爬虫的过程中，我们有时候会碰到一些网页的源代码中并不能直接得到我们想要的内容。因为某一些网页是通过AJAX技术通过发包的方式将网页的某些内容在网页源代码之外发送再加载进来的，这种网页我们称作动态网页。我们以往采用的方法是通过<code>Network</code>中抓包的方式来获取<code>Response</code>的内容，更换爬取的<code>url</code>来实现对需求内容的爬取。这一篇文章我们学习一种新的方法——通过运用<code>selenium</code>+<code>chromedriver</code>的方式来模拟浏览器操作的方法来解决这类问题。</p>
+<h1 id="动态网页爬虫"><a href="#动态网页爬虫" class="headerlink" title="动态网页爬虫"></a>动态网页爬虫</h1><ol>
+<li>动态网页，是网站在不重新加载的情况下，通过ajax技术动态更新网站中的局部数据。比如拉勾网的职位页面，在换页的过程中，url是没有发生改变的，但是职位数据动态的更改了。</li>
+<li>AJAX（Asynchronouse JavaScript And XML）异步JavaScript和XML。前端与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况 下，对网页的某部分进行更新。传统的网页（不使用Ajax）如果需要更新内容，必须重载整个网页页面。因为传统的在传输数据格式方面，使用的是XML语法。因此叫做AJAX，其实现在数据交互基本上都是使用JSON。使用AJAX加载的数据，即使使用了JS，将数据渲染到了浏览器中，在右键-&gt;查看网页源代码还是不能看到通过AJAX加载的数据，只能看到使用这个 url加载的html代码。</li>
+<li>解决的方案：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">方式</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">分析接口</td>
+<td align="center">可以直接请求到数据。不需要做一些解析工作，代码量少，性能高</td>
+<td align="center">分析接口比较复杂，特别是一些通过js混淆的接口，要有一定的js功底。容易被发现是爬虫</td>
+</tr>
+<tr>
+<td align="center">selenium</td>
+<td align="center">直接模拟浏览器的行为。浏览器能请求到的，使用selenium也能请求到，爬虫稳定</td>
+<td align="center">代码量多，性能比较低</td>
+</tr>
+</tbody></table>
+<h1 id="Selenium-Chrome介绍"><a href="#Selenium-Chrome介绍" class="headerlink" title="Selenium+Chrome介绍"></a>Selenium+Chrome介绍</h1><p>Selenium相当于是一个机器人。可以模拟人类在浏览器上的一些行为，自动处理浏览器上的一 些行为，比如点击，填充数据，删除cookie等。chromedriver是一个驱动Chrome浏览器的驱 动程序，使用他才可以驱动浏览器。当然针对不同的浏览器有不同的driver。以下列出了不同浏览器及其对应的driver和selenium的官方文档： </p>
+<ol>
+<li><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads">Chrome</a></li>
+<li><a href="https://github.com/mozilla/geckodriver/releases">Firefox</a></li>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">Edge</a></li>
+<li><a href="https://webkit.org/blog/6900/webdriver-support-in-safari-10/">Safari</a> </li>
+<li><a href="https://selenium-python.readthedocs.io/">Selenium官网网址</a></li>
+</ol>
+<p>selenium可以直接通过<code>pip install selenium</code>，<code>chromedriver</code>下载完后直接放到纯英文目录下即可。</p>
+<h1 id="Selenium的使用"><a href="#Selenium的使用" class="headerlink" title="Selenium的使用"></a>Selenium的使用</h1><p><code>Selenium</code>中的<code>webriver</code>类是我们主要采用的方法，下面是<code>selenium</code>的一些常用方法。</p>
+<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>打开页面只需要两步，具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="comment"># chromedriver的绝对路径</span></span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line"><span class="comment"># 请求网页</span></span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line"><span class="comment"># 通过page_source获取网页源代码</span></span><br><span class="line">print(driver.page_source)</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>executable_path</code>后面填写的是保存<code>chromedriver.exe</code>文件的路径地址，然后直接调用<code>get</code>来打开网址。</p>
+<h2 id="关闭页面-退出浏览器"><a href="#关闭页面-退出浏览器" class="headerlink" title="关闭页面/退出浏览器"></a>关闭页面/退出浏览器</h2><p>使用<code>.close()</code>关闭当前打开的页面，使用<code>.quit()</code>退出整个浏览器，具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com/"</span>)</span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line"><span class="comment"># 关闭当前页面</span></span><br><span class="line">driver.close()</span><br><span class="line"><span class="comment"># 关闭整个浏览器</span></span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+
+<h2 id="定位元素"><a href="#定位元素" class="headerlink" title="定位元素"></a>定位元素</h2><p>通过<code>selenium</code>可以定位网页中的元素来执行相关的操作，定位元素的方法有很多，具体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="comment"># 定位元素</span></span><br><span class="line"><span class="comment"># 1. find_element_by_id：根据id来查找某个元素。(只可能获取到1个,不会有多个,没有find_elements)</span></span><br><span class="line"><span class="comment"># 2. find_element_by_class_name：根据类名查找元素。</span></span><br><span class="line"><span class="comment"># 3. find_element_by_name：根据name属性的值来查找元素。</span></span><br><span class="line"><span class="comment"># 4. find_element_by_tag_name：根据标签名来查找元素。</span></span><br><span class="line"><span class="comment"># 5. find_element_by_xpath：根据xpath语法来获取元素。</span></span><br><span class="line"><span class="comment"># 6. find_element_by_css_selector：根据css选择器选择元素。</span></span><br><span class="line"><span class="comment"># 要注意，find_element是获取第一个满足条件的元素。find_elements是获取所有满足条件的元素。</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据id进行查找</span></span><br><span class="line">inputTag = driver.find_element_by_id(<span class="string">"kw"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据类名进行查找</span></span><br><span class="line">inputTag = driver.find_element_by_class_name(<span class="string">"s_ipt"</span>)</span><br><span class="line"><span class="comment"># 用elements返回一个列表</span></span><br><span class="line">inputTag = driver.find_element_by_class_name(<span class="string">"s_ipt"</span>)</span><br><span class="line">print(inputTag)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据name属性来查找</span></span><br><span class="line">inputTag = driver.find_element_by_name(<span class="string">"wd"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据标签名查找</span></span><br><span class="line">inputTag = driver.find_element_by_tag_name(<span class="string">"input"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据xpath语法查找</span></span><br><span class="line">inputTag = driver.find_element_by_xpath(<span class="string">"//input[@id='kw']"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据css选择器查找</span></span><br><span class="line">inputTag = driver.find_element_by_css_selector(<span class="string">"#form #kw"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定位到元素后可以用.send_keys来提交信息</span></span><br><span class="line">inputTag.send_keys(<span class="string">"python"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作表单元素"><a href="#操作表单元素" class="headerlink" title="操作表单元素"></a>操作表单元素</h2><p>表单元素指的是我们需要提交一些信息给服务器，例如填入某些数据（账号密码），或者做出某种选择（在列表选项中选择某一项），或者点击某个按钮（例如是否保存账号和密码）……这些都属于表单元素的范畴，下面我们要学习如何操作这些表单元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 找到需要输入的元素</span></span><br><span class="line"><span class="comment"># 2. 采用send_keys(value)将数据填充进去</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.zhihu.com/signin?next=%2Fhot"</span></span><br><span class="line">driver = webdriver.Chrome(<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交手机号码表单文件</span></span><br><span class="line">usernameTag = driver.find_element_by_name(<span class="string">"username"</span>)</span><br><span class="line">usernameTag.send_keys(<span class="string">"13702873488"</span>)</span><br><span class="line"><span class="comment"># 提交手机验证码表单文件</span></span><br><span class="line">passwordTag = driver.find_element_by_name(<span class="string">"digits"</span>)</span><br><span class="line">passwordTag.send_keys(<span class="string">"013638"</span>)</span><br><span class="line"><span class="comment"># 找到登录按钮，然后用click执行点击事件</span></span><br><span class="line">submitBtn = driver.find_element_by_class_name(<span class="string">"SignFlow-submitButton"</span>)</span><br><span class="line">submitBtn.click()</span><br><span class="line"></span><br><span class="line"><span class="comment"># checkbox类型的处理，如“下次自动登录”</span></span><br><span class="line"><span class="comment"># driver.get("https://www.douban.com/")</span></span><br><span class="line"><span class="comment"># checkbox = driver.find_element_by_name("remember")</span></span><br><span class="line"><span class="comment"># checkbox.click()</span></span><br><span class="line"><span class="comment"># 但这样子是请求不到由iframe组件的，因为iframe相当于在源网页又加载了另外一个网页，需要更改url</span></span><br><span class="line"><span class="comment"># 需要在网页的源代码中找到iframe中储存的链接来更换我们的url</span></span><br><span class="line">driver.get(<span class="string">"https://accounts.douban.com/passport/login_popup?login_source=anony"</span>)</span><br><span class="line">checkbox = driver.find_element_by_name(<span class="string">"remember"</span>)</span><br><span class="line">checkbox.click()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 表单选择操作：用来验证select元素,不能用于div元素</span></span><br><span class="line"><span class="comment"># select元素不饿能直接点击，因为点击后还需要选中元素，这时候selenium专门为select标签提供了一个类</span></span><br><span class="line"><span class="comment"># 将获取到的元素当成参数传到这个类中，创建这个对象，然后就可以使用这个对象进行选择了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> Select</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line">driver.get(<span class="string">"http://www.nchu.edu.cn/"</span>)</span><br><span class="line">result = Select(driver.find_element_by_class_name(<span class="string">"friendLinks"</span>))</span><br><span class="line">result.select_by_index(<span class="number">1</span>)    							<span class="comment"># 根据索引值来选择元素</span></span><br><span class="line">result.select_by_value(<span class="string">"http://www.moe.gov.cn/"</span>)        <span class="comment"># 根据value值来选择元素</span></span><br><span class="line">result.select_by_visible_text(<span class="string">"航空博览馆"</span>)               <span class="comment"># 根据文本内容来选择元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="行为链"><a href="#行为链" class="headerlink" title="行为链"></a>行为链</h2><p>有时候在页面中的操作可能有很多很多步，这个时候就可以使用鼠标行为链类来完成。比如现在要将鼠标移动到某个元素上并执行点击时间。因为有一些网站可能会在浏览器端做一些验证行为是否符合人类的行为来做反爬，这个时候我们就可以使用行为连来模拟人的操作。行为链有更多的复杂操作，比如双击，右键等等，在自动化测试中非常有用。示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.action_chains <span class="keyword">import</span> ActionChains</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.zhihu.com/signin?next=%2F"</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(url)</span><br><span class="line">actions = ActionChains(driver)</span><br><span class="line">usernameTag = driver.find_element_by_name(<span class="string">"username"</span>)</span><br><span class="line">passwordTag = driver.find_element_by_name(<span class="string">"digits"</span>)</span><br><span class="line">submitBtn = driver.find_element_by_class_name(<span class="string">"SignFlow-submitButton"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将鼠标移动到usernameTag上</span></span><br><span class="line">actions.move_to_element(usernameTag)</span><br><span class="line"><span class="comment"># 提交数据到usernameTag中</span></span><br><span class="line">actions.send_keys_to_element(usernameTag, <span class="string">"13702873488"</span>)</span><br><span class="line"><span class="comment"># 将鼠标移动到passwordTag中</span></span><br><span class="line">actions.move_to_element(passwordTag)</span><br><span class="line"><span class="comment"># 提交数据到passwaordTag中</span></span><br><span class="line">actions.send_keys_to_element(passwordTag, <span class="string">"888888888"</span>)</span><br><span class="line"><span class="comment"># 将鼠标移动到submitBtn上</span></span><br><span class="line">actions.move_to_element(submitBtn)</span><br><span class="line"><span class="comment"># 双击提交按钮</span></span><br><span class="line">actions.double_click(submitBtn)</span><br><span class="line"><span class="comment"># actions.click_and_hold(submitBtn)      # 单击且不松开鼠标</span></span><br><span class="line"><span class="comment"># actions.context_click(submitBtn)       # 右键</span></span><br><span class="line"><span class="comment"># 调用perform开始执行上述所有操作</span></span><br><span class="line">actions.perform()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Cookie操作"><a href="#Cookie操作" class="headerlink" title="Cookie操作"></a>Cookie操作</h2><p>使用<code>selenium</code>还可以操作浏览器中的<code>cookie</code>，不但可以获取所有的<code>cookie</code>，还可以更改<code>cookie</code>中的值，添加和删除<code>cookie</code>。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line"><span class="comment"># 1. 获取所有的cookie</span></span><br><span class="line">cookies = driver.get_cookies()</span><br><span class="line"><span class="keyword">for</span> cookie <span class="keyword">in</span> cookies:</span><br><span class="line">    print(cookie)</span><br><span class="line"><span class="comment"># 2. 根据cookie的key获取value</span></span><br><span class="line">cookie = driver.get_cookie(<span class="string">"delPer"</span>)</span><br><span class="line">print(cookie)</span><br><span class="line"><span class="comment"># 3. 删除所有的cookie</span></span><br><span class="line">driver.delete_all_cookies()</span><br><span class="line"><span class="comment"># 4. 删除某个cookie</span></span><br><span class="line">driver.add_cookie(&#123;<span class="string">"name"</span>: <span class="string">"username"</span>, <span class="string">"value"</span>: <span class="string">"123"</span>&#125;)</span><br><span class="line">cookie1 = driver.get_cookie(<span class="string">"username"</span>)</span><br><span class="line">print(cookie1)       <span class="comment"># cookie列表中就会多一个上述cookie</span></span><br><span class="line">driver.delete_cookie(<span class="string">"username"</span>)</span><br><span class="line">cookie2 = driver.get_cookie(<span class="string">"username"</span>)</span><br><span class="line">print(cookie2)       <span class="comment"># 上面这个cookie会被删除</span></span><br><span class="line"><span class="comment"># 5. 添加cookie值</span></span><br><span class="line">driver.add_cookie(&#123;<span class="string">"name"</span>:<span class="string">"username"</span>, <span class="string">"value"</span>:<span class="string">"123"</span>&#125;)</span><br><span class="line">cookies = driver.get_cookies()</span><br><span class="line">print(cookies)</span><br></pre></td></tr></table></figure>
+
+<h2 id="页面等待"><a href="#页面等待" class="headerlink" title="页面等待"></a>页面等待</h2><p>现在的网页越来越多采用了AJAX技术，这样程序便不能确定何时某个元素会完全加载出来了。如果实际页面等待时间过长导致某个元素还没有出来，但是你的代码直接使用了这个<code>WebElement</code>，那么就会抛出<code>NullPointer</code>的异常。为了解决这个问题，<code>selenium</code>提供了两种等待方式：隐式等待和显式等待。</p>
+<p>隐式等待的作用是无论页面有没有什么动静，都固定等待一定的时间。等待时间结束后就会继续执行操作。显式等待的作用是在某一个等待的时间范围内，如果浏览器有某个元素发生了变动，比如某个元素加载出来了，或者某一个框填入了某一个信息，他就会继续执行操作。显式操作一般和条件结合在一起使用。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 隐式等待:</span></span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line">driver.implicitly_wait(<span class="number">10</span>)   <span class="comment"># 等待10s再进行下一步操作</span></span><br><span class="line">driver.find_element_by_id(<span class="string">"abcdef"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 显示等待:</span></span><br><span class="line"><span class="comment"># 显示等待是表明某个条件成立后才执行获取元素的操作，可以在等待的时候指定一个最大的时间</span></span><br><span class="line"><span class="comment"># 如果超过这个时间那么就抛出一个异常</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC    <span class="comment"># 用来添加条件</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc"</span></span><br><span class="line">driver.get(url)</span><br><span class="line">WebDriverWait(driver, <span class="number">100</span>).until(</span><br><span class="line">    EC.text_to_be_present_in_element_value((By.ID, <span class="string">"fromStationText"</span>), <span class="string">"长沙"</span>)</span><br><span class="line">)    <span class="comment"># 条件是当“长沙”这个文本出现在我们定位的元素fromStationText中</span></span><br><span class="line">WebDriverWait(driver, <span class="number">100</span>).until(</span><br><span class="line">    EC.text_to_be_present_in_element_value((By.ID, <span class="string">"toStationText"</span>), <span class="string">"北京"</span>)</span><br><span class="line">)    <span class="comment"># 条件是当“北京”这个文本出现在我们定位的元素toStationText中</span></span><br><span class="line">btn = driver.find_element_by_id(<span class="string">"query_ticket"</span>)</span><br><span class="line">btn.click()   <span class="comment"># 点击id值为"query_ticket"的按钮</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="页面切换"><a href="#页面切换" class="headerlink" title="页面切换"></a>页面切换</h2><p>有时候窗口中有很多子Tab页面。这时候肯定是需要进行切换的。<code>selenium</code>提供了一个叫做<code>switch_to_window</code>来进行切换，具体切换到哪个页面，可以从<code>driver.window_handles</code>中找到，可以用过索引的值定位页面。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome(<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line">driver.implicitly_wait(<span class="number">3</span>)   <span class="comment"># 隐式等待3秒钟的时间</span></span><br><span class="line"><span class="comment"># 打开一个新的页面</span></span><br><span class="line">driver.execute_script(<span class="string">"window.open('https://www.douban.com/')"</span>)</span><br><span class="line"><span class="comment"># page_source代表当前页面的网页的源代码</span></span><br><span class="line">print(driver.page_source)  <span class="comment"># 这里打印的还是百度的源代码</span></span><br><span class="line"><span class="comment"># 下面进行切换窗口的操作</span></span><br><span class="line">driver.switch_to.window(driver.window_handles[<span class="number">1</span>])</span><br><span class="line"><span class="comment"># driver.window_handles[0]指的是浏览器的第一个页面，依次往后</span></span><br><span class="line">print(driver.page_source)   <span class="comment"># 这里打印的就是豆瓣网页的代码</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h2><p>有时候频繁地爬取一些网页，服务器发现你是爬虫后会封掉你的ip地址。这时候我们就可以更改代理ip。更改代理ip，不同的浏览器有不同的实现方式。这是以Chrome浏览器为例来讲解：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以调用ChromeOptions方法配置设置</span></span><br><span class="line">option = webdriver.ChromeOptions()</span><br><span class="line">option.add_argument(<span class="string">"--proxy-server=https://123.132.232.254:37638"</span>)</span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">"D:\chromedriver\chromedriver.exe"</span>, options=option)</span><br><span class="line">driver.get(<span class="string">"http://httpbin.org/ip"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h2><p>还有一些小工具可以帮助我们在模拟访问浏览器时获取到我们想要的内容，具体实例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(executable_path=<span class="string">"D:\chromedriver\chromedriver.exe"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过get_property获取html的官方属性对应的值</span></span><br><span class="line"><span class="comment"># 通过get_attribute获取这个标签某个属性,不但可以获取官方的，还可以获取自定义的标签</span></span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com/"</span>)</span><br><span class="line">result = driver.find_element_by_name(<span class="string">"wd"</span>)</span><br><span class="line">print(result.get_property(<span class="string">"id"</span>))</span><br><span class="line">print(result.get_attribute(<span class="string">"autocomplete"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前页面的截图,这个方法只能在driver上使用,然后保存图片到当前的目录下</span></span><br><span class="line">driver.save_screenshot(<span class="string">"baidu.png"</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p><code>selenium</code>+<code>chromedriver</code>可以完成各种各样的操作，例如用来抢票等等。接下来的文章中应该会写一篇关于实战的文章，用来动态实现浏览器的抢票功能。</p>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="http://sufeqs.com/web-crawler-selenium/">Python爬虫学习笔记（七）：动态爬虫</a></li>
+            <li><strong>本文作者：</strong><a href="http://sufeqs.com">Sufe.曲水</a></li>
+            <li><strong>本文链接：</strong><a href="http://sufeqs.com/web-crawler-selenium/">http://sufeqs.com/web-crawler-selenium/</a></li>
+            <li><strong>创建时间：</strong>2020-03-15</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/learn/" rel="tag">学习</a>,&nbsp;<a class="has-link-grey -link" href="/tags/web-crawler/" rel="tag">爬虫</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/web-crawler-re/">
+                <span class="level-item">Python爬虫学习笔记（六）：数据解析</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://sufeqs.com/web-crawler-selenium/';
+        this.page.identifier = 'web-crawler-selenium/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'Sufeqs' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-96x96 has-mb-6">
+                        <img class="is-rounded" src="https://www.gravatar.com/avatar/cfd1955fdbeef0f5e9af36b03ee37dd3?s=96" alt="Sufe.曲水">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sufe.曲水
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        清风徐来，水波不兴
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shanghai, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/archives/">
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/categories/">
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <a href="/tags/">
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Jordan-Li" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    
+        
+
+    <div class="card widget column-left is-sticky" id="toc">
+        <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    Catalogue
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态网页爬虫">
+        <span class="has-mr-6">2</span>
+        <span>动态网页爬虫</span>
+        </a></li><li>
+        <a class="is-flex" href="#Selenium-Chrome介绍">
+        <span class="has-mr-6">3</span>
+        <span>Selenium+Chrome介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#Selenium的使用">
+        <span class="has-mr-6">4</span>
+        <span>Selenium的使用</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#打开页面">
+        <span class="has-mr-6">4.1</span>
+        <span>打开页面</span>
+        </a></li><li>
+        <a class="is-flex" href="#关闭页面-退出浏览器">
+        <span class="has-mr-6">4.2</span>
+        <span>关闭页面/退出浏览器</span>
+        </a></li><li>
+        <a class="is-flex" href="#定位元素">
+        <span class="has-mr-6">4.3</span>
+        <span>定位元素</span>
+        </a></li><li>
+        <a class="is-flex" href="#操作表单元素">
+        <span class="has-mr-6">4.4</span>
+        <span>操作表单元素</span>
+        </a></li><li>
+        <a class="is-flex" href="#行为链">
+        <span class="has-mr-6">4.5</span>
+        <span>行为链</span>
+        </a></li><li>
+        <a class="is-flex" href="#Cookie操作">
+        <span class="has-mr-6">4.6</span>
+        <span>Cookie操作</span>
+        </a></li><li>
+        <a class="is-flex" href="#页面等待">
+        <span class="has-mr-6">4.7</span>
+        <span>页面等待</span>
+        </a></li><li>
+        <a class="is-flex" href="#页面切换">
+        <span class="has-mr-6">4.8</span>
+        <span>页面切换</span>
+        </a></li><li>
+        <a class="is-flex" href="#代理设置">
+        <span class="has-mr-6">4.9</span>
+        <span>代理设置</span>
+        </a></li><li>
+        <a class="is-flex" href="#补充内容">
+        <span class="has-mr-6">4.10</span>
+        <span>补充内容</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#后记">
+        <span class="has-mr-6">5</span>
+        <span>后记</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Python爬虫学习笔记（七）：动态爬虫" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Sufe.曲水&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Jordan-li GitHub" href="https://www.github.com/Jordan-li">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://sufeqs.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

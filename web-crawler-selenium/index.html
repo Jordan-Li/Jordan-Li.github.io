@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://sufeqs.com/photos/python-crawler.jfif">
 <meta property="article:published_time" content="2020-03-15T04:14:09.000Z">
-<meta property="article:modified_time" content="2020-03-15T08:17:07.542Z">
+<meta property="article:modified_time" content="2020-08-08T08:44:56.435Z">
 <meta property="article:author" content="Sufe.曲水">
 <meta property="article:tag" content="爬虫">
 <meta property="article:tag" content="学习">
@@ -154,7 +154,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-15T04:14:09.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-15</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-15T08:17:07.542Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-15</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-08-08T08:44:56.435Z"><i class="far fa-calendar-check">&nbsp;</i>2020-08-08</time>
                 
                 
                 <div class="level-item">
@@ -167,7 +167,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    24 minutes read (About 3532 words)
+                    24 minutes read (About 3533 words)
                 </span>
                 
                 
@@ -181,6 +181,8 @@
         
         <div class="content">
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在设计爬虫的过程中，我们有时候会碰到一些网页的源代码中并不能直接得到我们想要的内容。因为某一些网页是通过AJAX技术通过发包的方式将网页的某些内容在网页源代码之外发送再加载进来的，这种网页我们称作动态网页。我们以往采用的方法是通过<code>Network</code>中抓包的方式来获取<code>Response</code>的内容，更换爬取的<code>url</code>来实现对需求内容的爬取。这一篇文章我们学习一种新的方法——通过运用<code>selenium</code>+<code>chromedriver</code>的方式来模拟浏览器操作的方法来解决这类问题。</p>
+<a id="more"></a>
+
 <h1 id="动态网页爬虫"><a href="#动态网页爬虫" class="headerlink" title="动态网页爬虫"></a>动态网页爬虫</h1><ol>
 <li>动态网页，是网站在不重新加载的情况下，通过ajax技术动态更新网站中的局部数据。比如拉勾网的职位页面，在换页的过程中，url是没有发生改变的，但是职位数据动态的更改了。</li>
 <li>AJAX（Asynchronouse JavaScript And XML）异步JavaScript和XML。前端与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况 下，对网页的某部分进行更新。传统的网页（不使用Ajax）如果需要更新内容，必须重载整个网页页面。因为传统的在传输数据格式方面，使用的是XML语法。因此叫做AJAX，其实现在数据交互基本上都是使用JSON。使用AJAX加载的数据，即使使用了JS，将数据渲染到了浏览器中，在右键-&gt;查看网页源代码还是不能看到通过AJAX加载的数据，只能看到使用这个 url加载的html代码。</li>
